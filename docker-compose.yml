@@ -5,18 +5,20 @@ networks:
 services:
   php-nginx:
     image: webdevops/php-nginx:8.0
-    container_name: nginx
+    container_name: php-nginx
     ports:
       - "8080:80"
     volumes:
       - ./src:/app
     depends_on:
       - mysql
+    environment:
+      WEB_DOCUMENT_ROOT: /app/public
     networks:
       - example
   mysql:
     image: mysql:5.7.30
-    container_name: MySQLDatabase
+    container_name: mysql
     restart: unless-stopped
     tty: true
     ports:
@@ -24,9 +26,9 @@ services:
     volumes:
       - ./config/mysql:/var/lib/mysql
     environment:
-      MYSQL_DATABASE: laravel
-      MYSQL_USER: laravel
-      MYSQL_PASSWORD: test
+      MYSQL_DATABASE: ukf-events
+      MYSQL_USER: ukfevents
+      MYSQL_PASSWORD: password
       MYSQL_ROOT_PASSWORD: test
       SERVICE_TAGS: dev
       SERVICE_NAME: mysql
