@@ -4,7 +4,7 @@ networks:
   example:
 services:
   web:
-    image: webdevops/php-nginx:8.0
+    image: webdevops/php-nginx:8.1
     container_name: web
     links:
       - db
