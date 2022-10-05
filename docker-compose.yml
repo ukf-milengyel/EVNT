@@ -3,22 +3,24 @@ version: '3'
 networks:
   example:
 services:
-  php-nginx:
+  web:
     image: webdevops/php-nginx:8.0
-    container_name: php-nginx
+    container_name: web
+    links:
+      - db
     ports:
       - "8080:80"
     volumes:
       - ./src:/app
     depends_on:
-      - mysql
+      - db
     environment:
       WEB_DOCUMENT_ROOT: /app/public
     networks:
       - example
-  mysql:
-    image: mysql:5.7.30
-    container_name: mysql
+  db:
+    image: mysql:5.7.39
+    container_name: db
     restart: unless-stopped
     tty: true
     ports:
@@ -27,10 +29,23 @@ services:
       - ./config/mysql:/var/lib/mysql
     environment:
       MYSQL_DATABASE: ukf-events
-      MYSQL_USER: ukfevents
-      MYSQL_PASSWORD: password
+      MYSQL_USER: laravel
+      MYSQL_PASSWORD: test
       MYSQL_ROOT_PASSWORD: test
       SERVICE_TAGS: dev
       SERVICE_NAME: mysql
+    networks:
+      - example
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: phpmyadmin
+    links:
+      - db
+    ports:
+      - "8181:80"
+    environment:
+      PMA_HOST: db
+      PMA_USER: root
+      PMA_PASSWORD: test
     networks:
       - example
