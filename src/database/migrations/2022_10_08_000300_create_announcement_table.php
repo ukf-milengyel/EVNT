@@ -17,7 +17,7 @@ return new class extends Migration
     {
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->id();
-            $table->string('body');
+            $table->string('body', 1000);
             $table->string('image')->nullable();
             $table->unsignedBigInteger('event_id');
             $table->timestamps();

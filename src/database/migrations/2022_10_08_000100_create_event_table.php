@@ -18,14 +18,14 @@ return new class extends Migration
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('description');
+            $table->string('description', 2000);
             $table->integer('location_id');
             $table->unsignedBigInteger('user_id');
             $table->dateTime('date');
             $table->string('organizer')->nullable();
             $table->string('location_name');
             $table->string('location_address')->nullable();
-            $table->string('image', 45);
+            $table->string('image');
             $table->timestamps();
 
             $table->foreign('user_id')
