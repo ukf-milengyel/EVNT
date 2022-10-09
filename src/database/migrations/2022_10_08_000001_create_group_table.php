@@ -6,7 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 
 return new class extends Migration
 {
-    public $tableName = 'user_level';
+    public $tableName = 'group';
 
     /**
      * Run the migrations.

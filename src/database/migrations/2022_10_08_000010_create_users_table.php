@@ -21,13 +21,13 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->unsignedBigInteger('user_level_id')->nullable();
+            $table->unsignedBigInteger('group_id')->nullable();
             $table->rememberToken();
             $table->timestamps();
 
-            $table->foreign('user_level_id')
+            $table->foreign('group_id')
                 ->references('id')
-                ->on('user_level');
+                ->on('group');
         });
     }
 
