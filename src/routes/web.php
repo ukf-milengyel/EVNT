@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\GroupController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,5 +21,18 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+
+// GROUP --------------------------------------------------------------------
+Route::get('/group/add', function (){
+    return view('group.add');
+})->name('/group/add')->middleware(['auth', 'verified']);
+
+// destroy bude fungovať iba ak je daná skupina prázdna
+Route::resource('/group', GroupController::class)
+    ->only(['index', 'store', 'edit', 'update', 'destroy'])
+    ->middleware(['auth', 'verified']);
+
+
 
 require __DIR__.'/auth.php';
