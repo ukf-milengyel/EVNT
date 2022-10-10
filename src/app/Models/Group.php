@@ -12,13 +12,13 @@ class Group extends Model
     protected $table = 'group';
     public $timestamps = false;
 
-    public function user(){
-        return $this->hasMany(User::class);
-    }
-
     protected $fillable = [
         'name',
         'permissions',
         'color',
     ];
+
+    public function user(){
+        return $this->hasMany(User::class);
+    }
 }

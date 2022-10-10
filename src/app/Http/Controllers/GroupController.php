@@ -14,7 +14,7 @@ class GroupController extends Controller
      */
     public function index()
     {
-        // TODO: authorize
+        $this->authorize('viewAny', Group::class);
 
         return view('group.index', [
             'groups' => Group::all(),
@@ -39,7 +39,7 @@ class GroupController extends Controller
      */
     public function store(Request $request)
     {
-        //TODO: authorize
+        $this->authorize('store', Group::class);
 
         $validated = $request->validate([
             'name' => 'required|string|max:255',
@@ -77,7 +77,8 @@ class GroupController extends Controller
      */
     public function edit(Group $group)
     {
-        // TODO: authorize
+        $this->authorize('edit', Group::class);
+
         return view('group.edit', [
             'group' => $group,
         ]);

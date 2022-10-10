@@ -15,9 +15,12 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Podujatia') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('group.index')" :active="request()->routeIs('group.index')">
-                        {{ __('Správa skupín') }}
-                    </x-nav-link>
+
+                    @can('viewAny', App\Models\Group::class)
+                        <x-nav-link :href="route('group.index')" :active="request()->routeIs('group.index')">
+                            {{ __('Správa skupín') }}
+                        </x-nav-link>
+                    @endcan
                 </div>
             </div>
 
@@ -69,9 +72,11 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Podujatia') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('group.index')" :active="request()->routeIs('group.index')">
-                {{ __('Správa skupín') }}
-            </x-responsive-nav-link>
+            @can('viewAny', App\Models\Group::class)
+                <x-responsive-nav-link :href="route('group.index')" :active="request()->routeIs('group.index')">
+                    {{ __('Správa skupín') }}
+                </x-responsive-nav-link>
+            @endcan
         </div>
 
         <!-- Responsive Settings Options -->

@@ -17,10 +17,12 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+
     protected $fillable = [
         'name',
         'email',
         'password',
+        'group_id',
     ];
 
     /**
@@ -43,6 +45,6 @@ class User extends Authenticatable
     ];
 
     public function group(){
-        $this->belongsTo(User::class);
+        return $this->belongsTo(Group::class);
     }
 }
