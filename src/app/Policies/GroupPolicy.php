@@ -18,6 +18,7 @@ class GroupPolicy
      */
     public function viewAny(User $user)
     {
+        if ($user->group == NULL) return false;
         return $user->group->permissions & 1;
     }
 
