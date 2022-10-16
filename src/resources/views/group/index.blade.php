@@ -26,20 +26,48 @@
                         <thead>
                             <tr class="border-b">
                                 <th>Meno</th>
-                                <th>Povolenia</th>
                                 <th>Farba</th>
+                                <th>Admin</th>
+                                <th>Udalosti</th>
+                                <th>Tagy</th>
+                                <th>Fotografie</th>
+                                <th>Prílohy</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($groups as $group)
                             <tr class="border-b">
                                 <td>{{$group->name}}</td>
-                                <td>{{$group->permissions}}</td>
-                                <td>{{$group->color}}</td>
+                                <td style="background-color: {{$group->color}}; text-shadow: white 0 0 5px">{{$group->color}}</td>
+                                <td class="permissions">{{$group->permissions}}</td>
+
                             </tr>
                             @endforeach
                         </tbody>
                     </table>
+
+                    <script>
+                        // current limit on permissions
+                        const permLimit = 31;
+                        // select all permission values in table
+                        const permList = document.querySelectorAll('td.permissions');
+                        permList.forEach((node) => {
+                            const parent = node.parentElement;  // get parent for later use
+                            const permValue = node.innerText;   // get current permission value
+                            node.remove();                      // remove permission node as is
+
+                            // create new node containing checkboxes
+                            let checkBoxes = "";
+                            for (let i = 1; i < permLimit; i*=2) {
+                                checkBoxes += (permValue & i)
+                                    ? "<td><input type='checkbox' onclick='return false;' checked></td>"
+                                    : "<td><input type='checkbox' onclick='return false;'></td>";
+                            }
+
+                            parent.innerHTML += checkBoxes;     // append to parent
+                        });
+
+                    </script>
 
                 </div>
             </div>

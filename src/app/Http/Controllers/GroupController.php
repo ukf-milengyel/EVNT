@@ -39,7 +39,7 @@ class GroupController extends Controller
      */
     public function store(Request $request)
     {
-        $this->authorize('store', Group::class);
+        $this->authorize('create', Group::class);
 
         $validated = $request->validate([
             'name' => 'required|string|max:255',
