@@ -27,6 +27,7 @@
                             <tr class="border-b">
                                 <th>Akcie</th>
                                 <th>Meno</th>
+                                <th>Používatelia</th>
                                 <th>Farba</th>
                                 <th>Admin</th>
                                 <th>Udalosti</th>
@@ -40,6 +41,7 @@
                             <tr class="border-b">
                                 <td><a href="{{route('group.edit', $group)}}">upraviť </a><a href=".">vymazať</a></td>
                                 <td>{{$group->name}}</td>
+                                <td>{{$group->user->count()}}</td>
                                 <td style="background-color: {{$group->color}}; text-shadow: white 0 0 5px">{{$group->color}}</td>
                                 <td class="permissions">{{$group->permissions}}</td>
                             </tr>
