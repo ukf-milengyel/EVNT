@@ -25,6 +25,7 @@
                     <table class="w-full text-sm text-left">
                         <thead>
                             <tr class="border-b">
+                                <th>Akcie</th>
                                 <th>Meno</th>
                                 <th>Farba</th>
                                 <th>Admin</th>
@@ -37,10 +38,10 @@
                         <tbody>
                             @foreach ($groups as $group)
                             <tr class="border-b">
+                                <td><a href="{{route('group.edit', $group)}}">upraviť </a><a href=".">vymazať</a></td>
                                 <td>{{$group->name}}</td>
                                 <td style="background-color: {{$group->color}}; text-shadow: white 0 0 5px">{{$group->color}}</td>
                                 <td class="permissions">{{$group->permissions}}</td>
-
                             </tr>
                             @endforeach
                         </tbody>

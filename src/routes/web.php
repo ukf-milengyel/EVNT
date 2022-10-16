@@ -28,7 +28,6 @@ Route::get('/group/add', function (){
     return view('group.add');
 })->name('/group/add')->middleware(['auth', 'verified']);
 
-// destroy bude fungovať iba ak je daná skupina prázdna
 Route::resource('/group', GroupController::class)
     ->only(['index', 'store', 'edit', 'update', 'destroy'])
     ->middleware(['auth', 'verified']);
