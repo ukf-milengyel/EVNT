@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -22,6 +23,17 @@ return new class extends Migration
             $table->unsignedBigInteger('permissions')->default('0');
             $table->string('color', 7)->default('#3498eb');
         });
+
+        // create admin group
+        if (DB::table($this->tableName)->count() == 0){
+            DB::table($this->tableName)->insert([
+                array(
+                    'name' => 'admin',
+                    'permissions' => 65535,
+                    'color' => '#FF5733',
+                )
+            ]);
+        }
     }
 
     /**
