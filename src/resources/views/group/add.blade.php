@@ -1,41 +1,36 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Pridať novú skupinu') }}
+            {{ __('Vytvoriť novú skupinu') }}
         </h2>
     </x-slot>
 
-    <div class="py-12">
+    <div class="py-3">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 bg-white border-b border-gray-200">
-                   Vytvorenie novej skupiny
-                    <br>
-                    <form method="POST" action="{{ route('group.store') }}">
-                        @csrf
-                        <div style="background-color:white">
-                            <table width="75%" style="margin: 0 auto; border:0px solid;text-align:center">
-                                <tr>
-                                <td><label for="name">Názov skupiny</label></td>
-                                <td><input name="name" type="text" value="{{ old('name') }}"></td>
-                                </tr>
-                                <tr>
-                                    <td> <label for="permissions">Povolenia</label></td>
-                                    <td> <input name="permissions" type="text" value="{{ old('permissions') }}"></td>
-                                </tr>
-                                <tr>
-                                    <td> <label for="color">Farba</label></td>
-                                    <td> <input name="color" placeholder="#3498eb" type="text" value="{{ old('color') }}"></td>
-                                </tr>
-                                <tr>
-                                    <td> <x-input-error :messages="$errors->get('message')" class="mt-2" /></td>
-                                    <td> <x-primary-button class="mt-4">{{ __('Pridať') }}</x-primary-button></td>
-                                </tr>
-                            </table>
-                        </div>
-                    </form>
-                </div>
-            </div>
+            <x-std-form>
+                <form method="POST" action="{{ route('group.store') }}">
+                    @csrf
+                    <div>
+                        <x-input-label for="name" value="Názov skupiny" />
+                        <x-std-text-input name="name" type="text" value="{{ old('name') }}" required />
+                    </div>
+
+                    <div class="mt-4">
+                        <x-input-label for="permissions" value="Povolenia"/>
+                        <x-std-text-input name="permissions" type="text" value="{{ old('permissions') }}" required />
+                    </div>
+
+                    <div class="mt-4">
+                        <x-input-label for="color" value="Farba" />
+                        <x-std-text-input name="color" placeholder="#3498eb" type="text" value="{{ old('color', '#3498eb') }}" required />
+                    </div>
+
+                    <div class="flex justify-end mt-4">
+                        <x-primary-button>{{ __('Pridať') }}</x-primary-button>
+                    </div>
+
+                </form>
+            </x-std-form>
         </div>
     </div>
 </x-app-layout>

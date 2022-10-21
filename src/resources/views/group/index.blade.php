@@ -1,33 +1,25 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Skupiny') }}
-        </h2>
+        <div class="flex">
+            <div class="flex-auto">
+                <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                    {{ __('Skupiny ') . "(".$groups->count().")" }}
+                </h2>
+            </div>
+            <div class="justify-end">
+                <a href="{{ route('/group/add') }}" >
+                    <x-primary-button-sm>Pridať skupinu</x-primary-button-sm>
+                </a>
+            </div>
+
+
+        </div>
     </x-slot>
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
-                    --- tu bude správa skupín ---
-                    <br><br>
-                    stránka bude obsahovať:
-                    <ul>
-                        <li>Tabuľku skupín, stĺpce sú id, meno, farba, poč. členov, povolenia (samostatné stĺpce)</li>
-                        <li>Pri každom zázname tlačidlo na úpravu, presmeruje na stránku kde sa dá skupina upraviť</li>
-                        <li>Pri každom zázname tlačidlo vymazať, ak je poč. členov 0</li>
-                        <li>Tlačidlo na pridanie novej skupiny</li>
-                    </ul>
-
-                    <br>
-
-
-
-
-                    <a href="{{ route('/group/add') }}" >
-                        <x-primary-button   class="mt-4" >Pridať skupinu</x-primary-button>
-                    </a>
-                    <br> <br>
 
                     <table class="w-full text-sm text-left">
                         <thead>

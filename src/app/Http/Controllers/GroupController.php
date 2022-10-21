@@ -47,8 +47,6 @@ class GroupController extends Controller
             'color' => 'required|string|max:7',
         ]);
 
-        //return var_dump($validated);
-
         $group = new Group();
         $group->name = $validated['name'];
         $group->permissions = $validated['permissions'];
