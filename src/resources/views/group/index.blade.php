@@ -20,7 +20,14 @@
                     </ul>
 
                     <br>
-                    <a class="underline" href="{{ route('/group/add') }}">Pridať skupinu</a>
+
+
+
+
+                    <a href="{{ route('/group/add') }}" >
+                        <x-primary-button   class="mt-4" >Pridať skupinu</x-primary-button>
+                    </a>
+                    <br> <br>
 
                     <table class="w-full text-sm text-left">
                         <thead>
@@ -39,7 +46,16 @@
                         <tbody>
                             @foreach ($groups as $group)
                             <tr class="border-b">
-                                <td><a href="{{route('group.edit', $group)}}">upraviť </a><a href=".">vymazať</a></td>
+
+                                <td>
+                                    <a href="{{route('group.edit', $group)}}" >
+                                    <x-primary-button  class="btn btn-secondary" >Edit</x-primary-button>
+                                    </a>
+
+                                    <a href="." >
+                                        <x-primary-button  class="btn btn-secondary" >Delete</x-primary-button>
+                                    </a>
+
                                 <td>{{$group->name}}</td>
                                 <td>{{$group->user->count()}}</td>
                                 <td style="background-color: {{$group->color}}; text-shadow: white 0 0 5px">{{$group->color}}</td>
