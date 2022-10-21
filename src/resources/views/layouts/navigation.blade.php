@@ -15,12 +15,6 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Podujatia') }}
                     </x-nav-link>
-
-                    @can('viewAny', App\Models\Group::class)
-                        <x-nav-link :href="route('group.index')" :active="request()->routeIs('group.index')">
-                            {{ __('Správa skupín') }}
-                        </x-nav-link>
-                    @endcan
                 </div>
             </div>
 
@@ -40,6 +34,12 @@
                     </x-slot>
 
                     <x-slot name="content">
+                        @can('viewAny', App\Models\Group::class)
+                            <x-dropdown-link :href="route('group.index')">
+                                {{ __('Admin - Správa skupín') }}
+                            </x-dropdown-link>
+                        @endcan
+
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
@@ -47,7 +47,7 @@
                             <x-dropdown-link :href="route('logout')"
                                     onclick="event.preventDefault();
                                                 this.closest('form').submit();">
-                                {{ __('Log Out') }}
+                                {{ __('Odhlásiť sa') }}
                             </x-dropdown-link>
                         </form>
                     </x-slot>
@@ -72,11 +72,6 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Podujatia') }}
             </x-responsive-nav-link>
-            @can('viewAny', App\Models\Group::class)
-                <x-responsive-nav-link :href="route('group.index')" :active="request()->routeIs('group.index')">
-                    {{ __('Správa skupín') }}
-                </x-responsive-nav-link>
-            @endcan
         </div>
 
         <!-- Responsive Settings Options -->
@@ -87,6 +82,12 @@
             </div>
 
             <div class="mt-3 space-y-1">
+                @can('viewAny', App\Models\Group::class)
+                    <x-dropdown-link :href="route('group.index')">
+                        {{ __('Admin - Správa skupín') }}
+                    </x-dropdown-link>
+                @endcan
+
                 <!-- Authentication -->
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
