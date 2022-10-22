@@ -13,7 +13,7 @@
                     <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                         Tu bude zoznam podujatí
                     </h2>
-                    
+
                 </div>
             </div>
         </div>

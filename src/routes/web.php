@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\GroupController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,14 +15,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// INDEX --------------------------------------------------------------------
 Route::get('/', function () {
     return view('welcome');
 });
 
+// DASHBOARD ----------------------------------------------------------------
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
-
 
 // GROUP --------------------------------------------------------------------
 Route::get('/group/add', function (){
@@ -30,6 +32,11 @@ Route::get('/group/add', function (){
 
 Route::resource('/group', GroupController::class)
     ->only(['index', 'store', 'edit', 'update', 'destroy'])
+    ->middleware(['auth', 'verified']);
+
+// USER ---------------------------------------------------------------------
+Route::resource('/user', UserController::class)
+    ->only(['index', 'edit', 'update'])
     ->middleware(['auth', 'verified']);
 
 

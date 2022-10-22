@@ -40,6 +40,12 @@
                             </x-dropdown-link>
                         @endcan
 
+                            @can('viewAny', App\Models\User::class)
+                                <x-dropdown-link :href="route('user.index')">
+                                    {{ __('Admin - Správa používateľov') }}
+                                </x-dropdown-link>
+                            @endcan
+
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
@@ -85,6 +91,12 @@
                 @can('viewAny', App\Models\Group::class)
                     <x-dropdown-link :href="route('group.index')">
                         {{ __('Admin - Správa skupín') }}
+                    </x-dropdown-link>
+                @endcan
+
+                @can('viewAny', App\Models\User::class)
+                    <x-dropdown-link :href="route('user.index')">
+                        {{ __('Admin - Správa používateľov') }}
                     </x-dropdown-link>
                 @endcan
 

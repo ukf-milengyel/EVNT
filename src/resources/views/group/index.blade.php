@@ -77,7 +77,6 @@
 
                             parent.innerHTML += checkBoxes;     // append to parent
                         });
-
                     </script>
 
                 </div>
