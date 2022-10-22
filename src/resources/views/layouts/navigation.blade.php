@@ -40,11 +40,15 @@
                             </x-dropdown-link>
                         @endcan
 
-                            @can('viewAny', App\Models\User::class)
-                                <x-dropdown-link :href="route('user.index')">
-                                    {{ __('Admin - Správa používateľov') }}
-                                </x-dropdown-link>
-                            @endcan
+                        @can('viewAny', App\Models\User::class)
+                            <x-dropdown-link :href="route('user.index')">
+                                {{ __('Admin - Správa používateľov') }}
+                            </x-dropdown-link>
+                        @endcan
+
+                        <x-dropdown-link :href="route('statistics')">
+                            {{ __('Štatistika') }}
+                        </x-dropdown-link>
 
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
@@ -99,6 +103,10 @@
                         {{ __('Admin - Správa používateľov') }}
                     </x-dropdown-link>
                 @endcan
+
+                <x-dropdown-link :href="route('statistics')">
+                    {{ __('Štatistika') }}
+                </x-dropdown-link>
 
                 <!-- Authentication -->
                 <form method="POST" action="{{ route('logout') }}">

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\StatisticsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,6 +26,11 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+// STATISTICS ---------------------------------------------------------------
+Route::get('/statistics', [StatisticsController::class, 'index'])
+    ->middleware(['auth', 'verified'])
+    ->name('statistics');
+
 // GROUP --------------------------------------------------------------------
 Route::get('/group/add', function (){
     return view('group.add');
@@ -38,7 +44,5 @@ Route::resource('/group', GroupController::class)
 Route::resource('/user', UserController::class)
     ->only(['index', 'edit', 'update'])
     ->middleware(['auth', 'verified']);
-
-
 
 require __DIR__.'/auth.php';
