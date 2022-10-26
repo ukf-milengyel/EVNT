@@ -1,3 +1,7 @@
+@push('css')
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet" type="text/css">
+@endpush
+
 <x-app-layout>
     <x-slot name="header">
         <div class="flex">
@@ -30,16 +34,11 @@
 
                                 <td>
                                     <a href="{{route('user.edit', $user)}}" >
-                                        <x-primary-button  class="btn btn-secondary" >Edit</x-primary-button>
+                                        <x-primary-button  class="btn btn-secondary" >Upraviť</x-primary-button>
                                     </a>
-
-                                    <a href="." >
-                                        <x-primary-button  class="btn btn-secondary" >Delete</x-primary-button>
-                                    </a>
-
                                 <td>{{$user->name}}</td>
                                 <td>{{$user->email}}</td>
-                                <td style="background-color: {{$user->group->color}}; text-shadow: white 0 0 5px">{{$user->group->name}} ({{$user->group->permissions}})</td>
+                                <td class="text-center text-white text-outline rounded-md" style="background-color: {{$user->group->color}};">{{$user->group->name}} ({{$user->group->permissions}})</td>
                                 <td>{{$user->created_at}}</td>
                             </tr>
                         @endforeach

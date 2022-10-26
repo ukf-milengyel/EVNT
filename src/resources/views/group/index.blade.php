@@ -1,3 +1,7 @@
+@push('css')
+<link href="{{ asset('css/style.css') }}" rel="stylesheet" type="text/css">
+@endpush
+
 <x-app-layout>
     <x-slot name="header">
         <div class="flex">
@@ -41,16 +45,28 @@
 
                                 <td>
                                     <a href="{{route('group.edit', $group)}}" >
-                                    <x-primary-button  class="btn btn-secondary" >Edit</x-primary-button>
+                                        <x-primary-button  class="btn btn-secondary" >Upraviť</x-primary-button>
                                     </a>
 
-                                    <a href="." >
-                                        <x-primary-button  class="btn btn-secondary" >Delete</x-primary-button>
-                                    </a>
+                                    @if($group->user->count() == 0)
+                                        <form class="inline" method="POST" action="{{ route('group.destroy', $group) }}">
+                                            @csrf
+                                            @method('delete')
+                                            <x-primary-button class="btn btn-secondary" :href="route('group.destroy', $group)" onclick="event.preventDefault(); if(confirm('Chcete odstrániť túto skupinu?')){this.closest('form').submit();}">
+                                                Vymazať
+                                            </x-primary-button>
+                                        </form>
+                                    @else
+                                        <x-primary-button class="btn btn-secondary" disabled>
+                                            Vymazať
+                                        </x-primary-button>
+                                    @endif
+
+
 
                                 <td>{{$group->name}}</td>
                                 <td>{{$group->user->count()}}</td>
-                                <td style="background-color: {{$group->color}}; text-shadow: white 0 0 5px">{{$group->color}}</td>
+                                <td class="text-center text-white text-outline rounded-md" style="background-color: {{$group->color}};">{{$group->color}}</td>
                                 <td class="permissions">{{$group->permissions}}</td>
                             </tr>
                             @endforeach

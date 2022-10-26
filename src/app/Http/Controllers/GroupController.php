@@ -112,6 +112,10 @@ class GroupController extends Controller
      */
     public function destroy(Group $group)
     {
-        //
+        $this->authorize('delete', $group);
+
+        $group->delete();
+
+        return redirect(route('group.index'));
     }
 }
