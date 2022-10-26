@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Group;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -56,24 +57,35 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        //
+        $this->authorize('create', User::class);
+
+        return view('user.edit', [
+            'user' => $user,
+            'groups' => Group::all(),
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
-        //
+        $this->authorize('update', $user);
+
+        $user->update([
+            'group_id' => $request->get('group'),
+        ]);
+
+        return redirect(route('user.index'));
     }
 
     /**

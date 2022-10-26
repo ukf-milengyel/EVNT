@@ -12,9 +12,15 @@
                     @csrf
                     @method('PUT')
 
-                    <div class="mt-4">
-                        <x-input-label for="group" value="Skupina"/>
-                        <x-std-text-input name="group" type="text" value="{{ $user->group }}" required />
+                    <div>
+                        <x-input-label for="group" value="Skupina" />
+                        <select class="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" name="group">
+                            @foreach($groups as $group)
+                                <option value="{{ $group->id }}"
+                                @if($group->id == $user->group->id) selected @endif
+                                >{{$group->name}} ({{$group->permissions}})</option>
+                            @endforeach
+                        </select>
                     </div>
 
                     <div class="flex justify-end mt-4">
