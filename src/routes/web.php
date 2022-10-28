@@ -3,6 +3,7 @@
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\StatisticsController;
+use App\Http\Controllers\EventController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,10 +22,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// DASHBOARD ----------------------------------------------------------------
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// EVENTS -------------------------------------------------------------------
+Route::get('/event/add', function (){
+    return view('event.add');
+})->name('/event/add')->middleware(['auth', 'verified']);
+
+Route::resource('/event', EventController::class)
+    ->only(['index', 'show', 'store', 'edit', 'update', 'destroy'])
+    ->middleware(['auth', 'verified']);
 
 // STATISTICS ---------------------------------------------------------------
 Route::get('/statistics', [StatisticsController::class, 'index'])

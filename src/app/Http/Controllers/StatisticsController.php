@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
 class StatisticsController extends Controller
 {
     public function index()
     {
+        // stub!
+
         return view('statistics', [
             'users' => 10,
             'groups' => 3,
