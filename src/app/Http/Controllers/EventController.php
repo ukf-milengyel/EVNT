@@ -24,6 +24,7 @@ class EventController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', Event::class);
         return view('event.add');
     }
 
@@ -35,7 +36,7 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-        // todo: authorize, policies
+        $this->authorize('create', Event::class);
 
         $validated = $request->validate([
             'name' => 'required|string|max:255',
@@ -85,6 +86,7 @@ class EventController extends Controller
      */
     public function edit($id)
     {
+        $this->authorize('update', Event::class);
         return view('event.edit');
     }
 
@@ -97,7 +99,7 @@ class EventController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->authorize('update', Event::class);
     }
 
     /**
@@ -108,6 +110,6 @@ class EventController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->authorize('delete', Event::class);
     }
 }
