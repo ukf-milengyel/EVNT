@@ -80,7 +80,9 @@ class EventController extends Controller
      */
     public function show($id)
     {
-        return view('event.view');
+        return view('event.view', [
+            'event' => Event::findOrFail($id),
+        ]);
     }
 
     /**
