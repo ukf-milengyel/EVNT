@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Event;
 use Illuminate\Http\Request;
+use function GuzzleHttp\Promise\all;
 
 class EventController extends Controller
 {
@@ -14,7 +15,11 @@ class EventController extends Controller
      */
     public function index()
     {
-        return view('event.index');
+        // temporary fix, todo: allow ordering of events by date, tags, etc...
+
+        return view('event.index', [
+            'events' => Event::all(),
+        ]);
     }
 
     /**
