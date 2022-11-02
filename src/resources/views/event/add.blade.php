@@ -22,7 +22,7 @@
 
                     <div class="mt-4">
                         <x-input-label for="date" value="Dátum" />
-                        <x-std-text-input name="date" type="date" value="{{ old('date') }}" required />
+                        <x-std-text-input name="date" type="datetime-local" value="{{ old('date') }}" required />
                     </div>
 
                     <div class="mt-4">

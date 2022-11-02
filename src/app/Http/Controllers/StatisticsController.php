@@ -2,16 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Event;
+use App\Models\Group;
+use App\Models\User;
+
 class StatisticsController extends Controller
 {
     public function index()
     {
-        // stub!
+        // todo: replace stub values
 
         return view('statistics', [
-            'users' => 10,
-            'groups' => 3,
-            'events' => 40,
+            'users' => User::count(),
+            'groups' => Group::count(),
+            'events' => Event::count(),
             'attendants' => 200,
             'photos' => 320,
             'attachments' => 60,
