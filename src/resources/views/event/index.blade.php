@@ -3,12 +3,12 @@
         <div class="flex">
             <div class="flex-auto">
                 <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                    Podujatia
+                    Podujatia sort: {{$sort}}
                 </h2>
             </div>
             @can('create', App\Models\Event::class)
             <div class="justify-end">
-                <a href="{{ route('/event.add') }}" >
+                <a href="{{ route('event.add') }}" >
                     <x-primary-button-sm>Vytvoriť podujatie</x-primary-button-sm>
                 </a>
             </div>

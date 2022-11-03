@@ -13,12 +13,15 @@ class EventController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         // temporary fix, todo: allow ordering of events by date, tags, etc...
+        $sort = $request->get('sort') ?? 1;
+        $sorts = ["asc", "desc"];
 
         return view('event.index', [
-            'events' => Event::all(),
+            'events' => Event::orderBy('date' ,$sorts[$sort])->get(),
+            'sort' => $sorts[$sort],
         ]);
     }
 
