@@ -25,10 +25,13 @@ Route::get('/', function () {
 // EVENTS -------------------------------------------------------------------
 Route::get('/event/add', function (){
     return view('event.add');
-})->name('/event/add')->middleware(['auth', 'verified']);
+})->name('event.add')->middleware(['auth', 'verified']);
+
+Route::get('/event', [EventController::class, 'index'])
+    ->name('event.index')->middleware(['auth', 'verified']);
 
 Route::resource('/event', EventController::class)
-    ->only(['index', 'show', 'store', 'edit', 'update', 'destroy'])
+    ->only(['show', 'store', 'edit', 'update', 'destroy'])
     ->middleware(['auth', 'verified']);
 
 // STATISTICS ---------------------------------------------------------------
@@ -39,7 +42,7 @@ Route::get('/statistics', [StatisticsController::class, 'index'])
 // GROUP --------------------------------------------------------------------
 Route::get('/group/add', function (){
     return view('group.add');
-})->name('/group/add')->middleware(['auth', 'verified']);
+})->name('group.add')->middleware(['auth', 'verified']);
 
 Route::resource('/group', GroupController::class)
     ->only(['index', 'store', 'edit', 'update', 'destroy'])

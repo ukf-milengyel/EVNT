@@ -17,7 +17,7 @@
                         <select class="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" name="group">
                             @foreach($groups as $group)
                                 <option value="{{ $group->id }}"
-                                @if($group->id == $user->group->id) selected @endif
+                                @if($user->group != NULL && $group->id == $user->group->id) selected @endif
                                 >{{$group->name}} ({{$group->permissions}})</option>
                             @endforeach
                         </select>
