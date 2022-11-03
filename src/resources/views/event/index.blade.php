@@ -30,8 +30,10 @@
                             <h2 class="font-semibold text-l text-gray-800 leading-tight">{{$event->name}}</h2>
                             desc: {{$event->description}}<br>
                             user: {{$event->user->name}}<br>
-                            group: {{$event->user->group->name}}<br>
-                            color: {{$event->user->group->color}}<br>
+                            @if($event->user->group != NULL)
+                                group: {{$event->user->group->name}}<br>
+                                color: {{$event->user->group->color}}<br>
+                            @endif
                             date: {{$event->date}}<br>
                             organizer: {{$event->organizer}}<br>
                             location_name: {{$event->location_name}}<br>

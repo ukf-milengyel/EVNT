@@ -38,7 +38,12 @@
                                     </a>
                                 <td>{{$user->name}}</td>
                                 <td>{{$user->email}}</td>
-                                <td class="text-center text-white text-outline rounded-md" style="background-color: {{$user->group->color}};">{{$user->group->name}} ({{$user->group->permissions}})</td>
+                                @if($user->group != NULL)
+                                    <td class="text-center text-white text-outline rounded-md" style="background-color: {{$user->group->color}};">{{$user->group->name}} ({{$user->group->permissions}})</td>
+                                @else
+                                    <td class="text-center text-white text-outline rounded-md" style="background-color: #333;">Bez skupiny (0)</td>
+                                @endif
+
                                 <td>{{$user->created_at}}</td>
                             </tr>
                         @endforeach
