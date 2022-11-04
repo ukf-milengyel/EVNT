@@ -11,7 +11,7 @@
                 </h2>
             </div>
             <div class="justify-end">
-                <a href="{{ route('/group.add') }}" >
+                <a href="{{ route('group.add') }}" >
                     <x-primary-button-sm>Pridať skupinu</x-primary-button-sm>
                 </a>
             </div>
@@ -22,12 +22,12 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+            <div class="bg-white shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
 
                     <table class="w-full text-sm text-left">
                         <thead>
-                            <tr class="border-b">
+                            <tr class="border-b bg-white sticky top-0">
                                 <th>Akcie</th>
                                 <th>Meno</th>
                                 <th>Používatelia</th>
@@ -56,10 +56,6 @@
                                                 Vymazať
                                             </x-primary-button>
                                         </form>
-                                    @else
-                                        <x-primary-button class="btn btn-secondary" disabled>
-                                            Vymazať
-                                        </x-primary-button>
                                     @endif
 
 
