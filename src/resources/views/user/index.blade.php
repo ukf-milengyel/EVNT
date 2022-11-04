@@ -40,8 +40,8 @@
                                 <td>{{$user->email}}</td>
                                 <td>
                                     <x-user-badge class="py-1 mr-2">
-                                        <x-slot:name>{{$user->group->name}}</x-slot:name>
                                         @if($user->group)
+                                            <x-slot:name>{{$user->group->name}}</x-slot:name>
                                             <x-slot:group>{{$user->group->permissions}}</x-slot:group>
                                             <x-slot:color>{{$user->group->color}}</x-slot:color>
                                         @endif

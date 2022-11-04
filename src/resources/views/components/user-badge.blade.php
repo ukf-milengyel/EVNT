@@ -8,7 +8,11 @@
         @endif
     >
         <p class="inline-flex font-bold text-white text-shadow">
-            {{$name}}
+            @if(isset($name))
+                {{$name}}
+            @else
+                -
+            @endif
         </p>
 
         @if(isset($group))
