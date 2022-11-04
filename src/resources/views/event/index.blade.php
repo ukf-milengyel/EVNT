@@ -7,7 +7,7 @@
         <div class="flex">
             <div class="flex-auto">
                 <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-
+                    Podujatia
                 </h2>
             </div>
             @can('create', App\Models\Event::class)
@@ -25,14 +25,23 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
 
-                    <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                        Zoznam podujatí
-                    </h2>
+                    Filter
+                    <form method="get" action="{{route('event.index')}}">
+                        <input type="radio" name="sort" value="1" {{$sort ? 'checked' : ''}}>Najnovšie
+                        <input type="radio" name="sort" value="0" {{!$sort ? 'checked' : ''}}>Najstaršie
+                        <br>
+                        <input type="radio" name="archived" value="0" {{!$archived ? 'checked' : ''}}>Aktuálne
+                        <input type="radio" name="archived" value="1" {{$archived ? 'checked' : ''}}>Archivované
+                        <br>
+                        <x-primary-button-sm type="submit">Filtrovať</x-primary-button-sm>
+                    </form>
+
+                    <hr class="my-2">
 
                     @foreach($events as $event)
 
 
-                        <a href="{{route('event.show', $event)}}" >
+                        <a class="cursor-pointer" onclick="showDetails('{{route('event.show', $event)}}')">
                             <div style= "background-color:#E4E4E4; display: inline-block; vertical-align:top; margin: 20px; width:320px; height:300px; border:1px solid #000000;">
 
                                 <img src="{{url('/images/event/', $event->image)}}" class= "w-20 object-cover rounded-lg overflow-hidden shadow-lg"   style="border-width: 2px; width: 320px;" />
