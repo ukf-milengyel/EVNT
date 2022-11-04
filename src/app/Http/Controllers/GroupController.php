@@ -12,12 +12,13 @@ class GroupController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($message = null)
     {
         $this->authorize('viewAny', Group::class);
 
         return view('group.index', [
             'groups' => Group::all(),
+            'message' => $message
         ]);
     }
 
@@ -53,7 +54,7 @@ class GroupController extends Controller
         $group->color = $validated['color'];
         $group->save();
 
-        return redirect(route('group.index'));
+        return $this->index('Skupina '.$validated['name'].' bola vytvorená.');
     }
 
     /**
@@ -101,7 +102,7 @@ class GroupController extends Controller
 
         $group->update($validated);
 
-        return redirect(route('group.index'));
+        return $this->index('Skupina '.$validated['name'].' bola upravená.');
     }
 
     /**
@@ -114,8 +115,10 @@ class GroupController extends Controller
     {
         $this->authorize('delete', $group);
 
+        $name = $group->name;
         $group->delete();
 
+        return $this->index('Skupina '.$name.' bola odstránená.');
         return redirect(route('group.index'));
     }
 }

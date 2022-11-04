@@ -13,7 +13,7 @@ class EventController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(Request $request, $message = null)
     {
         // todo: sort events by tags
         $sorts = ["asc", "desc"];
@@ -24,6 +24,7 @@ class EventController extends Controller
 
         return view('event.index', [
             'events' => Event::whereDate('date', $archiveds[$archived], now())->orderBy('created_at' ,$sorts[$sort])->get(),
+            'message' => $message,
             'sort' => $sort,
             'archived' => $archived,
         ]);
@@ -76,7 +77,7 @@ class EventController extends Controller
         $event->save();
 
         // todo: redirect to event page
-        return $this->index(new Request());
+        return $this->index(new Request(), 'Vytvorili ste podujatie '.$validated['name'].', naplánované na '.$validated['date']);
     }
 
     /**

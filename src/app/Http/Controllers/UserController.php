@@ -13,12 +13,13 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($message = null)
     {
         $this->authorize('viewAny', User::class);
 
         return view('user.index', [
             'users' => User::all(),
+            'message' => $message
         ]);
     }
 
@@ -85,7 +86,7 @@ class UserController extends Controller
             'group_id' => $request->get('group'),
         ]);
 
-        return redirect(route('user.index'));
+        return $this->index('Používateľ '.$user->name.' bol upravený.');
     }
 
     /**
