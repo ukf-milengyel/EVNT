@@ -5,3 +5,53 @@
         -1px 1px 0 #000,
         1px 1px 0 #000;
 }
+
+#detail-background{
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    z-index: 3;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+}
+
+#detail-frame{
+    z-index: 3;
+    display: none;
+    background: #FFF;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 10px;
+    position: fixed;
+    width: calc(100% - 32px);
+    height: calc(100% - 32px);
+    top: calc(50%);
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#detail-iframe{
+    overflow: hidden;
+    border-radius: 10px;
+    border: none;
+    width: 100%;
+    height: 100%;
+}
+
+#detail-spinner{
+    display: none;
+    position: absolute;
+    left: calc(50% - 40px);
+    top: calc(50% - 40px);
+}
+
+#close-button{
+    z-index: 3;
+    cursor: pointer;
+    position: fixed;
+    width: 48px;
+    height: 48px;
+    top: 30px;
+    right: 10px;
+}

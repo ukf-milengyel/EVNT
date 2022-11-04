@@ -1,3 +1,7 @@
+@push('css')
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('css/spinner.css') }}" rel="stylesheet" type="text/css">
+@endpush
 <x-app-layout>
     <x-slot name="header">
         <div class="flex">
@@ -26,7 +30,7 @@
                     </h2>
 
                     @foreach($events as $event)
-                        <a href="{{route('event.show', $event)}}">
+                        <a class="cursor-pointer" onclick="showDetails('{{route('event.show', $event)}}')">
                             <h2 class="font-semibold text-l text-gray-800 leading-tight">{{$event->name}}</h2>
                             desc: {{$event->description}}<br>
                             user: {{$event->user->name}}<br>
@@ -47,4 +51,24 @@
             </div>
         </div>
     </div>
+
+    <div id='detail-background'></div>
+    <div id='detail-frame'>
+        <div id="detail-spinner">
+            <div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+        </div>
+        <iframe id='detail-iframe'>
+
+        </iframe>
+        <div id='detail-spinner'></div>
+        <div id='close-button' onclick='hideDetails()'>
+            <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+        </div>
+
+    </div>
+
+
+    <script src="{{asset("/js/detailframe.js")}}"></script>
 </x-app-layout>
