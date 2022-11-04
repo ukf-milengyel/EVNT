@@ -4,6 +4,18 @@
             {{ __('Vytvoriť novú skupinu') }}
         </h2>
     </x-slot>
+    @if($errors->any())
+        <x-std-error>
+            <x-slot:title>
+                Chyba
+            </x-slot:title>
+            <ul>
+                @foreach($errors->all() as $error)
+                    <li>{{$error}}</li>
+                @endforeach
+            </ul>
+        </x-std-error>
+    @endif
 
     <div class="py-3">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -12,17 +24,17 @@
                     @csrf
                     <div>
                         <x-input-label for="name" value="Názov skupiny" />
-                        <x-std-text-input name="name" type="text" value="{{ old('name') }}" required />
+                        <x-std-text-input name="name" type="text" value="{{ old('name') }}"/>
                     </div>
 
                     <div class="mt-4">
                         <x-input-label for="permissions" value="Povolenia"/>
-                        <x-std-text-input name="permissions" type="text" value="{{ old('permissions') }}" required />
+                        <x-std-text-input name="permissions" type="text" value="{{ old('permissions') }}"/>
                     </div>
 
                     <div class="mt-4">
                         <x-input-label for="color" value="Farba" />
-                        <x-std-text-input name="color" placeholder="#3498eb" type="text" value="{{ old('color', '#3498eb') }}" required />
+                        <x-std-text-input name="color" placeholder="#3498eb" type="text" value="{{ old('color', '#3498eb') }}"/>
                     </div>
 
                     <div class="flex justify-end mt-4">

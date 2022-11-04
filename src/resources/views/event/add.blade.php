@@ -4,25 +4,39 @@
             Vytvoriť podujatie
         </h2>
     </x-slot>
+    @if($errors->any())
+    <x-std-error>
+        <x-slot:title>
+            Chyba
+        </x-slot:title>
+        <ul>
+        @foreach($errors->all() as $error)
+            <li>{{$error}}</li>
+        @endforeach
+        </ul>
+    </x-std-error>
+    @endif
 
     <div class="py-12">
+
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+
             <x-std-form>
                 <form method="POST" action="{{ route('event.store') }}" enctype="multipart/form-data">
                     @csrf
                     <div>
                         <x-input-label for="name" value="Názov podujatia" />
-                        <x-std-text-input name="name" type="text" value="{{ old('name') }}" required />
+                        <x-std-text-input name="name" type="text" value="{{ old('name') }}"/>
                     </div>
 
                     <div class="mt-4">
                         <x-input-label for="description" value="Popis" />
-                        <x-std-textarea name="description" required>{{ old('description') }}</x-std-textarea>
+                        <x-std-textarea name="description">{{ old('description') }}</x-std-textarea>
                     </div>
 
                     <div class="mt-4">
                         <x-input-label for="date" value="Dátum" />
-                        <x-std-text-input name="date" type="datetime-local" value="{{ old('date') }}" required />
+                        <x-std-text-input name="date" type="datetime-local" value="{{ old('date') }}"/>
                     </div>
 
                     <div class="mt-4">
@@ -32,7 +46,7 @@
 
                     <div class="mt-4">
                         <x-input-label for="location_name" value="Miesto" />
-                        <x-std-text-input name="location_name" type="text" value="{{ old('location_name') }}" required />
+                        <x-std-text-input name="location_name" type="text" value="{{ old('location_name') }}"/>
                     </div>
 
                     <div class="mt-4">
@@ -42,7 +56,7 @@
 
                     <div class="mt-4">
                         <x-input-label for="image" value="Fotografia" />
-                        <input id="picker" name="image" type="file" required />
+                        <input id="picker" name="image" type="file"/>
                         <img id="preview" class="my-2 object-cover relative mx-auto rounded-lg overflow-hidden shadow-lg">
                     </div>
 

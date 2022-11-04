@@ -4,6 +4,18 @@
             {{ __('Upraviť používateľa ') . $user->name }}
         </h2>
     </x-slot>
+    @if($errors->any())
+        <x-std-error>
+            <x-slot:title>
+                Chyba
+            </x-slot:title>
+            <ul>
+                @foreach($errors->all() as $error)
+                    <li>{{$error}}</li>
+                @endforeach
+            </ul>
+        </x-std-error>
+    @endif
 
     <div class="py-3">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
