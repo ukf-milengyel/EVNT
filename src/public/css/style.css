@@ -6,6 +6,10 @@
         1px 1px 0 #000;
 }
 
+.text-shadow{
+    text-shadow: 2px 2px 5px #000
+}
+
 #detail-background{
     background: rgba(0, 0, 0, 0.5);
     display: none;

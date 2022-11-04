@@ -62,7 +62,14 @@
 
                                 <td>{{$group->name}}</td>
                                 <td>{{$group->user->count()}}</td>
-                                <td class="text-center text-white text-outline rounded-md" style="background-color: {{$group->color}};">{{$group->color}}</td>
+                                <td>
+                                    <x-user-badge class="py-1 mr-2">
+                                        <x-slot:name>{{$group->color}}</x-slot:name>
+                                        @if($group->color)
+                                            <x-slot:color>{{$group->color}}</x-slot:color>
+                                        @endif
+                                    </x-user-badge>
+                                </td>
                                 <td class="permissions">{{$group->permissions}}</td>
                             </tr>
                             @endforeach

@@ -38,11 +38,15 @@
                                     </a>
                                 <td>{{$user->name}}</td>
                                 <td>{{$user->email}}</td>
-                                @if($user->group != NULL)
-                                    <td class="text-center text-white text-outline rounded-md" style="background-color: {{$user->group->color}};">{{$user->group->name}} ({{$user->group->permissions}})</td>
-                                @else
-                                    <td class="text-center text-white text-outline rounded-md" style="background-color: #333;">Bez skupiny (0)</td>
-                                @endif
+                                <td>
+                                    <x-user-badge class="py-1 mr-2">
+                                        <x-slot:name>{{$user->group->name}}</x-slot:name>
+                                        @if($user->group)
+                                            <x-slot:group>{{$user->group->permissions}}</x-slot:group>
+                                            <x-slot:color>{{$user->group->color}}</x-slot:color>
+                                        @endif
+                                    </x-user-badge>
+                                </td>
 
                                 <td>{{$user->created_at}}</td>
                             </tr>

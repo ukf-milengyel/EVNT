@@ -46,14 +46,14 @@
 
                                 <img src="{{url('/images/event/', $event->image)}}" class= "w-20 object-cover rounded-lg overflow-hidden shadow-lg"   style="border-width: 2px; width: 320px;" />
                                 <h2 class="font-semibold text-l text-gray-800 leading-tight">{{$event->name}}</h2>
-                                <div style= "background-color:{{$event->user->group->color}};   width:175px; height:50px; border:1px solid #000000;" >
-                                    User: {{$event->user->name}}
-                                    <br>
-                                    @if($event->user->group != NULL)
-                                        Group: {{$event->user->group->name}}
-                                        <br>
+
+                                <x-user-badge class="mx-2">
+                                    <x-slot:name>{{$event->user->name}}</x-slot:name>
+                                    @if($event->user->group)
+                                    <x-slot:group>{{$event->user->group->name}}</x-slot:group>
+                                    <x-slot:color>{{$event->user->group->color}}</x-slot:color>
                                     @endif
-                                </div>
+                                </x-user-badge>
                             </div>
                         </a>
 
