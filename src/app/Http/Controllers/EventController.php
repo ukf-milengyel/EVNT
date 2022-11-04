@@ -72,7 +72,7 @@ class EventController extends Controller
         $event->save();
 
         // todo: redirect to event page
-        return view('event.index');
+        return  $this->index(new Request());
     }
 
     /**

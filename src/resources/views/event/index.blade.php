@@ -7,7 +7,7 @@
         <div class="flex">
             <div class="flex-auto">
                 <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                    Podujatia sort: {{$sort}}
+
                 </h2>
             </div>
             @can('create', App\Models\Event::class)
@@ -30,21 +30,24 @@
                     </h2>
 
                     @foreach($events as $event)
-                        <a class="cursor-pointer" onclick="showDetails('{{route('event.show', $event)}}')">
-                            <h2 class="font-semibold text-l text-gray-800 leading-tight">{{$event->name}}</h2>
-                            desc: {{$event->description}}<br>
-                            user: {{$event->user->name}}<br>
-                            @if($event->user->group != NULL)
-                                group: {{$event->user->group->name}}<br>
-                                color: {{$event->user->group->color}}<br>
-                            @endif
-                            date: {{$event->date}}<br>
-                            organizer: {{$event->organizer}}<br>
-                            location_name: {{$event->location_name}}<br>
-                            location_address: {{$event->location_address}}<br>
-                            image: {{$event->image}}<br>
-                            <img src="{{url('/images/event/', $event->image)}}" class="w-20 object-cover rounded-lg overflow-hidden shadow-lg">
+
+
+                        <a href="{{route('event.show', $event)}}" >
+                            <div style= "background-color:#E4E4E4; display: inline-block; vertical-align:top; margin: 20px; width:320px; height:300px; border:1px solid #000000;">
+
+                                <img src="{{url('/images/event/', $event->image)}}" class= "w-20 object-cover rounded-lg overflow-hidden shadow-lg"   style="border-width: 2px; width: 320px;" />
+                                <h2 class="font-semibold text-l text-gray-800 leading-tight">{{$event->name}}</h2>
+                                <div style= "background-color:{{$event->user->group->color}};   width:175px; height:50px; border:1px solid #000000;" >
+                                    User: {{$event->user->name}}
+                                    <br>
+                                    @if($event->user->group != NULL)
+                                        Group: {{$event->user->group->name}}
+                                        <br>
+                                    @endif
+                                </div>
+                            </div>
                         </a>
+
                     @endforeach
 
                 </div>
