@@ -23,7 +23,7 @@ class EventController extends Controller
         $archived = ($request->get('archived') ?? 0) % count($archiveds);
 
         return view('event.index', [
-            'events' => Event::whereDate('date', $archiveds[$archived], now())->orderBy('date' ,$sorts[$sort])->get(),
+            'events' => Event::whereDate('date', $archiveds[$archived], now())->orderBy('created_at' ,$sorts[$sort])->get(),
             'sort' => $sort,
             'archived' => $archived,
         ]);
@@ -53,10 +53,10 @@ class EventController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'required|string|max:2000',
-            'date' => 'required',
-            'organizer' => 'string|max:255',
+            'date' => 'date|required',
+            'organizer' => 'string|max:255|nullable',
             'location_name' => 'string|max:255',
-            'location_address' => 'string|max:255',
+            'location_address' => 'string|max:255|nullable',
             'image' => 'required|image|mimes:jpg,jpeg,png|max:8192'
         ]);
 
@@ -76,7 +76,7 @@ class EventController extends Controller
         $event->save();
 
         // todo: redirect to event page
-        return view('event.index');
+        return $this->index(new Request());
     }
 
     /**

@@ -7,16 +7,16 @@
         <div class="flex">
             <div class="flex-auto">
                 <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                    Podujatia sort: {{$sort}}
+                    Podujatia
                 </h2>
             </div>
-            @can('create', App\Models\Event::class)
             <div class="justify-end">
+                @can('create', App\Models\Event::class)
                 <a href="{{ route('event.add') }}" >
                     <x-primary-button-sm>Vytvoriť podujatie</x-primary-button-sm>
                 </a>
+                @endcan
             </div>
-            @endcan
         </div>
     </x-slot>
 
@@ -29,6 +29,21 @@
                         Zoznam podujatí
                     </h2>
 
+                    <hr class="my-2">
+
+                    Filter
+                    <form method="get" action="{{route('event.index')}}">
+                        <input type="radio" name="sort" value="1" {{$sort ? 'checked' : ''}}>Najnovšie
+                        <input type="radio" name="sort" value="0" {{!$sort ? 'checked' : ''}}>Najstaršie
+                        <br>
+                        <input type="radio" name="archived" value="0" {{!$archived ? 'checked' : ''}}>Aktuálne
+                        <input type="radio" name="archived" value="1" {{$archived ? 'checked' : ''}}>Archivované
+                        <br>
+                        <x-primary-button-sm type="submit">Filtrovať</x-primary-button-sm>
+                    </form>
+
+                    <hr class="my-2">
+
                     @foreach($events as $event)
                         <a class="cursor-pointer" onclick="showDetails('{{route('event.show', $event)}}')">
                             <h2 class="font-semibold text-l text-gray-800 leading-tight">{{$event->name}}</h2>
@@ -38,6 +53,7 @@
                                 group: {{$event->user->group->name}}<br>
                                 color: {{$event->user->group->color}}<br>
                             @endif
+                            created_at: {{$event->created_at}}<br>
                             date: {{$event->date}}<br>
                             organizer: {{$event->organizer}}<br>
                             location_name: {{$event->location_name}}<br>
