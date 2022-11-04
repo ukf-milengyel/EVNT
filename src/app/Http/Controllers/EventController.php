@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Event;
 use Illuminate\Http\Request;
-use function GuzzleHttp\Promise\all;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class EventController extends Controller
 {
@@ -60,9 +60,9 @@ class EventController extends Controller
             'image' => 'required|image|mimes:jpg,jpeg,png|max:8192'
         ]);
 
-        // todo: create compressed version of image with thumbnail before saving
         $imgname = uniqid('', true) . '.jpg';
-        $request->image->move(public_path('images/event'), $imgname);
+        Image::make($request->image)->fit(512,288)->save(public_path('images/event_thumb/'.$imgname), 75, 'jpg');
+        Image::make($request->image)->save(public_path('images/event/'.$imgname), 90, 'jpg');
 
         $event = new Event();
         $event->name = $validated['name'];
