@@ -24,21 +24,53 @@
                     @csrf
                     @method('PUT')
 
-                    <div>
-                        <x-input-label for="group" value="Skupina" />
-                        <select id="groupselect" onchange="translatePermissions(this.options[this.selectedIndex].dataset.perms)" class="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" name="group">
-                            @foreach($groups as $group)
-                                <option value="{{ $group->id }}"
-                                @if($user->group != NULL && $group->id == $user->group->id) selected @endif
-                                data-perms="{{$group->permissions}}"
-                                >{{$group->name}} ({{$group->permissions}})</option>
-                            @endforeach
-                        </select>
-                    </div>
+                    <x-input-label for="n" value="Používateľ" />
+                    <x-std-text-input name="n" type="text" value="{{ $user->name }}" disabled/>
+
+                    <x-input-label class="mt-4" for="group" value="Skupina" />
+                    <select id="groupselect" onchange="translatePermissions(this.options[this.selectedIndex].dataset.perms)" class="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" name="group">
+                        @foreach($groups as $group)
+                            <option value="{{ $group->id }}"
+                            @if($user->group != NULL && $group->id == $user->group->id) selected @endif
+                            data-perms="{{$group->permissions}}"
+                            data-color="{{$group->color}}"
+                            >{{$group->name}} ({{$group->permissions}})</option>
+                        @endforeach
+                    </select>
 
                     <div class="mt-4">
-                        Používateľ bude mať prístup k:
+                        <x-input-label value="Povolenia" />
                         <div id="checkboxes"></div>
+                        <x-std-checkbox>
+                            Administrátor
+                            <x-slot:id>check-1</x-slot:id>
+                            <x-slot:onclick>return false;</x-slot:onclick>
+                            <x-slot:subtext>Používateľ má prístup k administrátorskému rozhraniu</x-slot:subtext>
+                        </x-std-checkbox>
+                        <x-std-checkbox>
+                            Udalosti
+                            <x-slot:id>check-2</x-slot:id>
+                            <x-slot:onclick>return false;</x-slot:onclick>
+                            <x-slot:subtext>Používateľ vie vytvárať udalosti</x-slot:subtext>
+                        </x-std-checkbox>
+                        <x-std-checkbox>
+                            Tagy
+                            <x-slot:id>check-4</x-slot:id>
+                            <x-slot:onclick>return false;</x-slot:onclick>
+                            <x-slot:subtext>Používateľ vie vytvárať vlastné tagy</x-slot:subtext>
+                        </x-std-checkbox>
+                        <x-std-checkbox>
+                            Fotografie
+                            <x-slot:id>check-8</x-slot:id>
+                            <x-slot:onclick>return false;</x-slot:onclick>
+                            <x-slot:subtext>Používateľ vie k vytvoreným udalostiam pridať fotografie</x-slot:subtext>
+                        </x-std-checkbox>
+                        <x-std-checkbox>
+                            Prílohy
+                            <x-slot:id>check-16</x-slot:id>
+                            <x-slot:onclick>return false;</x-slot:onclick>
+                            <x-slot:subtext>Používateľ vie k vytvoreným udalostiam pridať prílohy</x-slot:subtext>
+                        </x-std-checkbox>
                     </div>
 
                     <div class="flex justify-end mt-4">
@@ -52,19 +84,12 @@
 
     <script>
         function translatePermissions(perms) {
-            // current limit on permissions
-            const permissionNames = ["Admin","Udalosti","Tagy","Fotografie","Prílohy"];
-
-             let checkBoxes = "";
-             for (let i = 0; i < permissionNames.length; ++i) {
-                 checkBoxes += (perms & Math.pow(2,i))
-                     ? "<input type='checkbox' onclick='return false;' checked>" + permissionNames[i]+"<br>"
-                     : "<input type='checkbox' onclick='return false;'>"  + permissionNames[i]+"<br>";
-             }
-
-             document.getElementById("checkboxes").innerHTML = checkBoxes;     // append to parent
+            for (let i = 0; i < 5; ++i) {
+                const current = Math.pow(2,i);
+                document.getElementById("check-"+current).checked = (perms & current);
+            }
         }
-
+        // translate initial group
         groupSelect = document.getElementById("groupselect")
         translatePermissions(groupSelect.options[groupSelect.selectedIndex].dataset.perms)
     </script>
