@@ -28,8 +28,9 @@
                     </div>
 
                     <div class="mt-4">
+                        <script src="{{asset("/js/jscolor.js")}}"></script>
                         <x-input-label for="color" value="Farba" />
-                        <x-std-text-input name="color" placeholder="#3498eb" type="text" value="{{ old('color', '#3498eb') }}"/>
+                        <x-std-text-input name="color" placeholder="#3498eb" type="text" value="{{ old('color', '#3498eb') }}" data-jscolor="{preset:'large', position:'bottom'}"/>
                     </div>
 
                     <div class="mt-4">
