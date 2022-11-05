@@ -54,26 +54,21 @@
 
                     <hr class="my-2">
 
-                    @foreach($events as $event)
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
 
+                        @foreach($events as $event)
 
-                        <a class="cursor-pointer" onclick="showDetails('{{route('event.show', $event)}}')">
-                            <div style= "background-color:#E4E4E4; display: inline-block; vertical-align:top; margin: 20px; width:320px; height:300px; border:1px solid #000000;">
+                            <x-event-component>
+                                <x-slot:img>{{url('/images/event/', $event->image)}}</x-slot:img>
+                                <x-slot:participants>10</x-slot:participants>
+                                <x-slot:name>{{$event->name}}</x-slot:name>
+                                <x-slot:date>{{$event->date}}</x-slot:date>
+                                <x-slot:organiser>{{$event->organiser}}</x-slot:organiser>
+                            </x-event-component>
 
-                                <img src="{{url('/images/event/', $event->image)}}" class= "w-20 object-cover rounded-lg overflow-hidden shadow-lg"   style="border-width: 2px; width: 320px;" />
-                                <h2 class="font-semibold text-l text-gray-800 leading-tight">{{$event->name}}</h2>
+                        @endforeach
 
-                                <x-user-badge class="mx-2">
-                                    <x-slot:name>{{$event->user->name}}</x-slot:name>
-                                    @if($event->user->group)
-                                    <x-slot:group>{{$event->user->group->name}}</x-slot:group>
-                                    <x-slot:color>{{$event->user->group->color}}</x-slot:color>
-                                    @endif
-                                </x-user-badge>
-                            </div>
-                        </a>
-
-                    @endforeach
+                    </div>
 
                 </div>
             </div>
