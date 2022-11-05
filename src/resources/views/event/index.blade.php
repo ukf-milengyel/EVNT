@@ -34,11 +34,17 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
-
-                    Filter
                     <form method="get" action="{{route('event.index')}}">
-                        <input type="radio" name="sort" value="1" {{$sort ? 'checked' : ''}}>Najnovšie
-                        <input type="radio" name="sort" value="0" {{!$sort ? 'checked' : ''}}>Najstaršie
+                        Zoradenie
+                        <br>
+                        <input type="radio" name="category" value="0" {{$category == 0 ? 'checked' : ''}}>Dátum vytvorenia
+                        <input type="radio" name="category" value="1" {{$category == 1 ? 'checked' : ''}}>Dátum uskutočnenia
+                        <input type="radio" name="category" value="2" {{$category == 2 ? 'checked' : ''}}>Názov
+                        <br>
+                        <input type="radio" name="sort" value="1" {{$sort ? 'checked' : ''}}>v
+                        <input type="radio" name="sort" value="0" {{!$sort ? 'checked' : ''}}>^
+                        <br>
+                        Kategória
                         <br>
                         <input type="radio" name="archived" value="0" {{!$archived ? 'checked' : ''}}>Aktuálne
                         <input type="radio" name="archived" value="1" {{$archived ? 'checked' : ''}}>Archivované

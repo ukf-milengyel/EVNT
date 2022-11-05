@@ -15,16 +15,22 @@ class EventController extends Controller
      */
     public function index(Request $request, $message = null)
     {
-        // todo: sort events by tags
-        $sorts = ["asc", "desc"];
+        // todo: sort events by tags, user count
+        $categories = ['created_at', 'date', 'name'];
+        $category = ($request->get('category') ?? 0) % count($categories);
+
+        $sorts = ['asc', 'desc'];
         $sort = ($request->get('sort') ?? 1) % count($sorts);
 
-        $archiveds = [">", "<"];
+        $archiveds = ['>', '<'];
         $archived = ($request->get('archived') ?? 0) % count($archiveds);
 
         return view('event.index', [
-            'events' => Event::whereDate('date', $archiveds[$archived], now())->orderBy('created_at' ,$sorts[$sort])->get(),
+            'events' => Event::whereDate('date', $archiveds[$archived], now())
+                ->orderBy($categories[$category] ,$sorts[$sort])
+                ->get(),
             'message' => $message,
+            'category' => $category,
             'sort' => $sort,
             'archived' => $archived,
         ]);
