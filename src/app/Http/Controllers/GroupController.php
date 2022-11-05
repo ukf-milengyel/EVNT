@@ -44,13 +44,14 @@ class GroupController extends Controller
 
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'permissions' => 'required|integer',
             'color' => 'required|string|max:7',
         ]);
 
+        $permissions = $this->translatePerms($request);
+
         $group = new Group();
         $group->name = $validated['name'];
-        $group->permissions = $validated['permissions'];
+        $group->permissions = $permissions;
         $group->color = $validated['color'];
         $group->save();
 
@@ -96,11 +97,16 @@ class GroupController extends Controller
 
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'permissions' => 'required|integer',
             'color' => 'required|string|max:7',
         ]);
 
-        $group->update($validated);
+        $permissions = $this->translatePerms($request);
+
+        $group->name = $validated['name'];
+        $group->permissions = $permissions;
+        $group->color = $validated['color'];
+
+        $group->save();
 
         return $this->index('Skupina '.$validated['name'].' bola upravená.');
     }
@@ -120,5 +126,14 @@ class GroupController extends Controller
 
         return $this->index('Skupina '.$name.' bola odstránená.');
         return redirect(route('group.index'));
+    }
+
+    private function translatePerms(Request $request) : int{
+        $result = 0;
+        for($i=0; $i<5; ++$i){
+            $current = pow(2, $i);
+            $result += isset($request['check-'.$current]) ? $current : 0;
+        }
+        return $result;
     }
 }

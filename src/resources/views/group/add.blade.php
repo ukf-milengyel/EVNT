@@ -28,17 +28,41 @@
                     </div>
 
                     <div class="mt-4">
-                        <x-input-label for="permissions" value="Povolenia"/>
-                        <x-std-text-input name="permissions" type="text" value="{{ old('permissions') }}"/>
-                    </div>
-
-                    <div class="mt-4">
                         <x-input-label for="color" value="Farba" />
                         <x-std-text-input name="color" placeholder="#3498eb" type="text" value="{{ old('color', '#3498eb') }}"/>
                     </div>
 
+                    <div class="mt-4">
+                        <x-input-label value="Povolenia" />
+                        <x-std-checkbox>
+                            Administrátor
+                            <x-slot:name>check-1</x-slot:name>
+                            <x-slot:subtext>Používateľ má prístup k administrátorskému rozhraniu</x-slot:subtext>
+                        </x-std-checkbox>
+                        <x-std-checkbox>
+                            Udalosti
+                            <x-slot:name>check-2</x-slot:name>
+                            <x-slot:subtext>Používateľ vie vytvárať udalosti</x-slot:subtext>
+                        </x-std-checkbox>
+                        <x-std-checkbox>
+                            Tagy
+                            <x-slot:name>check-4</x-slot:name>
+                            <x-slot:subtext>Používateľ vie vytvárať vlastné tagy</x-slot:subtext>
+                        </x-std-checkbox>
+                        <x-std-checkbox>
+                            Fotografie
+                            <x-slot:name>check-8</x-slot:name>
+                            <x-slot:subtext>Používateľ vie k vytvoreným udalostiam pridať fotografie</x-slot:subtext>
+                        </x-std-checkbox>
+                        <x-std-checkbox>
+                            Prílohy
+                            <x-slot:name>check-16</x-slot:name>
+                            <x-slot:subtext>Používateľ vie k vytvoreným udalostiam pridať prílohy</x-slot:subtext>
+                        </x-std-checkbox>
+                    </div>
+
                     <div class="flex justify-end mt-4">
-                        <x-primary-button>{{ __('Pridať') }}</x-primary-button>
+                        <x-primary-button>Vytvoriť skupinu</x-primary-button>
                     </div>
 
                 </form>

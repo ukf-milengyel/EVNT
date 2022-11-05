@@ -12,7 +12,7 @@
             </div>
             <div class="justify-end">
                 <a href="{{ route('group.add') }}" >
-                    <x-primary-button-sm>Pridať skupinu</x-primary-button-sm>
+                    <x-primary-button-sm>Vytvoriť skupinu</x-primary-button-sm>
                 </a>
             </div>
 

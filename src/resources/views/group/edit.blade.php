@@ -29,17 +29,53 @@
                     </div>
 
                     <div class="mt-4">
-                        <x-input-label for="permissions" value="Povolenia"/>
-                        <x-std-text-input name="permissions" type="text" value="{{ $group->permissions }}"/>
-                    </div>
-
-                    <div class="mt-4">
                         <x-input-label for="color" value="Farba" />
                         <x-std-text-input name="color" placeholder="#3498eb" type="text" value="{{ $group->color }}"/>
                     </div>
 
+                    <div class="mt-4">
+                        <x-input-label value="Povolenia" />
+                        <x-std-checkbox>
+                            Administrátor
+                            <x-slot:id>check-1</x-slot:id>
+                            <x-slot:name>check-1</x-slot:name>
+                            <x-slot:subtext>Používateľ má prístup k administrátorskému rozhraniu</x-slot:subtext>
+                        </x-std-checkbox>
+                        <x-std-checkbox>
+                            Udalosti
+                            <x-slot:id>check-2</x-slot:id>
+                            <x-slot:name>check-2</x-slot:name>
+                            <x-slot:subtext>Používateľ vie vytvárať udalosti</x-slot:subtext>
+                        </x-std-checkbox>
+                        <x-std-checkbox>
+                            Tagy
+                            <x-slot:id>check-4</x-slot:id>
+                            <x-slot:name>check-4</x-slot:name>
+                            <x-slot:subtext>Používateľ vie vytvárať vlastné tagy</x-slot:subtext>
+                        </x-std-checkbox>
+                        <x-std-checkbox>
+                            Fotografie
+                            <x-slot:id>check-8</x-slot:id>
+                            <x-slot:name>check-8</x-slot:name>
+                            <x-slot:subtext>Používateľ vie k vytvoreným udalostiam pridať fotografie</x-slot:subtext>
+                        </x-std-checkbox>
+                        <x-std-checkbox>
+                            Prílohy
+                            <x-slot:id>check-16</x-slot:id>
+                            <x-slot:name>check-16</x-slot:name>
+                            <x-slot:subtext>Používateľ vie k vytvoreným udalostiam pridať prílohy</x-slot:subtext>
+                        </x-std-checkbox>
+                    </div>
+
+                    <script>
+                        for (let i = 0; i < 5; ++i) {
+                            const current = Math.pow(2,i);
+                            document.getElementById("check-"+current).checked = ({{$group->permissions}} & current);
+                        }
+                    </script>
+
                     <div class="flex justify-end mt-4">
-                        <x-primary-button>{{ __('Uložiť') }}</x-primary-button>
+                        <x-primary-button>Uložiť</x-primary-button>
                     </div>
 
                 </form>

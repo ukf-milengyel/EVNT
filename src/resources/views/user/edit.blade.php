@@ -40,7 +40,6 @@
 
                     <div class="mt-4">
                         <x-input-label value="Povolenia" />
-                        <div id="checkboxes"></div>
                         <x-std-checkbox>
                             Administrátor
                             <x-slot:id>check-1</x-slot:id>
