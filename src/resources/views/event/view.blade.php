@@ -2,112 +2,82 @@
     <link href="{{ asset('css/style.css') }}" rel="stylesheet" type="text/css">
 @endpush
 <x-barebones>
-    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-        <div class="mx-auto">
+    <div class="mx-auto lg:pt-8">
+        <img src="{{url('/images/event/', $event->image)}}" class="lg:absolute top-0 w-full lg:blur lg:opacity-25 h-0 lg:h-[36rem] mx-auto object-cover">
+        <img src="{{url('/images/event/', $event->image)}}" onclick="window.open(this.src)" class="cursor-pointer mx-auto max-w-7xl w-full h-72 lg:h-[32rem] mx-auto object-cover lg:rounded-xl lg:shadow-xl relative z-10">
+    </div>
+    <div class="pt-8 max-w-7xl mx-auto sm:px-6 lg:px-8">
 
-            <img src="{{url('/images/event/', $event->image)}}" class="w-auto mx-auto object-cover rounded-lg overflow-hidden shadow-lg">
-
-        </div>
-
-
-        <div class="flex justify-between  md:justify-between" >
-            <div class="break-words min-w-[15%] max-w-[70%]">
-                <h2 class="font-semibold text-6xl text-gray-800 leading-tight">
+        <div class="flex justify-between flex-wrap">
+            <div class="break-words w-full lg:w-auto">
+                <h2 class="font-bold text-6xl text-gray-800">
                     {{$event->name}}
                 </h2>
-                <h2 class="font-semibold text-2xl text-gray-800 leading-tight">
-                    <?php echo date("Y/m/d");?>
-                </h2> <br>
-                    Description: {{$event->description}} <br>
+                <h4 class="font-semibold text-xl text-gray-800">
+                    {{$event->date}}
+                </h4>
+                <p class="text-gray-800">
+                    {{$event->description}}
+                </p>
+            </div>
+            <div class="break-words w-full lg:w-auto pt-4 lg:w-56">
 
+                <div class="flex items-end gap-x-4 items-stretch lg:items-baseline lg:justify-end">
+                    <x-primary-button-sm class="p-4 h-16 overflow-hidden w-full lg:w-auto rounded-full">
+                        <img src="{{asset('/icons/facebook.png/')}}" class="mx-auto h-8">
+                    </x-primary-button-sm>
+                    <x-primary-button-sm class="p-4 h-16 overflow-hidden w-full lg:w-auto rounded-full">
+                        <img src="{{asset('/icons/instagram.png/')}}" class="mx-auto h-8">
+                    </x-primary-button-sm>
+                    <x-primary-button-sm class="p-4 h-16 overflow-hidden w-full lg:w-auto rounded-full">
+                        <img src="{{asset('/icons/twitter.png/')}}" class="mx-auto h-8">
+                    </x-primary-button-sm>
+                </div>
 
-
-
-
+            <div class="text-center text-gray-800">
+                <br>
+                <p><span class="font-bold text-7xl">1234</span><br>prihlásených</p>
+                <x-primary-button-sm class="mt-2">Prihlásiť sa</x-primary-button-sm>
             </div>
 
-            <div class="break-words w-70">
+            <div class="pt-4">
+                <p class="pt-2 text-xs text-gray-800">Vytvoril</p>
+                <x-user-badge class="py-1">
+                    @if($event->organizer)
 
-                <h2 class="font-semibold text-6xl text-gray-800 leading-tight rounded-full">
+                        <x-slot:name>{{$event->organizer}}</x-slot:name>
+                    @else
 
-                    <x-primary-button-sm class="py-5 rounded-full "><img src="{{asset('/icons/Facebook.png/')}}" class="w-7 h-6 object-cover rounded-lg overflow-hidden shadow-lg"></x-primary-button-sm>
-                    <x-primary-button-sm class="py-5 rounded-full"><img src="{{asset('/icons/Instagram.png/')}}"class="w-7 h-6 object-cover rounded-lg overflow-hidden shadow-lg"></x-primary-button-sm>
-                    <x-primary-button-sm class="py-5 rounded-full"><img src="{{asset('/icons/Twitter.png/')}}"class="w-7 h-6 object-cover rounded-lg overflow-hidden shadow-lg"></x-primary-button-sm>
-                </h2>
+                        <x-slot:name>{{$event->user->name}}</x-slot:name>
+                    @endif
+                    @if($event->user->group)
 
-            <div class="text-center">
-                <br>
-                <h2 class="font-semibold text-2xl text-gray-800 leading-tight">
-                    X
-                    <br> prihlásených
-                </h2>
-                <br>
+                        <x-slot:group>{{$event->user->group->name}}</x-slot:group>
+                        <x-slot:color>{{$event->user->group->color}}</x-slot:color>
+                    @endif
+                </x-user-badge>
 
+                <p class="pt-2 text-xs text-gray-800">Miesto</p>
+                {{$event->location_name}}<br>
+                {{$event->location_address}}
 
-                <h2 class="font-semibold text-6xl text-gray-800 leading-tight">
-                <x-primary-button-sm>Prihlásiť sa</x-primary-button-sm>
-                </h2>
-
-                <br>
+                <p class="pt-2 text-xs text-gray-800">Dátum vytvorenia</p>
+                {{$event->date}}
             </div>
 
-
-
-
-                @if($event->user->group != NULL)
-
-                    <div>
-                        <x-user-badge>
-
-                            @if($event->organizer)
-
-                                <x-slot:name>{{$event->organizer}}</x-slot:name>
-                            @else
-
-                                <x-slot:name>{{$event->user->name}}</x-slot:name>
-                            @endif
-                            @if($event->user->group)
-
-                                <x-slot:group>{{$event->user->group->name}}</x-slot:group>
-                                <x-slot:color>{{$event->user->group->color}}</x-slot:color>
-                            @endif
-                        </x-user-badge>
-
-                        @endif
-                    </div>
-
-                    Location Name: {{$event->location_name}}</br>
-                    Location Adress: {{$event->location_address}}</br>
-
-                    User: {{$event->user->name}} </br>
-                    Group: {{$event->user->group->name}}</br>
-                    Organizer: {{$event->organizer}} </br>
-
-                    Created: {{$event->date}}</br>
-
-
             </div>
-
         </div>
 
+        <div class="mt-4">
+            <h2 class="font-bold text-2xl text-gray-800">Fotografie</h2>
 
-        <div>
-
-            <h2 class="font-semibold text-2xl text-gray-800 leading-tight">Fotografie</h2>
-            <br>
-
-            <div class="grid grid-cols-10 gap-4">
+            <div class="mt-2 grid grid-cols-4 md:grid-cols-8 lg:grid-cols-12 gap-4">
                 <img src="{{url('/images/event/', $event->image)}}" class="w-60 object-cover rounded-lg overflow-hidden shadow-lg" onclick="window.open(this.src)">
                 <img src="{{url('/images/event/', $event->image)}}" class="w-60 object-cover rounded-lg overflow-hidden shadow-lg" onclick="window.open(this.src)">
-
             </div>
 
-            <h2 class="font-semibold text-2xl text-gray-800 leading-tight">Prilohy</h2>
-            <br>
-            <x-primary-button-sm>Nahrat prilohy</x-primary-button-sm>
-
+            <h2 class="font-bold text-2xl text-gray-800">Prílohy</h2>
         </div>
-
 
     </div>
 </x-barebones>
