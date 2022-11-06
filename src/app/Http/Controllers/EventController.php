@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Event;
+use App\Models\Group;
 use Illuminate\Http\Request;
 use Intervention\Image\ImageManagerStatic as Image;
 
@@ -105,10 +106,14 @@ class EventController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+
+    public function edit(Event $event)
     {
-        $this->authorize('update', Event::class);
-        return view('event.edit');
+        $this->authorize('create', Event::class);
+
+        return view('event.edit', [
+            'event' => $event,
+        ]);
     }
 
     /**
@@ -118,9 +123,37 @@ class EventController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Event $event)
     {
-        $this->authorize('update', Event::class);
+        $this->authorize('update', $event);
+
+        $permissions = $this->translatePerms($request);
+
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'required|string|max:2000',
+            'date' => 'date|required',
+            'organizer' => 'string|max:255|nullable',
+            'location_name' => 'string|max:255',
+            'location_address' => 'string|max:255|nullable',
+            'image' => 'required|image|mimes:jpg,jpeg,png|max:8192'
+        ]);
+
+        $imgname = uniqid('', true) . '.jpg';
+        Image::make($request->image)->fit(400)->save(public_path('images/event_thumb/'.$imgname), 75, 'jpg');
+        Image::make($request->image)->save(public_path('images/event/'.$imgname), 90, 'jpg');
+
+        $event->name = $validated['name'];
+        $event->description = $validated['description'];
+        $event->user_id = $request->user()->id;
+        $event->date = $validated['date'];
+        $event->organizer = $validated['organizer'];
+        $event->location_name = $validated['location_name'];
+        $event->location_address = $validated['location_address'];
+        $event->image = $imgname;
+        $event->save();
+
+        return $this->index('Event '.$validated['name'].' bol upravený.');
     }
 
     /**
@@ -129,8 +162,16 @@ class EventController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Event $event)
+
     {
-        $this->authorize('delete', Event::class);
+        $this->authorize('delete', $event);
+
+        $name = $event->name;
+        $event->delete();
+
+        return $this->index('Event '.$name.' bol odstránený.');
+        return redirect(route('event.index'));
     }
+
 }
