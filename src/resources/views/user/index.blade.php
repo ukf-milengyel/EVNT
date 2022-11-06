@@ -30,23 +30,17 @@
 
                     <table class="w-full text-sm text-left">
                         <thead>
-                        <tr class="border-b bg-white sticky top-0">
-                            <th>Akcie</th>
-                            <th>Meno</th>
-                            <th>E-mail</th>
-                            <th>Skupina</th>
-                            <th>Vytvorený</th>
+                        <tr class="text-xs uppercase border-b bg-white sticky top-0">
+                            <th class="pr-2 py-1">Meno</th>
+                            <th class="pr-2">E-mail</th>
+                            <th class="pr-2">Skupina</th>
+                            <th class="pr-2">Vytvorený</th>
+                            <th class="w-6">Akcie</th>
                         </tr>
                         </thead>
                         <tbody>
                         @foreach ($users as $user)
                             <tr class="border-b">
-
-                                <td>
-                                    <a href="{{route('user.edit', $user)}}" >
-                                        <x-primary-button  class="btn btn-secondary" >Upraviť</x-primary-button>
-                                    </a>
-                                </td>
                                 <td>{{$user->name}}</td>
                                 <td>{{$user->email}}</td>
                                 <td>
@@ -60,6 +54,11 @@
                                 </td>
 
                                 <td>{{$user->created_at}}</td>
+                                <td>
+                                    <a href="{{route('user.edit', $user)}}">
+                                        <img src="{{asset('/icons/edit.svg')}}" class="inline underline w-6 my-auto cursor-pointer">
+                                    </a>
+                                </td>
                             </tr>
                         @endforeach
                         </tbody>
