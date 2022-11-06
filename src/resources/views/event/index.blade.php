@@ -85,16 +85,16 @@
     </div>
 
     <div id='detail-background'></div>
-    <div id='detail-frame'>
+    <div id='detail-frame' class="overflow-hidden z-10 bg-white rounded-lg shadow-2xl">
         <div id="detail-spinner">
             <div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
         </div>
-        <iframe id='detail-iframe'>
+        <iframe id='detail-iframe' class="border-none w-full h-full">
 
         </iframe>
         <div id='detail-spinner'></div>
-        <div id='close-button' onclick='hideDetails()'>
-            <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+        <div id='close-button' class="bg-white rounded-full shadow-lg w-10 h-10 fixed top-6 right-8 cursor-pointer z-10" onclick='hideDetails()'>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
             </svg>
         </div>

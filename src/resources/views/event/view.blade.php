@@ -2,9 +2,9 @@
     <link href="{{ asset('css/style.css') }}" rel="stylesheet" type="text/css">
 @endpush
 <x-barebones>
-    <div class="mx-auto lg:pt-8">
-        <img src="{{url('/images/event/', $event->image)}}" class="lg:absolute top-0 w-full lg:blur lg:opacity-25 h-0 lg:h-[36rem] mx-auto object-cover">
-        <img src="{{url('/images/event/', $event->image)}}" onclick="window.open(this.src)" class="cursor-pointer mx-auto max-w-7xl w-full h-72 lg:h-[32rem] mx-auto object-cover lg:rounded-xl lg:shadow-xl relative z-10">
+    <div class="mx-auto xl:pt-8">
+        <img src="{{url('/images/event/', $event->image)}}" class="xl:absolute top-0 w-full xl:blur xl:opacity-25 h-0 xl:h-[36rem] mx-auto object-cover">
+        <img src="{{url('/images/event/', $event->image)}}" onclick="window.open(this.src)" class="cursor-pointer mx-auto max-w-7xl w-full h-72 lg:h-[32rem] mx-auto object-cover xl:rounded-xl shadow-xl relative z-10">
     </div>
     <div class="pt-8 max-w-7xl mx-auto sm:px-6 lg:px-8">
 
@@ -44,7 +44,6 @@
                 <p class="pt-2 text-xs text-gray-800">Vytvoril</p>
                 <x-user-badge class="py-1">
                     @if($event->organizer)
-
                         <x-slot:name>{{$event->organizer}}</x-slot:name>
                     @else
 
@@ -61,8 +60,25 @@
                 {{$event->location_name}}<br>
                 {{$event->location_address}}
 
-                <p class="pt-2 text-xs text-gray-800">Dátum vytvorenia</p>
+                <p class="pt-2 text-xs text-gray-800">Dátum konania</p>
                 {{$event->date}}
+
+                <p class="pt-2 text-xs text-gray-800">Dátum vytvorenia</p>
+                {{$event->created_at}}
+
+                @unless($event->updated_at->eq($event->created_at))
+                    <p class="pt-2 text-xs text-gray-800">Posledná úprava</p>
+                    {{$event->updated_at}}
+                @endunless
+
+                <p class="pt-2 text-xs text-gray-800">Tagy</p>
+                -
+
+                <p class="pt-2 text-xs text-gray-800">Fotografie</p>
+                1234
+
+                <p class="pt-2 text-xs text-gray-800">Prílohy</p>
+                1234
             </div>
 
             </div>
