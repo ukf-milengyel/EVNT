@@ -24,17 +24,37 @@
 
 
 
-
             </div>
 
-            <div class="break-words w-60">
-                <h2 class="font-semibold text-6xl text-gray-800 leading-tight">
-                    <x-primary-button-sm>Share</x-primary-button-sm>
+            <div class="break-words w-70">
+
+                <h2 class="font-semibold text-6xl text-gray-800 leading-tight rounded-full">
+
+                    <x-primary-button-sm class="py-5 rounded-full "><img src="{{asset('/icons/Facebook.png/')}}" class="w-7 h-6 object-cover rounded-lg overflow-hidden shadow-lg"></x-primary-button-sm>
+                    <x-primary-button-sm class="py-5 rounded-full"><img src="{{asset('/icons/Instagram.png/')}}"class="w-7 h-6 object-cover rounded-lg overflow-hidden shadow-lg"></x-primary-button-sm>
+                    <x-primary-button-sm class="py-5 rounded-full"><img src="{{asset('/icons/Twitter.png/')}}"class="w-7 h-6 object-cover rounded-lg overflow-hidden shadow-lg"></x-primary-button-sm>
                 </h2>
 
+            <div class="text-center">
+                <br>
+                <h2 class="font-semibold text-2xl text-gray-800 leading-tight">
+                    X
+                    <br> prihlásených
+                </h2>
+                <br>
+
+
+                <h2 class="font-semibold text-6xl text-gray-800 leading-tight">
+                <x-primary-button-sm>Prihlásiť sa</x-primary-button-sm>
+                </h2>
+
+                <br>
+            </div>
+
+
+
+
                 @if($event->user->group != NULL)
-
-
 
                     <div>
                         <x-user-badge>
@@ -55,27 +75,37 @@
 
                         @endif
                     </div>
-                    User: {{$event->user->name}} </br>
-                    Group: {{$event->user->group->name}}</br>
-                    Organizer:: {{$event->organizer}} </br>
+
                     Location Name: {{$event->location_name}}</br>
                     Location Adress: {{$event->location_address}}</br>
+
+                    User: {{$event->user->name}} </br>
+                    Group: {{$event->user->group->name}}</br>
+                    Organizer: {{$event->organizer}} </br>
+
                     Created: {{$event->date}}</br>
 
-                tagy-tagy-tagy-tagy<br>
-                tagy-tagy-tagy-tagy<br>
-                tagy-tagy-tagy-tagy
+
             </div>
 
         </div>
 
 
         <div>
-            ----------------------------------------------------------------------------<br>
-            Fotografie<br>
-            fotografie-fotografie-fotografie-fotografie-fotografie-fotografie-fotografie<br>
-            Prilohy<br>
-            prilohy-prilohy-prilohy-prilohy-prilohy-prilohy-prilohy-prilohy-prilohy-prilohy
+
+            <h2 class="font-semibold text-2xl text-gray-800 leading-tight">Fotografie</h2>
+            <br>
+
+            <div class="grid grid-cols-10 gap-4">
+                <img src="{{url('/images/event/', $event->image)}}" class="w-60 object-cover rounded-lg overflow-hidden shadow-lg" onclick="window.open(this.src)">
+                <img src="{{url('/images/event/', $event->image)}}" class="w-60 object-cover rounded-lg overflow-hidden shadow-lg" onclick="window.open(this.src)">
+
+            </div>
+
+            <h2 class="font-semibold text-2xl text-gray-800 leading-tight">Prilohy</h2>
+            <br>
+            <x-primary-button-sm>Nahrat prilohy</x-primary-button-sm>
+
         </div>
 
 
