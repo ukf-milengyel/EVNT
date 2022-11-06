@@ -11,7 +11,7 @@
                 <div class="p-6">
                     <div class="flex flex-col space-y-8 ...">
 
-                    <div class="grid grid-cols-2 gap-4">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
 
                         <div class="p-6 w-96 mx-auto bg-white rounded-xl shadow-lg flex items-center space-x-4">
                             <div class="shrink-0">
@@ -33,7 +33,7 @@
 
                     </div>
 
-                    <div class="grid grid-cols-4 gap-4">
+                    <div class="grid md:grid-cols-2 xl:grid-cols-4 gap-4">
 
                         <div class="p-6 h-24 w-72 mx-auto bg-white rounded-xl shadow-lg flex items-center space-x-4">
                             <div class="shrink-0">

@@ -67,7 +67,7 @@
                                             </x-primary-button>
                                         </form>
                                     @endif
-
+                                </td>
 
 
                                 <td>{{$group->name}}</td>
@@ -100,8 +100,8 @@
                             let checkBoxes = "";
                             for (let i = 1; i < permLimit; i*=2) {
                                 checkBoxes += (permValue & i)
-                                    ? "<td><input type='checkbox' onclick='return false;' checked></td>"
-                                    : "<td><input type='checkbox' onclick='return false;'></td>";
+                                    ? "<td><input class='rounded' type='checkbox' onclick='return false;' checked></td>"
+                                    : "<td><input class='rounded' type='checkbox' onclick='return false;'></td>";
                             }
 
                             parent.innerHTML += checkBoxes;     // append to parent

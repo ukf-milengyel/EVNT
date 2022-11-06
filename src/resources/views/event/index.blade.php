@@ -32,8 +32,6 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 bg-white border-b border-gray-200">
                     <form method="get" action="{{route('event.index')}}">
                         Zoradenie
                         <br>
@@ -59,7 +57,7 @@
                         @foreach($events as $event)
 
                             <x-event-component>
-                                <x-slot:img>{{url('/images/event/', $event->image)}}</x-slot:img>
+                                <x-slot:img>{{url('/images/event_thumb/', $event->image)}}</x-slot:img>
                                 <x-slot:onclick>showDetails('{{route('event.show', $event)}}')</x-slot:onclick>
                                 <x-slot:participants>10</x-slot:participants>
                                 <x-slot:name>{{$event->name}}</x-slot:name>
@@ -83,8 +81,6 @@
 
                     </div>
 
-                </div>
-            </div>
         </div>
     </div>
 

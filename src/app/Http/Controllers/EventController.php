@@ -68,7 +68,7 @@ class EventController extends Controller
         ]);
 
         $imgname = uniqid('', true) . '.jpg';
-        Image::make($request->image)->fit(512,288)->save(public_path('images/event_thumb/'.$imgname), 75, 'jpg');
+        Image::make($request->image)->fit(400)->save(public_path('images/event_thumb/'.$imgname), 75, 'jpg');
         Image::make($request->image)->save(public_path('images/event/'.$imgname), 90, 'jpg');
 
         $event = new Event();

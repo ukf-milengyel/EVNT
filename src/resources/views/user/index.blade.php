@@ -46,6 +46,7 @@
                                     <a href="{{route('user.edit', $user)}}" >
                                         <x-primary-button  class="btn btn-secondary" >Upraviť</x-primary-button>
                                     </a>
+                                </td>
                                 <td>{{$user->name}}</td>
                                 <td>{{$user->email}}</td>
                                 <td>
