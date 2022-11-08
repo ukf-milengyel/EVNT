@@ -8,15 +8,15 @@
     </div>
     <div class="pt-8 max-w-7xl mx-auto sm:px-6 lg:px-8">
 
-        <div class="flex justify-between flex-wrap">
-            <div class="break-words w-full lg:w-auto">
+        <div class="flex flex-row gap-4 justify-between flex-wrap">
+            <div class="break-words w-full grow lg:w-auto">
                 <h2 class="font-bold text-6xl text-gray-800">
                     {{$event->name}}
                 </h2>
                 <h4 class="font-semibold text-xl text-gray-800">
                     {{$event->date}}
                 </h4>
-                <p class="text-gray-800">
+                <p class="text-gray-800 w-full lg:w-[45rem] xl:w-[58rem]">
                     {{$event->description}}
                 </p>
             </div>
