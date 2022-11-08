@@ -22,11 +22,11 @@ class EventSeeder extends Seeder
                 'name' => $faker->word,
                 'description' => $faker->text(1000),
                 'user_id' => User::all()->random(1)->first()->id,
-                'date' => $faker->dateTime,
+                'date' => $faker->dateTimeBetween('+1 week', '+1 month'),
                 'organizer' => $faker->firstName,
                 'location_name' => $faker->streetAddress,
                 'location_address' => $faker->address,
-                'image' => "1.jpg",
+                'image' => "0.jpg",
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);

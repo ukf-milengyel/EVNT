@@ -6,21 +6,23 @@
         <img src="{{url('/images/event/', $event->image)}}" class="xl:absolute top-0 w-full xl:blur xl:opacity-25 h-0 xl:h-[36rem] mx-auto object-cover">
         <img src="{{url('/images/event/', $event->image)}}" onclick="window.open(this.src)" class="cursor-pointer mx-auto max-w-7xl w-full h-72 lg:h-[32rem] mx-auto object-cover xl:rounded-xl shadow-xl relative z-10">
     </div>
-    <div class="pt-8 max-w-7xl mx-auto sm:px-6 lg:px-8">
+    <div class="pt-4 sm:pt-8 mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
 
-        <div class="flex flex-row gap-4 justify-between flex-wrap">
-            <div class="break-words w-full grow lg:w-auto">
+        <div class="flex flex-wrap lg:flex-nowrap gap-4 justify-between">
+
+            <div class="break-words lg:w-auto">
                 <h2 class="font-bold text-6xl text-gray-800">
                     {{$event->name}}
                 </h2>
                 <h4 class="font-semibold text-xl text-gray-800">
                     {{$event->date}}
                 </h4>
-                <p class="text-gray-800 w-full lg:w-[45rem] xl:w-[58rem]">
+                <p class="text-gray-800">
                     {{$event->description}}
                 </p>
             </div>
-            <div class="break-words w-full lg:w-auto pt-4 lg:w-56">
+
+            <div class="break-words w-full lg:w-56 pt-4 shrink-0">
 
                 <div class="flex items-end gap-x-4 items-stretch lg:items-baseline lg:justify-end">
                     <x-primary-button-sm class="p-4 h-16 overflow-hidden w-full lg:w-auto rounded-full">
@@ -56,29 +58,45 @@
                     @endif
                 </x-user-badge>
 
-                <p class="pt-2 text-xs text-gray-800">Miesto</p>
-                {{$event->location_name}}<br>
-                {{$event->location_address}}
+                <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-1">
+                    <div>
+                        <p class="pt-2 text-xs text-gray-800">Miesto</p>
+                        <span class="font-semibold">{{$event->location_name}}</span><br>
+                        {{$event->location_address}}
+                    </div>
 
-                <p class="pt-2 text-xs text-gray-800">Dátum konania</p>
-                {{$event->date}}
+                    <div>
+                        <p class="pt-2 text-xs text-gray-800">Dátum konania</p>
+                        {{$event->date}}
+                    </div>
 
-                <p class="pt-2 text-xs text-gray-800">Dátum vytvorenia</p>
-                {{$event->created_at}}
+                    <div>
+                        <p class="pt-2 text-xs text-gray-800">Dátum vytvorenia</p>
+                        {{$event->created_at}}
+                    </div>
 
-                @unless($event->updated_at->eq($event->created_at))
-                    <p class="pt-2 text-xs text-gray-800">Posledná úprava</p>
-                    {{$event->updated_at}}
-                @endunless
+                    @unless($event->updated_at->eq($event->created_at))
+                        <div>
+                            <p class="pt-2 text-xs text-gray-800">Posledná úprava</p>
+                            {{$event->updated_at}}
+                        </div>
+                    @endunless
 
-                <p class="pt-2 text-xs text-gray-800">Tagy</p>
-                -
+                    <div>
+                        <p class="pt-2 text-xs text-gray-800">Tagy</p>
+                        -
+                    </div>
 
-                <p class="pt-2 text-xs text-gray-800">Fotografie</p>
-                1234
+                    <div>
+                        <p class="pt-2 text-xs text-gray-800">Fotografie</p>
+                        1234
+                    </div>
 
-                <p class="pt-2 text-xs text-gray-800">Prílohy</p>
-                1234
+                    <div>
+                        <p class="pt-2 text-xs text-gray-800">Prílohy</p>
+                        1234
+                    </div>
+                </div>
             </div>
 
             </div>

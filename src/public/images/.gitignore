@@ -1,4 +1,6 @@
 event/*
 !event/.gitkeep
+!event/0.jpg
 event_thumb/*
 !event_thumb/.gitkeep
+!event_thumb/0.jpg
