@@ -26,10 +26,15 @@ class EventController extends Controller
         $archiveds = ['>', '<'];
         $archived = ($request->get('archived') ?? 0) % count($archiveds);
 
+        $events = Event::whereDate('date', $archiveds[$archived], now())
+            ->orderBy($categories[$category] ,$sorts[$sort])
+            ->get();
+
+        if ($events->count() == 0)
+            $message = 'Zvoleným filtrom nezodpovedajú žiadne podujatia.';
+
         return view('event.index', [
-            'events' => Event::whereDate('date', $archiveds[$archived], now())
-                ->orderBy($categories[$category] ,$sorts[$sort])
-                ->get(),
+            'events' => $events,
             'message' => $message,
             'category' => $category,
             'sort' => $sort,

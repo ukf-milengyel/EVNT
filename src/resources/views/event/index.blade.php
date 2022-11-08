@@ -78,7 +78,6 @@
                             </x-event-component>
 
                         @endforeach
-
                     </div>
 
         </div>

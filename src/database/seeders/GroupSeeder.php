@@ -2,13 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Faker\Factory;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
-use Illuminate\Support\Arr;
 
 class GroupSeeder extends Seeder
 {
@@ -19,12 +15,13 @@ class GroupSeeder extends Seeder
      */
     public function run()
     {
-        //
+        $faker = Factory::create();
+
         for ($i = 1; $i <= 5; $i++) {
             DB::table('group')->insert([
-                'name' => Str::random(10),
-                'permissions' => Arr::random([1,2,4,8,16]),
-                'color' => Arr::random(["#3498EB", "#FF5733", "#7EEB16"]),
+                'name' => $faker->name,
+                'permissions' => 0,
+                'color' => $faker->hexColor,
             ]);
         }
     }

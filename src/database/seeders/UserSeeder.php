@@ -2,12 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Faker\Factory;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
-use Illuminate\Support\Carbon;
 
 class UserSeeder extends Seeder
 {
@@ -18,14 +15,13 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
+        $faker = Factory::create();
         for ($i = 1; $i <= 20; $i++) {
             DB::table('users')->insert([
-                'name' => Str::random(10),
-                'email' => Str::random(10) . '@gmail.com',
-                'password' => Hash::make('password'),
-                'group_id' => 1,
-                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-
+                'name' => $faker->firstName,
+                'email' => $faker->email,
+                'password' => password_hash('testtesttesttesttesttesttesttesttest', null),
+                'group_id' => rand(2,6),
             ]);
         }
     }
