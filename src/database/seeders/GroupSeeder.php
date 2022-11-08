@@ -17,10 +17,10 @@ class GroupSeeder extends Seeder
     {
         $faker = Factory::create();
 
-        for ($i = 1; $i <= 5; $i++) {
+        for ($i = 1; $i <= 20; $i++) {
             DB::table('group')->insert([
                 'name' => $faker->name,
-                'permissions' => 0,
+                'permissions' => rand(0, 15) * 2,
                 'color' => $faker->hexColor,
             ]);
         }

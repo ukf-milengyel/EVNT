@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Group;
 use Faker\Factory;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -15,13 +16,14 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
+        $count = 20;
         $faker = Factory::create();
-        for ($i = 1; $i <= 20; $i++) {
+        for ($i = 0; $i < $count; $i++) {
             DB::table('users')->insert([
                 'name' => $faker->firstName,
                 'email' => $faker->email,
                 'password' => password_hash('testtesttesttesttesttesttesttesttest', null),
-                'group_id' => rand(2,6),
+                'group_id' => Group::all()->random(1)->first()->id,
             ]);
         }
     }

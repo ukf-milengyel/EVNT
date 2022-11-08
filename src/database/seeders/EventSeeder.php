@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use Faker\Factory;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -14,12 +15,13 @@ class EventSeeder extends Seeder
      */
     public function run()
     {
+        $count = 30;
         $faker = Factory::create();
-        for ($i = 1; $i <= 30; $i++) {
+        for ($i = 1; $i <= $count; $i++) {
             DB::table('event')->insert([
                 'name' => $faker->word,
-                'description' => $faker->text(200),
-                'user_id' => rand(1,21),
+                'description' => $faker->text(1000),
+                'user_id' => User::all()->random(1)->first()->id,
                 'date' => $faker->dateTime,
                 'organizer' => $faker->firstName,
                 'location_name' => $faker->streetAddress,
