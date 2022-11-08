@@ -25,6 +25,8 @@ class EventSeeder extends Seeder
                 'location_name' => $faker->streetAddress,
                 'location_address' => $faker->address,
                 'image' => "1.jpg",
+                'created_at' => now(),
+                'updated_at' => now(),
             ]);
         }
     }
