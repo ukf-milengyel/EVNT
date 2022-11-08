@@ -15,7 +15,7 @@
                     {{$event->name}}
                 </h2>
                 <h4 class="font-semibold text-xl text-gray-800">
-                    {{$event->date}}
+                    {{ \Carbon\Carbon::parse($event->date)->format('d.m.Y, h:i:s') }}
                 </h4>
                 <p class="text-gray-800">
                     {{$event->description}}
@@ -67,18 +67,18 @@
 
                     <div>
                         <p class="pt-2 text-xs text-gray-800">Dátum konania</p>
-                        {{$event->date}}
+                        {{ \Carbon\Carbon::parse($event->date)->format('d.m.Y, h:i') }}
                     </div>
 
                     <div>
                         <p class="pt-2 text-xs text-gray-800">Dátum vytvorenia</p>
-                        {{$event->created_at}}
+                        {{ \Carbon\Carbon::parse($event->created_at)->format('d.m.Y, h:i') }}
                     </div>
 
                     @unless($event->updated_at->eq($event->created_at))
                         <div>
                             <p class="pt-2 text-xs text-gray-800">Posledná úprava</p>
-                            {{$event->updated_at}}
+                            {{ \Carbon\Carbon::parse($event->updated_at)->format('d.m.Y, h:i') }}
                         </div>
                     @endunless
 
