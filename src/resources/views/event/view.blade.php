@@ -4,7 +4,7 @@
 <x-barebones>
     <div class="mx-auto xl:pt-8">
         <img src="{{url('/images/event/', $event->image)}}" class="xl:absolute top-0 w-full xl:blur xl:opacity-25 h-0 xl:h-[36rem] mx-auto object-cover">
-        <img src="{{url('/images/event/', $event->image)}}" onclick="window.open(this.src)" class="cursor-pointer mx-auto max-w-7xl w-full h-72 lg:h-[32rem] mx-auto object-cover xl:rounded-xl shadow-xl relative z-10">
+        <img src="{{url('/images/event/', $event->image)}}" onclick="window.open(this.src)" class="cursor-pointer mx-auto max-w-7xl w-full h-72 transition-transform hover:scale-[1.01] lg:h-[32rem] mx-auto object-cover xl:rounded-xl shadow-xl relative z-10">
     </div>
     <div class="pt-4 sm:pt-8 mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
 
