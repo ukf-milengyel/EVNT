@@ -15,6 +15,18 @@
                     <x-nav-link :href="route('event.index')" :active="request()->routeIs('event.index')">
                         {{ __('Podujatia') }}
                     </x-nav-link>
+                    <x-nav-link href="/">
+                        {{ __('Moje podujatia') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('announcement.index')" :active="request()->routeIs('announcement.index')">
+                        {{ __('Oznámenia') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('tag.index')" :active="request()->routeIs('tag.index')">
+                        {{ __('Tagy') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('statistics')" :active="request()->routeIs('statistics')">
+                        {{ __('Štatistika') }}
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -45,10 +57,6 @@
                                 {{ __('Admin - Správa používateľov') }}
                             </x-dropdown-link>
                         @endcan
-
-                        <x-dropdown-link :href="route('statistics')">
-                            {{ __('Štatistika') }}
-                        </x-dropdown-link>
 
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
@@ -82,6 +90,18 @@
             <x-responsive-nav-link :href="route('event.index')" :active="request()->routeIs('event.index')">
                 {{ __('Podujatia') }}
             </x-responsive-nav-link>
+            <x-responsive-nav-link href="/">
+                {{ __('Moje podujatia') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('announcement.index')" :active="request()->routeIs('announcement.index')">
+                {{ __('Oznámenia') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('tag.index')" :active="request()->routeIs('tag.index')">
+                {{ __('Tagy') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('statistics')" :active="request()->routeIs('statistics')">
+                {{ __('Štatistika') }}
+            </x-responsive-nav-link>
         </div>
 
         <!-- Responsive Settings Options -->
@@ -103,10 +123,6 @@
                         {{ __('Admin - Správa používateľov') }}
                     </x-dropdown-link>
                 @endcan
-
-                <x-dropdown-link :href="route('statistics')">
-                    {{ __('Štatistika') }}
-                </x-dropdown-link>
 
                 <!-- Authentication -->
                 <form method="POST" action="{{ route('logout') }}">

@@ -4,6 +4,8 @@ use App\Http\Controllers\GroupController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\StatisticsController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\TagController;
+use App\Http\Controllers\AnnouncementController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -38,6 +40,21 @@ Route::resource('/event', EventController::class)
 Route::get('/statistics', [StatisticsController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('statistics');
+
+// TAGS
+Route::get('/tag/add', function (){
+    return view('tag.add');
+})->name('tag.add')->middleware(['auth', 'verified']);
+
+Route::resource('/tag', TagController::class)
+    ->only(['index','show', 'store', 'edit', 'update', 'destroy'])
+    ->middleware(['auth', 'verified']);
+
+// ANNOUNCEMENTS
+// na zobrazovanie všetkých oznámení, pridávanie je možné iba zo stránky podujatia
+Route::resource('/announcement', AnnouncementController::class)
+    ->only(['index','show', 'store', 'edit', 'update', 'destroy'])
+    ->middleware(['auth', 'verified']);
 
 // GROUP --------------------------------------------------------------------
 Route::get('/group/add', function (){

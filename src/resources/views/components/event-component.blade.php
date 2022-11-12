@@ -1,4 +1,4 @@
-<div onclick="{{$onclick}}" class="overflow-hidden bg-white w-full sm:rounded-xl shadow-lg transition-transform hover:scale-105 items-center cursor-pointer">
+<div onclick="{{$onclick}}" class="overflow-hidden bg-white w-full sm:rounded-xl shadow-lg transition-transform sm:hover:scale-105 items-center cursor-pointer">
     <div class="relative">
         <img class="object-cover h-44 md:h-48 xl:h-52 w-full" src="{{($img)}}">
         <div class="flex absolute w-full bottom-2 px-2">

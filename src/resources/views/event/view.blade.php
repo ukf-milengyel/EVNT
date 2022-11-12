@@ -4,7 +4,7 @@
 <x-barebones>
     <div class="mx-auto xl:pt-8">
         <img src="{{url('/images/event/', $event->image)}}" class="xl:absolute top-0 w-full xl:blur xl:opacity-25 h-0 xl:h-[36rem] mx-auto object-cover">
-        <img src="{{url('/images/event/', $event->image)}}" onclick="window.open(this.src)" class="cursor-pointer mx-auto max-w-7xl w-full h-72 transition-transform hover:scale-[1.01] lg:h-[32rem] mx-auto object-cover xl:rounded-xl shadow-xl relative z-10">
+        <img src="{{url('/images/event/', $event->image)}}" onclick="window.open(this.src)" class="cursor-pointer mx-auto max-w-7xl w-full h-72 transition-transform xl:hover:scale-[1.02] lg:h-[32rem] mx-auto object-cover xl:rounded-xl shadow-xl relative z-10">
     </div>
     <div class="pt-4 sm:pt-8 mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
 
@@ -20,6 +20,30 @@
                 <p class="text-gray-800">
                     {{$event->description}}
                 </p>
+
+                <!-- todo: nahradiť checkom, či používateľ je autor príspevku -->
+                @if(true)
+                <form method="POST" action="{{ route('announcement.store') }}" class="py-4 px-6 border-2 rounded-xl border-gray-300" enctype="multipart/form-data">
+                    @csrf
+                    <div>
+                        <x-input-label for="body" value="Nové oznámenie" />
+                        <x-std-textarea name="description">{{ old('description') }}</x-std-textarea>
+                    </div>
+                    <div class="mt-4">
+                        <x-input-label for="image" value="Fotografia" />
+                        <input id="picker" name="image" type="file"/>
+                    </div>
+                    <div class="flex justify-end mt-8">
+                        <x-primary-button>{{ __('Pridať') }}</x-primary-button>
+                    </div>
+                </form>
+                @endif
+                <!-- todo: nahradiť checkom, či existujú oznámenia -->
+                @if(true)
+                    <h2 class="font-bold mt-4 text-2xl text-gray-800">Oznámenia</h2>
+                    <!-- todo: vytvoriť komponent pre oznámenie -->
+                @endif
+
             </div>
 
             <div class="break-words w-full lg:w-56 pt-4 shrink-0">
