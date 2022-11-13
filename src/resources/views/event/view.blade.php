@@ -62,8 +62,18 @@
 
             <div class="text-center text-gray-800">
                 <br>
-                <p><span class="font-bold text-7xl">1234</span><br>prihlásených</p>
-                <x-primary-button-sm class="mt-2">Prihlásiť sa</x-primary-button-sm>
+                <p><span class="font-bold text-7xl">{{$attend_count}}</span><br>prihlásených</p>
+                <form method="post" action="{{route('event.attend')}}">
+                    @csrf
+                    <input type="hidden" name="event_id" value="{{$event->id}}">
+                    @if($attends)
+                        <p class="pt-2 text-xs text-gray-800">Ste prihlásený na toto podujatie</p>
+                        <x-primary-button-sm class="mt-2 bg-red-700 hover:bg-red-600">Odhlásiť sa</x-primary-button-sm>
+                    @else
+                        <x-primary-button-sm class="mt-2 bg-green-700 hover:bg-green-600">Prihlásiť sa</x-primary-button-sm>
+                    @endif
+                </form>
+
             </div>
 
             <div class="pt-4">

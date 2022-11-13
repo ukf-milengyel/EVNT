@@ -29,6 +29,9 @@ Route::get('/event/add', function (){
     return view('event.add');
 })->name('event.add')->middleware(['auth', 'verified']);
 
+Route::post('/event/attend', [EventController::class, 'attendEvent'])
+    ->name('event.attend')->middleware(['auth', 'verified']);
+
 Route::get('/event', [EventController::class, 'index'])
     ->name('event.index')->middleware(['auth', 'verified']);
 

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Event;
-use App\Models\Group;
+use App\Models\User_attends_event;
 use Illuminate\Http\Request;
 use Intervention\Image\ImageManagerStatic as Image;
 
@@ -98,10 +98,12 @@ class EventController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, int $id)
     {
         return view('event.view', [
             'event' => Event::findOrFail($id),
+            'attends' => User_attends_event::where('user_id', $request->user()->id)->where('event_id', $id)->count(),
+            'attend_count' => User_attends_event::where('event_id', $id)->count()
         ]);
     }
 
@@ -168,7 +170,6 @@ class EventController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy(Event $event)
-
     {
         $this->authorize('delete', $event);
 
@@ -177,6 +178,24 @@ class EventController extends Controller
 
         return $this->index('Event '.$name.' bol odstránený.');
         return redirect(route('event.index'));
+    }
+
+    public function attendEvent(Request $request)
+    {
+        $uid = $request->user()->id;
+        $eid = $request->event_id;
+
+        $model = User_attends_event::where('user_id', $uid)->where('event_id', $eid);
+        if ($model->count() == 0){
+            $attend = new User_attends_event;
+            $attend->user_id = $uid;
+            $attend->event_id = $eid;
+            $attend->save();
+        }else{
+            $model->delete();
+        }
+
+        return redirect()->back();
     }
 
 }
