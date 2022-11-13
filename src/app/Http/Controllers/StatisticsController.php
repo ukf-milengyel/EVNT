@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Event;
 use App\Models\Group;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 
 class StatisticsController extends Controller
 {
@@ -16,7 +17,7 @@ class StatisticsController extends Controller
             'users' => User::count(),
             'groups' => Group::count(),
             'events' => Event::count(),
-            'attendants' => 200,
+            'attendants' => DB::table("user_attends_event")->selectRaw("count(*)")->value(0),
             'photos' => 320,
             'attachments' => 60,
         ]);
