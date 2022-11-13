@@ -59,7 +59,7 @@
                             <x-event-component>
                                 <x-slot:img>{{url('/images/event_thumb/', $event->image)}}</x-slot:img>
                                 <x-slot:onclick>showDetails('{{route('event.show', $event)}}')</x-slot:onclick>
-                                <x-slot:participants>10</x-slot:participants>
+                                <x-slot:participants>{{$event->user_a->count()}}</x-slot:participants>
                                 <x-slot:name>{{$event->name}}</x-slot:name>
                                 <x-slot:date>{{ \Carbon\Carbon::parse($event->date)->format('d.m.Y, h:i') }}</x-slot:date>
                                 <x-slot:organizer>

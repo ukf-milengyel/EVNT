@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->unsignedBigInteger('group_id')->nullable();
+            $table->unsignedBigInteger('group_id')->nullable()->constrained('group')->nullOnDelete();
             $table->rememberToken();
             $table->timestamps();
 

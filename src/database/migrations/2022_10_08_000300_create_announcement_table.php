@@ -19,7 +19,7 @@ return new class extends Migration
             $table->id();
             $table->string('body', 1000);
             $table->string('image')->nullable();
-            $table->unsignedBigInteger('event_id');
+            $table->unsignedBigInteger('event_id')->constrained('event')->cascadeOnDelete();
             $table->timestamps();
 
             $table->foreign('event_id')

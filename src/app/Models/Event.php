@@ -27,4 +27,12 @@ class Event extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function tag() {
+        return $this->belongsToMany(Tag::class, 'event_has_tag');
+    }
+
+    public function user_a() {
+        return $this->belongsToMany(User::class, 'user_attends_event');
+    }
+
 }

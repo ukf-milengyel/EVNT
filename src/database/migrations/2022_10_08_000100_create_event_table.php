@@ -19,7 +19,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('description', 2000);
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('user_id')->constrained('event')->nullOnDelete();
             $table->dateTime('date');
             $table->string('organizer')->nullable();
             $table->string('location_name');

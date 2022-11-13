@@ -17,8 +17,8 @@ return new class extends Migration
     {
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('event_id');
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('event_id')->constrained('event')->cascadeOnDelete();
+            $table->unsignedBigInteger('user_id')->nullable()->constrained('user')->cascadeOnDelete();
             $table->unsignedBigInteger('type')->default(0);
             $table->string('message')->nullable();
             $table->boolean('seen');

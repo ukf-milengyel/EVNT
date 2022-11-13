@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Event;
-use App\Models\User_attends_event;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Intervention\Image\ImageManagerStatic as Image;
 
@@ -100,10 +100,11 @@ class EventController extends Controller
      */
     public function show(Request $request, int $id)
     {
+        $event = Event::findOrFail($id);
         return view('event.view', [
-            'event' => Event::findOrFail($id),
-            'attends' => User_attends_event::where('user_id', $request->user()->id)->where('event_id', $id)->count(),
-            'attend_count' => User_attends_event::where('event_id', $id)->count()
+            'event' => $event,
+            'attends' => User::find($request->user()->id)->event_a->where('id', $id)->count(),
+            'attend_count' => $event->user_a->count(),
         ]);
     }
 
@@ -185,15 +186,13 @@ class EventController extends Controller
         $uid = $request->user()->id;
         $eid = $request->event_id;
 
-        $model = User_attends_event::where('user_id', $uid)->where('event_id', $eid);
-        if ($model->count() == 0){
-            $attend = new User_attends_event;
-            $attend->user_id = $uid;
-            $attend->event_id = $eid;
-            $attend->save();
-        }else{
-            $model->delete();
-        }
+        $user = User::find($uid);
+        $model = $user->event_a()->find($eid);
+
+        if ($model != null)
+            $user->event_a()->detach($eid);
+        else
+            $user->event_a()->attach($eid);
 
         return redirect()->back();
     }
