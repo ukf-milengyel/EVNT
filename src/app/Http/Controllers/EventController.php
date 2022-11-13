@@ -110,10 +110,19 @@ class EventController extends Controller
     public function show(Request $request, int $id)
     {
         $event = Event::findOrFail($id);
+        $share_message =
+            sprintf(
+                "%s sa bude na %s konať %s! Teším sa na stretnutie s vami!",
+                \Carbon\Carbon::parse($event->date)->format('d.m.Y o h:i'),
+                $event->location_name,
+                $event->name
+            );
+
         return view('event.view', [
             'event' => $event,
             'attends' => User::find($request->user()->id)->event_a->where('id', $id)->count(),
             'attend_count' => $event->user_a->count(),
+            'share_message' => $share_message
         ]);
     }
 
