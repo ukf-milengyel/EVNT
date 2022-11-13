@@ -19,12 +19,13 @@ return new class extends Migration
             $table->id();
             $table->string('body', 1000);
             $table->string('image')->nullable();
-            $table->unsignedBigInteger('event_id')->constrained('event')->cascadeOnDelete();
+            $table->unsignedBigInteger('event_id');
             $table->timestamps();
 
             $table->foreign('event_id')
                 ->references('id')
-                ->on('event');
+                ->on('event')
+                ->cascadeOnDelete();
         });
     }
 

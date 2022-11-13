@@ -67,15 +67,11 @@
                                         <img src="{{asset('/icons/edit.svg')}}" class="inline underline w-6 my-auto cursor-pointer">
                                     </a>
 
-                                    @if($group->user->count() == 0)
-                                        <form class="inline" method="POST" action="{{ route('group.destroy', $group) }}">
-                                            @csrf
-                                            @method('delete')
-                                            <img src="{{asset('/icons/delete.svg')}}" class="inline underline w-6 my-auto cursor-pointer" :href="route('group.destroy', $group)" onclick="event.preventDefault(); if(confirm('Chcete odstrániť túto skupinu?')){this.closest('form').submit();}">
-                                        </form>
-                                    @else
-                                        <div class="w-4"></div>
-                                    @endif
+                                    <form class="inline" method="POST" action="{{ route('group.destroy', $group) }}">
+                                        @csrf
+                                        @method('delete')
+                                        <img src="{{asset('/icons/delete.svg')}}" class="inline underline w-6 my-auto cursor-pointer" :href="route('group.destroy', $group)" onclick="event.preventDefault(); if(confirm('Chcete odstrániť túto skupinu?')){this.closest('form').submit();}">
+                                    </form>
                                 </td>
                             </tr>
                             @endforeach

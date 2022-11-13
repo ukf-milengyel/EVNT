@@ -17,8 +17,8 @@ return new class extends Migration
     {
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('event_id')->constrained('event')->cascadeOnDelete();
-            $table->unsignedBigInteger('user_id')->nullable()->constrained('user')->cascadeOnDelete();
+            $table->unsignedBigInteger('event_id');
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->unsignedBigInteger('type')->default(0);
             $table->string('message')->nullable();
             $table->boolean('seen');
@@ -26,11 +26,13 @@ return new class extends Migration
 
             $table->foreign('event_id')
                 ->references('id')
-                ->on('event');
+                ->on('event')
+                ->cascadeOnDelete();
 
             $table->foreign('user_id')
                 ->references('id')
-                ->on('users');
+                ->on('users')
+                ->cascadeOnDelete();
         });
     }
 

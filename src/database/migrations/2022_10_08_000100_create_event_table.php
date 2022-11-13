@@ -19,7 +19,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('description', 2000);
-            $table->unsignedBigInteger('user_id')->constrained('event')->nullOnDelete();
+            $table->unsignedBigInteger('user_id');
             $table->dateTime('date');
             $table->string('organizer')->nullable();
             $table->string('location_name');
@@ -29,7 +29,8 @@ return new class extends Migration
 
             $table->foreign('user_id')
                 ->references('id')
-                ->on('users');
+                ->on('users')
+                ->cascadeOnDelete();
         });
     }
 

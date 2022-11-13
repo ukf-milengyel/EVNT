@@ -17,16 +17,18 @@ return new class extends Migration
     {
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('event_id')->constrained('event')->cascadeOnDelete();
-            $table->unsignedBigInteger('tag_id')->constrained('tag')->cascadeOnDelete();
+            $table->unsignedBigInteger('event_id');
+            $table->unsignedBigInteger('tag_id');
 
             $table->foreign('event_id')
                 ->references('id')
-                ->on('event');
+                ->on('event')
+                ->cascadeOnDelete();
 
             $table->foreign('tag_id')
                 ->references('id')
-                ->on('tag');
+                ->on('tag')
+                ->cascadeOnDelete();
         });
     }
 
