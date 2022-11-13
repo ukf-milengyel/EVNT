@@ -15,9 +15,6 @@
                     <x-nav-link :href="route('event.index')" :active="request()->routeIs('event.index')">
                         {{ __('Podujatia') }}
                     </x-nav-link>
-                    <x-nav-link href="/">
-                        {{ __('Moje podujatia') }}
-                    </x-nav-link>
                     <x-nav-link :href="route('announcement.index')" :active="request()->routeIs('announcement.index')">
                         {{ __('Oznámenia') }}
                     </x-nav-link>
@@ -89,9 +86,6 @@
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('event.index')" :active="request()->routeIs('event.index')">
                 {{ __('Podujatia') }}
-            </x-responsive-nav-link>
-            <x-responsive-nav-link href="/">
-                {{ __('Moje podujatia') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('announcement.index')" :active="request()->routeIs('announcement.index')">
                 {{ __('Oznámenia') }}

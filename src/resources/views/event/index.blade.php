@@ -33,15 +33,20 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <form method="get" action="{{route('event.index')}}">
-                        Zoradenie
+                        Zobraziť
                         <br>
-                        <input type="radio" name="category" value="0" {{$category == 0 ? 'checked' : ''}}>Dátum vytvorenia
-                        <input type="radio" name="category" value="1" {{$category == 1 ? 'checked' : ''}}>Dátum uskutočnenia
-                        <input type="radio" name="category" value="2" {{$category == 2 ? 'checked' : ''}}>Názov
+                        <input type="radio" name="my" value="0" {{!$my ? 'checked' : ''}}>Všetky podujatia
+                        <input type="radio" name="my" value="1" {{$my ? 'checked' : ''}}>Moje podujatia
+                        <hr>
+                        Zoradiť
+                        <br>
+                        <input type="radio" name="order" value="0" {{$order == 0 ? 'checked' : ''}}>Dátum vytvorenia
+                        <input type="radio" name="order" value="1" {{$order == 1 ? 'checked' : ''}}>Dátum uskutočnenia
+                        <input type="radio" name="order" value="2" {{$order == 2 ? 'checked' : ''}}>Názov
                         <br>
                         <input type="radio" name="sort" value="1" {{$sort ? 'checked' : ''}}>v
                         <input type="radio" name="sort" value="0" {{!$sort ? 'checked' : ''}}>^
-                        <br>
+                        <hr>
                         Kategória
                         <br>
                         <input type="radio" name="archived" value="0" {{!$archived ? 'checked' : ''}}>Aktuálne

@@ -16,9 +16,8 @@ class EventController extends Controller
      */
     public function index(Request $request, $message = null)
     {
-        // todo: sort events by tags, user count
-        $categories = ['created_at', 'date', 'name'];
-        $category = ($request->get('category') ?? 0) % count($categories);
+        $orders = ['created_at', 'date', 'name'];
+        $order = ($request->get('order') ?? 0) % count($orders);
 
         $sorts = ['asc', 'desc'];
         $sort = ($request->get('sort') ?? 1) % count($sorts);
@@ -26,19 +25,29 @@ class EventController extends Controller
         $archiveds = ['>', '<'];
         $archived = ($request->get('archived') ?? 0) % count($archiveds);
 
-        $events = Event::whereDate('date', $archiveds[$archived], now())
-            ->orderBy($categories[$category] ,$sorts[$sort])
-            ->get();
+        // create query
+        $events = Event::whereDate('date', $archiveds[$archived], now());
+
+        // only show attended events?
+        $uid = $request->user()->id;
+        $my = $request->get('my') ?? 0;
+        if ($my)
+            $events->whereHas('user_a', function($query) use($uid){
+                $query->where('user_id', $uid);
+            });
+
+        $events->orderBy($orders[$order] ,$sorts[$sort]);
 
         if ($events->count() == 0)
             $message = 'Zvoleným filtrom nezodpovedajú žiadne podujatia.';
 
         return view('event.index', [
-            'events' => $events,
+            'events' => $events->get(),
             'message' => $message,
-            'category' => $category,
+            'order' => $order,
             'sort' => $sort,
             'archived' => $archived,
+            'my' => $my,
         ]);
     }
 
