@@ -49,16 +49,18 @@
             <div class="break-words w-full lg:w-56 pt-4 shrink-0">
 
                 <div class="flex items-end gap-x-4 items-stretch lg:items-baseline lg:justify-end">
-                    <x-primary-button-sm onclick="navigator.clipboard.writeText('{{$share_message}}'); alert('Skopírované do schránky.')" class="p-4 h-16 overflow-hidden w-full lg:w-auto rounded-full">
-                        <img src="{{asset('/icons/link.png/')}}" class="mx-auto h-8">
-                    </x-primary-button-sm>
-                    <a href="https://twitter.com/intent/tweet?text={{ urlencode($share_message) }}" target="_blank">
-                        <x-primary-button-sm class="p-4 h-16 overflow-hidden w-full lg:w-auto rounded-full">
+                    <div class="w-full lg:w-auto">
+                        <x-primary-button-sm class="p-4 h-16 w-full overflow-hidden rounded-full" onclick="navigator.clipboard.writeText('{{$share_message}}'); alert('Skopírované do schránky.')">
+                            <img src="{{asset('/icons/link.png/')}}" class="mx-auto h-8">
+                        </x-primary-button-sm>
+                    </div>
+                    <a class="w-full lg:w-auto" href="https://twitter.com/intent/tweet?text={{ urlencode($share_message) }}" target="_blank">
+                        <x-primary-button-sm class="p-4 h-16 w-full overflow-hidden rounded-full">
                             <img src="{{asset('/icons/twitter.png/')}}" class="mx-auto h-8">
                         </x-primary-button-sm>
                     </a>
-                    <a href="https://www.facebook.com/share.php?u=http://{{$_SERVER["HTTP_HOST"].$_SERVER["REQUEST_URI"]}}">
-                        <x-primary-button-sm class="p-4 h-16 overflow-hidden w-full lg:w-auto rounded-full">
+                    <a class="w-full lg:w-auto" href="https://www.facebook.com/share.php?u=http://{{$_SERVER["HTTP_HOST"].$_SERVER["REQUEST_URI"]}}">
+                        <x-primary-button-sm class="p-4 h-16 w-full overflow-hidden rounded-full">
                             <img src="{{asset('/icons/facebook.png/')}}" class="mx-auto h-8">
                         </x-primary-button-sm>
                     </a>
