@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Event;
 use App\Models\User;
+use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
 use Intervention\Image\ImageManagerStatic as Image;
 
@@ -98,7 +99,7 @@ class EventController extends Controller
         $event->save();
 
         // todo: redirect to event page
-        return $this->index(new Request(), 'Vytvorili ste podujatie '.$validated['name'].', naplánované na '.$validated['date']);
+        return $this->index($request, 'Vytvorili ste podujatie '.$validated['name'].', naplánované na '.$validated['date']);
     }
 
     /**
@@ -153,8 +154,6 @@ class EventController extends Controller
     {
         $this->authorize('update', $event);
 
-        $permissions = $this->translatePerms($request);
-
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'required|string|max:2000',
@@ -165,6 +164,7 @@ class EventController extends Controller
             'image' => 'required|image|mimes:jpg,jpeg,png|max:8192'
         ]);
 
+        // todo: figure out why image upload is broken
         $imgname = uniqid('', true) . '.jpg';
         Image::make($request->image)->fit(400)->save(public_path('images/event_thumb/'.$imgname), 75, 'jpg');
         Image::make($request->image)->save(public_path('images/event/'.$imgname), 90, 'jpg');
@@ -179,7 +179,12 @@ class EventController extends Controller
         $event->image = $imgname;
         $event->save();
 
-        return $this->index('Event '.$validated['name'].' bol upravený.');
+        // delete old image
+        $oldname = $event->image;
+        if ($oldname != "0.jpg")
+            File::delete(['images/event_thumb/'.$oldname, 'images/event/'.$oldname]);
+
+        return $this->show($request, $event->id);
     }
 
     /**
@@ -192,11 +197,14 @@ class EventController extends Controller
     {
         $this->authorize('delete', $event);
 
-        $name = $event->name;
-        $event->delete();
+        // todo: delete all associated images and files
+        $imgname = $event->image;
 
-        return $this->index('Event '.$name.' bol odstránený.');
-        return redirect(route('event.index'));
+        $event->delete();
+        if ($imgname != "0.jpg")
+            File::delete(['images/event_thumb/'.$imgname, 'images/event/'.$imgname]);
+
+        return view('reload_parent');
     }
 
     public function attendEvent(Request $request)

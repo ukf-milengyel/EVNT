@@ -48,6 +48,23 @@
 
             <div class="break-words w-full lg:w-56 pt-4 shrink-0">
 
+                @if($event->user()->is(auth()->user()))
+                    <div class="flex pb-4 items-end gap-x-4 items-stretch lg:items-baseline lg:justify-end">
+                        <a href="{{route('event.edit', $event)}}" class="w-full">
+                            <x-primary-button-sm class="p-4 h-16 w-full overflow-hidden rounded-full">
+                                <img src="{{asset('/icons/edit_white.svg/')}}" class="mx-auto h-8">
+                            </x-primary-button-sm>
+                        </a>
+                        <form class="inline w-full" method="POST" action="{{ route('event.destroy', $event) }}">
+                            @csrf
+                            @method('delete')
+                            <x-primary-button-sm onclick="event.preventDefault(); if(confirm('Chcete odstrániť toto podujatie?')){this.closest('form').submit();}" class="p-4 h-16 w-full overflow-hidden rounded-full">
+                                <img src="{{asset('/icons/delete_white.svg/')}}" class="mx-auto h-8">
+                            </x-primary-button-sm>
+                        </form>
+                    </div>
+                @endif
+
                 <div class="flex items-end gap-x-4 items-stretch lg:items-baseline lg:justify-end">
                     <div class="w-full lg:w-auto">
                         <x-primary-button-sm class="p-4 h-16 w-full overflow-hidden rounded-full" onclick="navigator.clipboard.writeText('{{$share_message}}'); alert('Skopírované do schránky.')">
@@ -88,17 +105,18 @@
                     @if($event->organizer)
                         <x-slot:name>{{$event->organizer}}</x-slot:name>
                     @else
-
                         <x-slot:name>{{$event->user->name}}</x-slot:name>
                     @endif
                     @if($event->user->group)
-
                         <x-slot:group>{{$event->user->group->name}}</x-slot:group>
                         <x-slot:color>{{$event->user->group->color}}</x-slot:color>
                     @endif
                 </x-user-badge>
+                @if($event->organizer)
+                    <p class="italic text-right text-xs text-gray-800">Používateľ: {{$event->user->name}}</p>
+                @endif
 
-                <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-1">
+                <div class="grid pt-2 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-1">
                     <div>
                         <p class="pt-2 text-xs text-gray-800">Miesto</p>
                         <span class="font-semibold">{{$event->location_name}}</span><br>
