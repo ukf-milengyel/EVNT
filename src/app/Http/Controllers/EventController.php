@@ -84,7 +84,7 @@ class EventController extends Controller
         ]);
 
         $imgname = uniqid('', true) . '.jpg';
-        Image::make($request->image)->fit(400)->save(public_path('images/event_thumb/'.$imgname), 75, 'jpg');
+        Image::make($request->image)->fit(400,300)->save(public_path('images/event_thumb/'.$imgname), 75, 'jpg');
         Image::make($request->image)->save(public_path('images/event/'.$imgname), 90, 'jpg');
 
         $event = new Event();
@@ -165,9 +165,12 @@ class EventController extends Controller
         ]);
 
         // todo: figure out why image upload is broken
-        $imgname = uniqid('', true) . '.jpg';
-        Image::make($request->image)->fit(400)->save(public_path('images/event_thumb/'.$imgname), 75, 'jpg');
-        Image::make($request->image)->save(public_path('images/event/'.$imgname), 90, 'jpg');
+        $imgname = uniqid('', true) . ".jpg";
+
+        Image::make($request->file("image"))->fit(400,300)->save(public_path('images/event_thumb/').$imgname, 75, 'jpg');
+        Image::make($request->file("image"))->save(public_path('images/event/').$imgname, 90, 'jpg');
+
+        $oldname = $event->image;
 
         $event->name = $validated['name'];
         $event->description = $validated['description'];
@@ -180,10 +183,9 @@ class EventController extends Controller
         $event->save();
 
         // delete old image
-        $oldname = $event->image;
         if ($oldname != "0.jpg")
             File::delete(['images/event_thumb/'.$oldname, 'images/event/'.$oldname]);
-
+        
         return $this->show($request, $event->id);
     }
 
