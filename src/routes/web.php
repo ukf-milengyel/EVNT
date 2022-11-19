@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\AttachmentController;
 use App\Http\Controllers\GroupController;
+use App\Http\Controllers\ImageController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\StatisticsController;
 use App\Http\Controllers\EventController;
@@ -72,5 +74,9 @@ Route::resource('/group', GroupController::class)
 Route::resource('/user', UserController::class)
     ->only(['index', 'edit', 'update'])
     ->middleware(['auth', 'verified']);
+
+// FILES ---------------------------------------------------------------------
+Route::post('/event/image/store', [EventController::class, 'storeImage'])
+    ->name('event.image.store')->middleware(['auth', 'verified']);
 
 require __DIR__.'/auth.php';

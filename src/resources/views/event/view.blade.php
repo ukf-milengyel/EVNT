@@ -2,6 +2,28 @@
     <link href="{{ asset('css/style.css') }}" rel="stylesheet" type="text/css">
 @endpush
 <x-barebones>
+    @if($errors->any())
+        <x-std-error>
+            <x-slot:title>
+                Chyba
+            </x-slot:title>
+            <ul>
+                @foreach($errors->all() as $error)
+                    <li>{{$error}}</li>
+                @endforeach
+            </ul>
+        </x-std-error>
+    @endif
+    @if(isset($message))
+        <x-std-alert>
+            <x-slot:title>
+                Informácia
+            </x-slot:title>
+            <ul>
+                {{$message}}
+            </ul>
+        </x-std-alert>
+    @endif
     <div class="mx-auto xl:pt-8">
         <img src="{{url('/images/event/', $event->image)}}" class="xl:absolute top-0 w-full xl:blur xl:opacity-25 h-0 xl:h-[36rem] mx-auto object-cover">
         <img src="{{url('/images/event/', $event->image)}}" onclick="window.open(this.src)" class="cursor-pointer mx-auto max-w-7xl w-full h-72 transition-transform xl:hover:scale-[1.02] lg:h-[32rem] mx-auto object-cover xl:rounded-xl shadow-xl relative z-10">
@@ -33,7 +55,7 @@
                         <x-input-label for="image" value="Fotografia" />
                         <input id="picker" name="image" type="file"/>
                     </div>
-                    <div class="flex justify-end mt-8">
+                    <div class="flex justify-end">
                         <x-primary-button>{{ __('Pridať') }}</x-primary-button>
                     </div>
                 </form>
@@ -162,13 +184,41 @@
 
         <div class="mt-4">
             <h2 class="font-bold text-2xl text-gray-800">Fotografie</h2>
+            @if($event->user()->is(auth()->user()))
+                <form method="POST" action="{{ route('event.image.store', $event) }}" class="my-1 py-4 px-6 border-2 rounded-xl border-gray-300" enctype="multipart/form-data">
+                    @csrf
+                    <input type="hidden" name="event_id" value="{{$event->id}}">
+                    <div>
+                        <x-input-label for="images[]" value="Pridať fotografie" />
+                        <input id="picker" name="images[]" type="file" accept="image/png, image/jpeg" multiple/>
+                    </div>
 
-            <div class="mt-2 grid grid-cols-4 md:grid-cols-8 lg:grid-cols-12 gap-4">
-                <img src="{{url('/images/event/', $event->image)}}" class="w-60 object-cover rounded-lg overflow-hidden shadow-lg" onclick="window.open(this.src)">
-                <img src="{{url('/images/event/', $event->image)}}" class="w-60 object-cover rounded-lg overflow-hidden shadow-lg" onclick="window.open(this.src)">
+                    <div class="flex justify-end">
+                        <x-primary-button>{{ __('Pridať') }}</x-primary-button>
+                    </div>
+                </form>
+            @endif
+
+            <div class="my-4 grid grid-cols-4 sm:grid-cols-6 lg:grid-cols-8 gap-4">
+                @foreach($images as $image)
+                    <img src="{{url('/images/image_thumb/', $image->filename)}}" class="cursor-pointer transition-transform hover:scale-125 w-full h-24 md:h-24 object-cover rounded-lg overflow-hidden shadow-lg" onclick="window.open( '{{url('/images/image/', $image->filename)}}' )">
+                @endforeach
             </div>
 
             <h2 class="font-bold text-2xl text-gray-800">Prílohy</h2>
+            @if($event->user()->is(auth()->user()))
+                <form method="POST" action="/" class="my-1 py-4 px-6 border-2 rounded-xl border-gray-300" enctype="multipart/form-data">
+                    @csrf
+                    <div>
+                        <x-input-label for="attachments" value="Pridať prílohy" />
+                        <input id="picker" name="attachments" type="file" multiple/>
+                    </div>
+
+                    <div class="flex justify-end">
+                        <x-primary-button>{{ __('Pridať') }}</x-primary-button>
+                    </div>
+                </form>
+            @endif
         </div>
 
     </div>

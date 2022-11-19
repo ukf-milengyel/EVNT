@@ -4,3 +4,8 @@ event/*
 event_thumb/*
 !event_thumb/.gitkeep
 !event_thumb/0.jpg
+image/*
+!image/.gitkeep
+image_thumb/*
+!image_thumb/.gitkeep
+

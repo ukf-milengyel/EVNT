@@ -64,7 +64,7 @@
 
                                     <div class="mt-4">
                                         <x-input-label for="image" value="Fotografia" />
-                                        <input id="picker" name="image" type="file"/>
+                                        <input id="picker" name="image" type="file" accept="image/png, image/jpeg"/>
                                         <img id="preview" class="my-2 object-cover relative mx-auto rounded-lg overflow-hidden shadow-lg">
                                     </div>
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Event;
 use App\Models\User;
+use App\Models\Image as ImageModel;
 use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
 use Intervention\Image\ImageManagerStatic as Image;
@@ -108,7 +109,7 @@ class EventController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request, int $id)
+    public function show(Request $request, int $id, $message = null)
     {
         $event = Event::findOrFail($id);
         $share_message =
@@ -123,7 +124,9 @@ class EventController extends Controller
             'event' => $event,
             'attends' => User::find($request->user()->id)->event_a->where('id', $id)->count(),
             'attend_count' => $event->user_a->count(),
-            'share_message' => $share_message
+            'message' => $message,
+            'images' => ImageModel::where('event_id', $event->id)->get(),
+            'share_message' => $share_message,
         ]);
     }
 
@@ -164,7 +167,6 @@ class EventController extends Controller
             'image' => 'required|image|mimes:jpg,jpeg,png|max:8192'
         ]);
 
-        // todo: figure out why image upload is broken
         $imgname = uniqid('', true) . ".jpg";
 
         Image::make($request->image)->fit(400,300)->save(public_path('images/event_thumb/'.$imgname), 75, 'jpg');
@@ -223,6 +225,32 @@ class EventController extends Controller
             $user->event_a()->attach($eid);
 
         return redirect()->back();
+    }
+
+    public function storeImage(Request $request){
+        // todo: authorize adding images
+
+        $eid = $request["event_id"];
+        //$this->authorize('create', Image::class);
+
+        $this->validate($request, [
+            'images' => 'required',
+            'images.*' => 'image|mimes:jpg,jpeg,png|max:8192',
+        ]);
+
+        foreach ($request->file("images") as $image){
+            // store in public folder
+            $imgname = uniqid('', true) . '.jpg';
+            Image::make($image)->fit(200,150)->save(public_path('images/image_thumb/'.$imgname), 75, 'jpg');
+            Image::make($image)->save(public_path('images/image/'.$imgname), 90, 'jpg');
+
+            // add db entry
+            ImageModel::create([
+                'event_id' => $eid,
+                'filename' => $imgname,
+            ]);
+        }
+        return $this->show($request, $eid, "Fotografie boli pridané.");
     }
 
 }
