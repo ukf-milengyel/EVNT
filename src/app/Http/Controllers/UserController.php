@@ -82,9 +82,9 @@ class UserController extends Controller
     {
         $this->authorize('update', $user);
 
-        $user->update([
-            'group_id' => $request->get('group'),
-        ]);
+        $val = $request->get('group');
+        $user->group_id = $val == -1 ? null : $val;
+        $user->save();
 
         return $this->index('Používateľ '.$user->name.' bol upravený.');
     }
