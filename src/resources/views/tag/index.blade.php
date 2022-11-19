@@ -26,6 +26,59 @@
                     </h2>
 
                 </div>
+
+
+                <div class="grid grid-cols-8 gap-4">
+
+                    <div class="p-6 h-14 w-14 md:w-32 md:mx-auto bg-gray-100 md:rounded-xl  flex items-center space-x-4">
+                        <div>
+                            testovaci tag1
+                        </div>
+                    </div>
+
+                    <div class="p-6 h-14 w-14 md:w-32 md:mx-auto bg-gray-100 md:rounded-xl  flex items-center space-x-4">
+                        <div>
+                            testovaci tag1
+                        </div>
+                    </div>
+                    <div class="p-6 h-14 w-14 md:w-32 md:mx-auto bg-gray-100 md:rounded-xl  flex items-center space-x-4">
+                        <div>
+                            testovaci tag1
+                        </div>
+                    </div>
+                    <div class="p-6 h-14 w-14 md:w-32 md:mx-auto bg-gray-100 md:rounded-xl  flex items-center space-x-4">
+                        <div>
+                            testovaci tag1
+                        </div>
+                    </div>
+                    <div class="p-6 h-14 w-14 md:w-32 md:mx-auto bg-gray-100 md:rounded-xl  flex items-center space-x-4">
+                        <div>
+                            testovaci tag1
+                        </div>
+                    </div>
+                    <div class="p-6 h-14 w-14 md:w-32 md:mx-auto bg-gray-100 md:rounded-xl  flex items-center space-x-4">
+                        <div>
+                            testovaci tag1
+                        </div>
+                    </div>
+                    <div class="p-6 h-14 w-14 md:w-32 md:mx-auto bg-gray-100 md:rounded-xl  flex items-center space-x-4">
+                        <div>
+                            testovaci tag1
+                        </div>
+                    </div>
+                    <div class="p-6 h-14 w-14 md:w-32 md:mx-auto bg-gray-100 md:rounded-xl  flex items-center space-x-4">
+                        <div>
+                            testovaci tag1
+                        </div>
+                    </div>
+                    <div class="p-6 h-14 w-14 md:w-32 md:mx-auto bg-gray-100 md:rounded-xl  flex items-center space-x-4">
+                        <div>
+                            testovaci tag1
+                        </div>
+                    </div>
+
+                </div>
+
             </div>
         </div>
     </div>
