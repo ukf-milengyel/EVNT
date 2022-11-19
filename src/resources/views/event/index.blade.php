@@ -2,7 +2,12 @@
     <link href="{{ asset('css/style.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('css/spinner.css') }}" rel="stylesheet" type="text/css">
 @endpush
+
+
+
 <x-app-layout>
+
+
     <x-slot name="header">
         <div class="flex">
             <div class="flex-auto">
@@ -104,7 +109,7 @@
         </div>
 
     </div>
-
-
     <script src="{{asset("/js/detailframe.js")}}"></script>
 </x-app-layout>
+
+
