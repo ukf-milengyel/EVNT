@@ -41,7 +41,9 @@
                 <!-- todo: nahradiť checkom, či existujú oznámenia -->
                 @if(true)
                     <h2 class="font-bold mt-4 text-2xl text-gray-800">Oznámenia</h2>
-                    <!-- todo: vytvoriť komponent pre oznámenie -->
+                    <x-announcement-component>
+
+                    </x-announcement-component>
                 @endif
 
             </div>
