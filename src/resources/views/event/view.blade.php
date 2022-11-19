@@ -64,7 +64,9 @@
                 @if(true)
                     <h2 class="font-bold mt-4 text-2xl text-gray-800">Oznámenia</h2>
                     <x-announcement-component>
-
+                        <x-slot:date>12.5.2023, 20:48</x-slot:date>
+                        <x-slot:image>{{asset('images/event/0.jpg')}}</x-slot:image>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                     </x-announcement-component>
                 @endif
 
