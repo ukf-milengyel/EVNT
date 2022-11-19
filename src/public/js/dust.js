@@ -1,6 +1,6 @@
 // options
 const sf = 1; // scale factor
-const fps = 40;
+const fps = 20;
 
 // canvas
 const canvas = document.getElementById("canvas");
@@ -21,14 +21,14 @@ let particles;
 const numberOfParticles = 50;
 const minSize = 2;
 const maxSize = 40 / sf;
-const maxSpeed = 1;
+const maxSpeed = 2;
 const speedChangeThreshold = maxSpeed / 2;
 
 let lerpamt = 0.01 / sf;
 
 // alpha stuff
 const minAlpha = 0;
-const maxAlpha = 0.2;
+const maxAlpha = 0.3;
 const mapConst = (maxAlpha - minAlpha) / (maxSize - minSize);
 
 function loop(){
