@@ -9,17 +9,26 @@ use Illuminate\Support\Facades\DB;
 
 class StatisticsController extends Controller
 {
+    public function statistics()
+    {
+        return view('statistics', $this->getStatistics());
+    }
+
     public function index()
     {
-        // todo: replace stub values
+        return view('welcome', $this->getStatistics());
+    }
 
-        return view('statistics', [
+    // todo: replace stub values
+    private function getStatistics() : array
+    {
+        return array(
             'users' => User::count(),
             'groups' => Group::count(),
             'events' => Event::count(),
             'attendants' => DB::table("user_attends_event")->selectRaw("count(*)")->value(0),
             'photos' => 320,
             'attachments' => 60,
-        ]);
+        );
     }
 }

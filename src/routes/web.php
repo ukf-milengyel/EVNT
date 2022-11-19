@@ -22,9 +22,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 // INDEX --------------------------------------------------------------------
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [StatisticsController::class, 'index']);
 
 // EVENTS -------------------------------------------------------------------
 Route::get('/event/add', function (){
@@ -42,7 +40,7 @@ Route::resource('/event', EventController::class)
     ->middleware(['auth', 'verified']);
 
 // STATISTICS ---------------------------------------------------------------
-Route::get('/statistics', [StatisticsController::class, 'index'])
+Route::get('/statistics', [StatisticsController::class, 'statistics'])
     ->middleware(['auth', 'verified'])
     ->name('statistics');
 

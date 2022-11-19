@@ -7,7 +7,7 @@ const canvas = document.getElementById("canvas");
 canvas.width = Math.floor(canvas.scrollWidth / sf);
 canvas.height = Math.floor(canvas.scrollHeight / sf);
 const ctx = canvas.getContext("2d");
-let w,h,wh,hh;
+let w,h;
 let bordertop,borderleft,borderright,borderbottom;
 
 // timer
@@ -28,7 +28,7 @@ let lerpamt = 0.01 / sf;
 
 // alpha stuff
 const minAlpha = 0;
-const maxAlpha = 0.3;
+const maxAlpha = 0.4;
 const mapConst = (maxAlpha - minAlpha) / (maxSize - minSize);
 
 function loop(){

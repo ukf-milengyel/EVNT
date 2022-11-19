@@ -26,7 +26,7 @@
     <canvas id="canvas" class="pointer-events-none md:pointer-events-none"></canvas>
 
     <div class="bg-white/50 p-8 mx-2 rounded-none lg:rounded-2xl shadow-xl max-w-6xl my-0 md:my-auto mx-0 sm:mx-auto">
-        <div class="flex flex-wrap sm:flex-nowrap gap-8">
+        <div class="flex flex-wrap md:flex-nowrap gap-8">
             <x-application-logo class="flex-none h-48 w-48 md:w-72 md:h-72 fill-red-700" />
 
             <div class="w-full sm:w-auto">
@@ -42,7 +42,7 @@
                     @if (Route::has('login'))
                         @auth
                             <a href="{{ route('event.index') }}" class="text-sm text-blue-900 dark:text-blue-900 ">
-                                <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Podujatia</button>
+                                <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Vstúpiť</button>
                             </a>
                         @else
                             <a href="{{ route('login') }}" class="text-sm text-blue-900 dark:text-blue-900 ">
@@ -66,31 +66,29 @@
         <div class="pt-8 text-left md:text-center text-gray-900">
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6">
                 <div>
-                    <h3 class="text-4xl font-bold">0</h3>
-                    <p class="font-medium">podujatí</p>
-                </div>
-
-                <div>
-                    <h3 class="text-4xl font-bold">0</h3>
+                    <h3 class="text-4xl font-bold">{{$events}}</h3>
                     <p class="font-medium">podujatí</p>
                 </div>
                 <div>
-                    <h3 class="text-4xl font-bold">0</h3>
-                    <p class="font-medium">podujatí</p>
+                    <h3 class="text-4xl font-bold">{{$attendants}}</h3>
+                    <p class="font-medium">zúčastnených</p>
                 </div>
                 <div>
-                    <h3 class="text-4xl font-bold">0</h3>
-                    <p class="font-medium">podujatí</p>
+                    <h3 class="text-4xl font-bold">{{$users}}</h3>
+                    <p class="font-medium">používateľov</p>
                 </div>
                 <div>
-                    <h3 class="text-4xl font-bold">0</h3>
-                    <p class="font-medium">podujatí</p>
+                    <h3 class="text-4xl font-bold">{{$groups}}</h3>
+                    <p class="font-medium">skupín</p>
                 </div>
                 <div>
-                    <h3 class="text-4xl font-bold">0</h3>
-                    <p class="font-medium">podujatí</p>
+                    <h3 class="text-4xl font-bold">{{$photos}}</h3>
+                    <p class="font-medium">fotografií</p>
                 </div>
-
+                <div>
+                    <h3 class="text-4xl font-bold">{{$attachments}}</h3>
+                    <p class="font-medium">príloh</p>
+                </div>
             </div>
         </div>
 
