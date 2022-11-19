@@ -45,7 +45,7 @@
 
                 <!-- todo: nahradiť checkom, či používateľ je autor príspevku -->
                 @if(true)
-                <form method="POST" action="{{ route('announcement.store') }}" class="py-4 px-6 border-2 rounded-xl border-gray-300" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('announcement.store') }}" class="py-4 px-6 border-2 border-dashed rounded-xl border-gray-300" enctype="multipart/form-data">
                     @csrf
                     <div>
                         <x-input-label for="body" value="Nové oznámenie" />
@@ -173,7 +173,7 @@
 
                     <div>
                         <p class="pt-2 text-xs text-gray-800">Fotografie</p>
-                        1234
+                        {{$images->count()}}
                     </div>
 
                     <div>
@@ -189,7 +189,7 @@
         <div class="mt-4">
             <h2 class="font-bold text-2xl text-gray-800">Fotografie</h2>
             @if($event->user()->is(auth()->user()))
-                <form method="POST" action="{{ route('event.image.store', $event) }}" class="my-1 py-4 px-6 border-2 rounded-xl border-gray-300" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('event.image.store', $event) }}" class="my-1 py-4 px-6 border-2 border-dashed rounded-xl border-gray-300" enctype="multipart/form-data">
                     @csrf
                     <input type="hidden" name="event_id" value="{{$event->id}}">
                     <div>
@@ -211,7 +211,7 @@
 
             <h2 class="font-bold text-2xl text-gray-800">Prílohy</h2>
             @if($event->user()->is(auth()->user()))
-                <form method="POST" action="/" class="my-1 py-4 px-6 border-2 rounded-xl border-gray-300" enctype="multipart/form-data">
+                <form method="POST" action="/" class="my-1 py-4 px-6 border-2 border-dashed rounded-xl border-gray-300" enctype="multipart/form-data">
                     @csrf
                     <div>
                         <x-input-label for="attachments" value="Pridať prílohy" />
