@@ -28,54 +28,64 @@
                 </div>
 
 
-                <div class="grid grid-cols-8 gap-4">
+                <div class="grid grid-cols-10 gap-4">
 
-                    <div class="p-6 h-14 w-14 md:w-32 md:mx-auto bg-gray-100 md:rounded-xl  flex items-center space-x-4">
+                    <div class="text-sm  p-3 h-10 w-auto md:w-auto md:mx-auto bg-gray-200 md:rounded-xl  flex items-center space-x-4">
                         <div>
-                            testovaci tag1
+                            testovaci tag..............
+                        </div>
+                    </div>
+                    <div class="text-sm  p-3 h-10 w-auto md:w-auto md:mx-auto bg-gray-200 md:rounded-xl  flex items-center space-x-4">
+                        <div>
+                            testovaci tag..............
+                        </div>
+                    </div>
+                    <div class="text-sm  p-3 h-10 w-auto md:w-auto md:mx-auto bg-gray-200 md:rounded-xl  flex items-center space-x-4">
+                        <div>
+                            testovaci tag..............
+                        </div>
+                    </div>
+                    <div class="text-sm  p-3 h-10 w-auto md:w-auto md:mx-auto bg-gray-200 md:rounded-xl  flex items-center space-x-4">
+                        <div>
+                            testovaci tag..............
+                        </div>
+                    </div>
+                    <div class="text-sm  p-3 h-10 w-auto md:w-auto md:mx-auto bg-gray-200 md:rounded-xl  flex items-center space-x-4">
+                        <div>
+                            testovaci tag..............
+                        </div>
+                    </div>
+                    <div class="text-sm  p-3 h-10 w-auto md:w-auto md:mx-auto bg-gray-200 md:rounded-xl  flex items-center space-x-4">
+                        <div>
+                            testovaci tag..............
+                        </div>
+                    </div>
+                    <div class="text-sm  p-3 h-10 w-auto md:w-auto md:mx-auto bg-gray-200 md:rounded-xl  flex items-center space-x-4">
+                        <div>
+                            testovaci tag..............
+                        </div>
+                    </div>
+                    <div class="text-sm  p-3 h-10 w-auto md:w-auto md:mx-auto bg-gray-200 md:rounded-xl  flex items-center space-x-4">
+                        <div>
+                            testovaci tag..............
+                        </div>
+                    </div>
+                    <div class="text-sm  p-3 h-10 w-auto md:w-auto md:mx-auto bg-gray-200 md:rounded-xl  flex items-center space-x-4">
+                        <div>
+                            testovaci tag..............
+                        </div>
+                    </div>
+                    <div class="text-sm  p-3 h-10 w-auto md:w-auto md:mx-auto bg-gray-200 md:rounded-xl  flex items-center space-x-4">
+                        <div>
+                            testovaci tag..............
+                        </div>
+                    </div>
+                    <div class="text-sm  p-3 h-10 w-auto md:w-auto md:mx-auto bg-gray-200 md:rounded-xl  flex items-center space-x-4">
+                        <div>
+                            testovaci tag..............
                         </div>
                     </div>
 
-                    <div class="p-6 h-14 w-14 md:w-32 md:mx-auto bg-gray-100 md:rounded-xl  flex items-center space-x-4">
-                        <div>
-                            testovaci tag1
-                        </div>
-                    </div>
-                    <div class="p-6 h-14 w-14 md:w-32 md:mx-auto bg-gray-100 md:rounded-xl  flex items-center space-x-4">
-                        <div>
-                            testovaci tag1
-                        </div>
-                    </div>
-                    <div class="p-6 h-14 w-14 md:w-32 md:mx-auto bg-gray-100 md:rounded-xl  flex items-center space-x-4">
-                        <div>
-                            testovaci tag1
-                        </div>
-                    </div>
-                    <div class="p-6 h-14 w-14 md:w-32 md:mx-auto bg-gray-100 md:rounded-xl  flex items-center space-x-4">
-                        <div>
-                            testovaci tag1
-                        </div>
-                    </div>
-                    <div class="p-6 h-14 w-14 md:w-32 md:mx-auto bg-gray-100 md:rounded-xl  flex items-center space-x-4">
-                        <div>
-                            testovaci tag1
-                        </div>
-                    </div>
-                    <div class="p-6 h-14 w-14 md:w-32 md:mx-auto bg-gray-100 md:rounded-xl  flex items-center space-x-4">
-                        <div>
-                            testovaci tag1
-                        </div>
-                    </div>
-                    <div class="p-6 h-14 w-14 md:w-32 md:mx-auto bg-gray-100 md:rounded-xl  flex items-center space-x-4">
-                        <div>
-                            testovaci tag1
-                        </div>
-                    </div>
-                    <div class="p-6 h-14 w-14 md:w-32 md:mx-auto bg-gray-100 md:rounded-xl  flex items-center space-x-4">
-                        <div>
-                            testovaci tag1
-                        </div>
-                    </div>
 
                 </div>
 
