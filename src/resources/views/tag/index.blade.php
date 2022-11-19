@@ -28,64 +28,85 @@
                 </div>
 
 
-                <div class="grid grid-cols-10 gap-4">
+                <div class="grid grid-cols-10 gap-2">
 
-                    <div class="text-sm  p-3 h-10 w-auto md:w-auto md:mx-auto bg-gray-200 md:rounded-xl  flex items-center space-x-4">
+                    <div class="text-xs	px-px h-10 w-auto md:w-1/7 md:mx-auto bg-gray-200 md:rounded-xl md:shadow-lg flex items-center space-x-1">
+                        <img src="{{asset('/icons/edit.svg')}}" class="inline underline w-4 my-auto cursor-pointer">
+                        <img src="{{asset('/icons/delete.svg')}}" class="inline underline w-4 my-auto cursor-pointer" :href="route('group.destroy', $group)" onclick="event.preventDefault(); if(confirm('Chcete odstrániť tento tag?')){this.closest('form').submit();}">
                         <div>
-                            testovaci tag..............
+                            testovaci tag - Text
                         </div>
                     </div>
-                    <div class="text-sm  p-3 h-10 w-auto md:w-auto md:mx-auto bg-gray-200 md:rounded-xl  flex items-center space-x-4">
+                    <div class="text-xs	px-px h-10 w-auto md:w-1/7 md:mx-auto bg-gray-200 md:rounded-xl md:shadow-lg flex items-center space-x-1">
+                        <img src="{{asset('/icons/edit.svg')}}" class="inline underline w-4 my-auto cursor-pointer">
+                        <img src="{{asset('/icons/delete.svg')}}" class="inline underline w-4 my-auto cursor-pointer" :href="route('group.destroy', $group)" onclick="event.preventDefault(); if(confirm('Chcete odstrániť tento tag?')){this.closest('form').submit();}">
                         <div>
-                            testovaci tag..............
+                            testovaci tag - Text
                         </div>
                     </div>
-                    <div class="text-sm  p-3 h-10 w-auto md:w-auto md:mx-auto bg-gray-200 md:rounded-xl  flex items-center space-x-4">
+                    <div class="text-xs	px-px h-10 w-auto md:w-1/7 md:mx-auto bg-gray-200 md:rounded-xl md:shadow-lg flex items-center space-x-1">
+                        <img src="{{asset('/icons/edit.svg')}}" class="inline underline w-4 my-auto cursor-pointer">
+                        <img src="{{asset('/icons/delete.svg')}}" class="inline underline w-4 my-auto cursor-pointer" :href="route('group.destroy', $group)" onclick="event.preventDefault(); if(confirm('Chcete odstrániť tento tag?')){this.closest('form').submit();}">
                         <div>
-                            testovaci tag..............
+                            testovaci tag - Text
                         </div>
                     </div>
-                    <div class="text-sm  p-3 h-10 w-auto md:w-auto md:mx-auto bg-gray-200 md:rounded-xl  flex items-center space-x-4">
+                    <div class="text-xs	px-px h-10 w-auto md:w-1/7 md:mx-auto bg-gray-200 md:rounded-xl md:shadow-lg flex items-center space-x-1">
+                        <img src="{{asset('/icons/edit.svg')}}" class="inline underline w-4 my-auto cursor-pointer">
+                        <img src="{{asset('/icons/delete.svg')}}" class="inline underline w-4 my-auto cursor-pointer" :href="route('group.destroy', $group)" onclick="event.preventDefault(); if(confirm('Chcete odstrániť tento tag?')){this.closest('form').submit();}">
                         <div>
-                            testovaci tag..............
+                            testovaci tag - Text
                         </div>
                     </div>
-                    <div class="text-sm  p-3 h-10 w-auto md:w-auto md:mx-auto bg-gray-200 md:rounded-xl  flex items-center space-x-4">
+                    <div class="text-xs	px-px h-10 w-auto md:w-1/7 md:mx-auto bg-gray-200 md:rounded-xl md:shadow-lg flex items-center space-x-1">
+                        <img src="{{asset('/icons/edit.svg')}}" class="inline underline w-4 my-auto cursor-pointer">
+                        <img src="{{asset('/icons/delete.svg')}}" class="inline underline w-4 my-auto cursor-pointer" :href="route('group.destroy', $group)" onclick="event.preventDefault(); if(confirm('Chcete odstrániť tento tag?')){this.closest('form').submit();}">
                         <div>
-                            testovaci tag..............
+                            testovaci tag - Text
                         </div>
                     </div>
-                    <div class="text-sm  p-3 h-10 w-auto md:w-auto md:mx-auto bg-gray-200 md:rounded-xl  flex items-center space-x-4">
+                    <div class="text-xs	px-px h-10 w-auto md:w-1/7 md:mx-auto bg-gray-200 md:rounded-xl md:shadow-lg flex items-center space-x-1">
+                        <img src="{{asset('/icons/edit.svg')}}" class="inline underline w-4 my-auto cursor-pointer">
+                        <img src="{{asset('/icons/delete.svg')}}" class="inline underline w-4 my-auto cursor-pointer" :href="route('group.destroy', $group)" onclick="event.preventDefault(); if(confirm('Chcete odstrániť tento tag?')){this.closest('form').submit();}">
                         <div>
-                            testovaci tag..............
+                            testovaci tag - Text
                         </div>
                     </div>
-                    <div class="text-sm  p-3 h-10 w-auto md:w-auto md:mx-auto bg-gray-200 md:rounded-xl  flex items-center space-x-4">
+                    <div class="text-xs	px-px h-10 w-auto md:w-1/7 md:mx-auto bg-gray-200 md:rounded-xl md:shadow-lg flex items-center space-x-1">
+                        <img src="{{asset('/icons/edit.svg')}}" class="inline underline w-4 my-auto cursor-pointer">
+                        <img src="{{asset('/icons/delete.svg')}}" class="inline underline w-4 my-auto cursor-pointer" :href="route('group.destroy', $group)" onclick="event.preventDefault(); if(confirm('Chcete odstrániť tento tag?')){this.closest('form').submit();}">
                         <div>
-                            testovaci tag..............
+                            testovaci tag - Text
                         </div>
                     </div>
-                    <div class="text-sm  p-3 h-10 w-auto md:w-auto md:mx-auto bg-gray-200 md:rounded-xl  flex items-center space-x-4">
+                    <div class="text-xs	px-px h-10 w-auto md:w-1/7 md:mx-auto bg-gray-200 md:rounded-xl md:shadow-lg flex items-center space-x-1">
+                        <img src="{{asset('/icons/edit.svg')}}" class="inline underline w-4 my-auto cursor-pointer">
+                        <img src="{{asset('/icons/delete.svg')}}" class="inline underline w-4 my-auto cursor-pointer" :href="route('group.destroy', $group)" onclick="event.preventDefault(); if(confirm('Chcete odstrániť tento tag?')){this.closest('form').submit();}">
                         <div>
-                            testovaci tag..............
+                            testovaci tag - Text
                         </div>
                     </div>
-                    <div class="text-sm  p-3 h-10 w-auto md:w-auto md:mx-auto bg-gray-200 md:rounded-xl  flex items-center space-x-4">
+                    <div class="text-xs	px-px h-10 w-auto md:w-1/7 md:mx-auto bg-gray-200 md:rounded-xl md:shadow-lg flex items-center space-x-1">
+                        <img src="{{asset('/icons/edit.svg')}}" class="inline underline w-4 my-auto cursor-pointer">
+                        <img src="{{asset('/icons/delete.svg')}}" class="inline underline w-4 my-auto cursor-pointer" :href="route('group.destroy', $group)" onclick="event.preventDefault(); if(confirm('Chcete odstrániť tento tag?')){this.closest('form').submit();}">
                         <div>
-                            testovaci tag..............
+                            testovaci tag - Text
                         </div>
                     </div>
-                    <div class="text-sm  p-3 h-10 w-auto md:w-auto md:mx-auto bg-gray-200 md:rounded-xl  flex items-center space-x-4">
+                    <div class="text-xs	px-px h-10 w-auto md:w-1/7 md:mx-auto bg-gray-200 md:rounded-xl md:shadow-lg flex items-center space-x-1">
+                        <img src="{{asset('/icons/edit.svg')}}" class="inline underline w-4 my-auto cursor-pointer">
+                        <img src="{{asset('/icons/delete.svg')}}" class="inline underline w-4 my-auto cursor-pointer" :href="route('group.destroy', $group)" onclick="event.preventDefault(); if(confirm('Chcete odstrániť tento tag?')){this.closest('form').submit();}">
                         <div>
-                            testovaci tag..............
+                            testovaci tag - Text
                         </div>
                     </div>
-                    <div class="text-sm  p-3 h-10 w-auto md:w-auto md:mx-auto bg-gray-200 md:rounded-xl  flex items-center space-x-4">
+                    <div class="text-xs	px-px h-10 w-auto md:w-1/7 md:mx-auto bg-gray-200 md:rounded-xl md:shadow-lg flex items-center space-x-1">
+                        <img src="{{asset('/icons/edit.svg')}}" class="inline underline w-4 my-auto cursor-pointer">
+                        <img src="{{asset('/icons/delete.svg')}}" class="inline underline w-4 my-auto cursor-pointer" :href="route('group.destroy', $group)" onclick="event.preventDefault(); if(confirm('Chcete odstrániť tento tag?')){this.closest('form').submit();}">
                         <div>
-                            testovaci tag..............
+                            testovaci tag - Text
                         </div>
                     </div>
-
 
                 </div>
 
