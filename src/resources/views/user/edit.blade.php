@@ -29,6 +29,7 @@
 
                     <x-input-label class="mt-4" for="group" value="Skupina" />
                     <select id="groupselect" onchange="translatePermissions(this.options[this.selectedIndex].dataset.perms)" class="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" name="group">
+                        <option value="-1" @if($user->group == NULL) selected @endif>Bez skupiny</option>
                         @foreach($groups as $group)
                             <option value="{{ $group->id }}"
                             @if($user->group != NULL && $group->id == $user->group->id) selected @endif
