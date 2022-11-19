@@ -28,7 +28,7 @@
                 </div>
 
 
-                <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6 gap-4">
+                <div class="py-5 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6 gap-4">
 
                     <div class="text-xs	px-px h-7 w-auto md:w-1/7 md:mx-auto bg-gray-200 md:rounded-xl md:shadow-lg flex items-center space-x-1">
                         <img src="{{asset('/icons/edit.svg')}}" class="inline underline w-4 my-auto cursor-pointer">
