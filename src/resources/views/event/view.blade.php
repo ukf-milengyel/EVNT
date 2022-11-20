@@ -240,21 +240,20 @@
             @endif
             <div class="my-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
                 @foreach($files as $file)
-                    <a href="{{url('files/', $file->filename)}}">
-                        <div class="relative border-2 border-gray-300 cursor-pointer w-full rounded-lg overflow-hidden shadow-lg">
-                            <img src="{{asset('/icons/file.svg/')}}" class="inline h-10 p-1">
-                            {{substr($file->filename, 14)}}
-
-                            <!-- delete button -->
-                            @if(false)
-                                <div class="absolute bottom-2 right-2 h-6 w-6">
-                                    <img onclick="deleteImage(this.parentNode.parentNode, {{$image->id}})" src="{{asset('/icons/delete.svg/')}}" class="outline-red-700 outline-1 outline hover:bg-red-500 bg-gray-100 p-0.5 shadow-sm rounded-md">
-                                </div>
-                            @endif
-                        </div>
-                    </a>
-
-
+                    <div class="relative border-2 border-gray-300 cursor-pointer w-full rounded-lg overflow-hidden shadow-lg underline">
+                        <a href="{{url('files/', $file->filename)}}" target="_blank">
+                            <div>
+                                <img src="{{asset('/icons/file.svg/')}}" class="inline h-10 p-1">
+                                {{substr($file->filename, 14)}}
+                            </div>
+                        </a>
+                        <!-- delete button -->
+                        @if($event->user()->is(auth()->user()))
+                            <div class="absolute bottom-2 right-2 h-6 w-6">
+                                <img onclick="deleteFile(this.parentNode.parentNode, {{$file->id}})" src="{{asset('/icons/delete.svg/')}}" class="outline-red-700 outline-1 outline hover:bg-red-500 bg-gray-100 p-0.5 shadow-sm rounded-md">
+                            </div>
+                        @endif
+                    </div>
                 @endforeach
             </div>
         </div>
