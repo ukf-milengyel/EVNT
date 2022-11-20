@@ -21,21 +21,21 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="py-5 px-2 w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6 gap-4">
 
-                    @for($i = 0; $i < 8; $i++)
+                    @foreach($tags as $tag)
                         <div class="flex w-full px-1 rounded-xl border-2 flex items-center space-x-1">
                             <div class="flex-initial">
                                 <x-tag-view class="md:max-w-[10em]">
-                                    <x-slot:tag>Tag Komponent {{$i}}</x-slot:tag>
+                                    <x-slot:tag>{{$tag->name}}</x-slot:tag>
                                 </x-tag-view>
                             </div>
                             <div class="flex-auto">
                             </div>
                             <div class="flex-none">
                                 <img src="{{asset('/icons/edit.svg')}}" class="inline w-4 my-auto cursor-pointer">
-                                <img src="{{asset('/icons/delete.svg')}}" class="inline underline w-4 my-auto cursor-pointer" :href="route('group.destroy', $group)" onclick="event.preventDefault(); if(confirm('Chcete odstrániť tento tag?')){this.closest('form').submit();}">
+                                <img src="{{asset('/icons/delete.svg')}}" class="inline underline w-4 my-auto cursor-pointer" :href="route('tag.destroy', $tag)" onclick="event.preventDefault(); if(confirm('Chcete odstrániť tento tag?')){this.closest('form').submit();}">
                             </div>
                         </div>
-                    @endfor
+                    @endforeach
 
 
                 </div>

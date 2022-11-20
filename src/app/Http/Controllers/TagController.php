@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Event;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 
 class TagController extends Controller
@@ -11,10 +13,13 @@ class TagController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request, $message = null)
     {
-        // zobrazíme všetky tagy ktoré patria skupine
-        return view("tag.index");
+        // create query
+
+        return view('tag.index', [
+            'tags' => Tag::all(),
+        ]);
     }
 
     /**
@@ -25,6 +30,7 @@ class TagController extends Controller
     public function create()
     {
         // zobrazíme formulár na vytvorenie tagu
+        $this->authorize('create', Tag::class);
         return view("tag.add");
     }
 
@@ -37,6 +43,18 @@ class TagController extends Controller
     public function store(Request $request)
     {
         // uložíme nový tag
+        $this->authorize('create', Tag::class);
+
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+        ]);
+
+        $tag = new Tag();
+        $tag->name = $validated['name'];
+        $tag->save();
+
+        // todo: redirect to event page
+        return $this->index($request, 'Vytvorili ste tag '.$validated['name']);
     }
 
     /**
@@ -56,10 +74,13 @@ class TagController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Tag $tag)
     {
-        // zobrazíme formulár na úpravu tagu, pošleme do view model tagu
-        return view("tag.edit");
+        $this->authorize('create', Tag::class);
+
+        return view('tag.edit', [
+            'tag' => $tag,
+        ]);
     }
 
     /**
@@ -69,9 +90,22 @@ class TagController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Tag $tag)
     {
         // aktualizujeme daný tag
+        $this->authorize('update', $tag);
+
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+        ]);
+
+        $permissions = $this->translatePerms($request);
+
+        $tag->name = $validated['name'];
+
+        $tag->save();
+
+        return $this->index('Tag '.$validated['name'].' bol upravený.');
     }
 
     /**
@@ -80,8 +114,15 @@ class TagController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Tag $tag)
     {
         // odstránime tag
+        $this->authorize('delete', $tag);
+
+        $name = $tag->name;
+        $tag->delete();
+
+        return $this->index('Tag '.$name.' bol odstránený.');
+        return redirect(route('tag.index'));
     }
 }
