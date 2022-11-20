@@ -68,11 +68,11 @@
                             <ul class="p-2 space-y-3 text-sm text-gray-700 dark:text-gray-900" aria-labelledby="dropdownRadioButton1">
                                 <li>
                                         <input type="radio" id="default-radio-7" name="sort" value="1" {{$sort ? 'checked' : ''}}>
-                                        <label for="default-radio-7" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-800">v</label>
+                                        <label for="default-radio-7" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-800">Zostupne</label>
                                 </li>
                                 <li>
                                         <input type="radio" id="default-radio-8" name="sort" value="0" {{!$sort ? 'checked' : ''}}>
-                                        <label for="default-radio-8" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-800">^</label>
+                                        <label for="default-radio-8" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-800">Vzostupne</label>
                                 </li>
                             </ul>
 
