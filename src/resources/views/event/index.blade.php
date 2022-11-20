@@ -16,85 +16,71 @@
                 </h2>
             </div>
             @can('create', App\Models\Event::class)
-                <div class="justify-end">
-                    <div class="grid  grid-cols-2">
-                    <form method="get"  action="{{route('event.index')}}">
+                <div class="justify-end flex-none">
+                    <x-primary-button-sm class="inline" id="dropdownRadioButton" data-dropdown-toggle="dropdownDefaultRadio" type="button">Filter<svg class="ml-2 w-4 h-4" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></x-primary-button-sm>
+                    <a href="{{ route('event.add') }}">
+                        <x-primary-button-sm>Vytvoriť podujatie</x-primary-button-sm>
+                    </a>
 
-                        <button id="dropdownRadioButton" data-dropdown-toggle="dropdownDefaultRadio" class="text-white bg-gray-700 hover:bg-gray-800 focus:ring-1 focus:outline-none focus:ring-gray-300 font-normal rounded-lg text-sm px-2 py-0.5 text-center inline-flex items-center dark:bg-black dark:hover:bg-blue-700" type="button" >Možnosti filtrovania <svg class="ml-2 w-4 h-4" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button>
-                        <div id="dropdownDefaultRadio" class="hidden z-10 w-48 bg-gray-100 rounded divide-y divide-gray-100 shadow dark:bg-gray-100 dark:divide-gray-300">
+                    <form method="get" action="{{route('event.index')}}">
+                        <div id="dropdownDefaultRadio" class="hidden px-2 z-10 w-full sm:w-48 bg-white rounded-xl divide-y divide-gray-100 border-0 border-b-2 sm:border-2 border-gray-300 shadow-md">
 
-                            <ul class="p-1 space-y-3 text-sm text-gray-700 dark:text-gray-900" aria-labelledby="dropdownRadioButton1">
-                                Zoradiť
+                            <ul class="p-2 space-y-3 text-sm text-gray-700 dark:text-gray-900" aria-labelledby="dropdownRadioButton">
+                                <span class="text-gray-800 text-lg font-semibold">Zobraziť</span>
                                 <li>
-                                    <div class="flex items-center">
+                                    <input type="radio" id="default-radio-1" name="my" value="0" {{!$my ? 'checked' : ''}}>
+                                    <label for="default-radio-1" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-800">Všetky podujatia</label>
+                                </li>
+                                <li>
+                                    <input type="radio" id="default-radio-2" name="my" value="1" {{$my ? 'checked' : ''}}>
+                                    <label for="default-radio-2" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-800">Moje podujatia</label>
+                                </li>
+                            </ul>
+
+                            <ul class="p-2 space-y-3 text-sm text-gray-700 dark:text-gray-900" aria-labelledby="dropdownRadioButton2">
+                                <span class="text-gray-800 text-lg font-semibold">Kategória</span>
+                                <li>
+                                    <input type="radio" id="default-radio-9" name="archived" value="0" {{!$archived ? 'checked' : ''}}>
+                                    <label for="default-radio-9" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-800">Aktuálne</label>
+                                </li>
+                                <li>
+                                    <input type="radio" id="default-radio-10" name="archived" value="1" {{$archived ? 'checked' : ''}}>
+                                    <label for="default-radio-10" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-800">Archivované</label>
+                                </li>
+                            </ul>
+
+                            <ul class="p-2 space-y-3 text-sm text-gray-700 dark:text-gray-900" aria-labelledby="dropdownRadioButton1">
+                                <span class="text-gray-800 text-lg font-semibold">Zoradiť</span>
+                                <li>
                                         <input type="radio" id="default-radio-4" name="order" value="0" {{$order == 0 ? 'checked' : ''}}>
                                         <label for="default-radio-4" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-800">Dátum vytvorenia</label>
-                                    </div>
                                 </li>
                                 <li>
-                                    <div class="flex items-center">
                                         <input type="radio" id="default-radio-5" name="order" value="1" {{$order == 1 ? 'checked' : ''}}>
                                         <label for="default-radio-5" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-800">Dátum uskutočnenia</label>
-                                    </div>
                                 </li>
                                 <li>
-                                    <div class="flex items-center">
                                         <input type="radio" id="default-radio-6" name="order" value="2" {{$order == 2 ? 'checked' : ''}}>
                                         <label for="default-radio-6" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-800">Názov</label>
-                                    </div>
                                 </li>
                             </ul>
 
-                            <ul class="p-1 space-y-3 text-sm text-gray-700 dark:text-gray-900" aria-labelledby="dropdownRadioButton1">
+                            <ul class="p-2 space-y-3 text-sm text-gray-700 dark:text-gray-900" aria-labelledby="dropdownRadioButton1">
                                 <li>
-                                    <div class="flex items-center">
                                         <input type="radio" id="default-radio-7" name="sort" value="1" {{$sort ? 'checked' : ''}}>
                                         <label for="default-radio-7" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-800">v</label>
-                                    </div>
                                 </li>
                                 <li>
-                                    <div class="flex items-center">
                                         <input type="radio" id="default-radio-8" name="sort" value="0" {{!$sort ? 'checked' : ''}}>
                                         <label for="default-radio-8" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-800">^</label>
-                                    </div>
                                 </li>
                             </ul>
 
 
-                            <ul class="p-1 space-y-3 text-sm text-gray-700 dark:text-gray-900" aria-labelledby="dropdownRadioButton">
-                                Zobraziť
-                                <li>
-                                    <div class="flex items-center">
-                                        <input type="radio" id="default-radio-1" name="my" value="0" {{!$my ? 'checked' : ''}}>
-                                        <label for="default-radio-1" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-800">Všetky podujatia</label>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="flex items-center">
-                                        <input type="radio" id="default-radio-2" name="my" value="1" {{$my ? 'checked' : ''}}>
-                                        <label for="default-radio-2" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-800">Moje podujatia</label>
-                                    </div>
-                                </li>
-                            </ul>
 
-                            <ul class="p-1 space-y-3 text-sm text-gray-700 dark:text-gray-900" aria-labelledby="dropdownRadioButton2">
-                                Kategória
-                                <li>
-                                    <div class="flex items-center">
-                                        <input type="radio" id="default-radio-9" name="archived" value="0" {{!$archived ? 'checked' : ''}}>
-                                        <label for="default-radio-9" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-800">Aktuálne</label>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="flex items-center">
-                                        <input type="radio" id="default-radio-10" name="archived" value="1" {{$archived ? 'checked' : ''}}>
-                                        <label for="default-radio-10" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-800">Archivované</label>
-                                    </div>
-                                </li>
-                            </ul>
                             <script src="https://unpkg.com/flowbite@1.5.1/dist/flowbite.js"></script>
 
-                            <div class="text-center">
+                            <div class="text-center py-2">
                             <x-primary-button-sm type="submit">Filtrovať</x-primary-button-sm>
                             </div>
 
@@ -102,15 +88,6 @@
 
 
                     </form>
-
-
-
-
-                    <a href="{{ route('event.add') }}" >
-                        <x-primary-button-sm>Vytvoriť podujatie</x-primary-button-sm>
-                    </a>
-
-                    </div>
 
                 </div>
             @endcan
