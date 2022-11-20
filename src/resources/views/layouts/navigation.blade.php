@@ -43,6 +43,10 @@
                     </x-slot>
 
                     <x-slot name="content">
+                        <x-dropdown-link href="/">
+                            {{ __('Index') }}
+                        </x-dropdown-link>
+
                         @can('viewAny', App\Models\Group::class)
                             <x-dropdown-link :href="route('group.index')">
                                 {{ __('Admin - Správa skupín') }}
@@ -106,6 +110,9 @@
             </div>
 
             <div class="mt-3 space-y-1">
+                <x-dropdown-link href="/">
+                    {{ __('Index') }}
+                </x-dropdown-link>
                 @can('viewAny', App\Models\Group::class)
                     <x-dropdown-link :href="route('group.index')">
                         {{ __('Admin - Správa skupín') }}

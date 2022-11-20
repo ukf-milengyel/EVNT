@@ -253,4 +253,17 @@ class EventController extends Controller
         return $this->show($request, $eid, "Fotografie boli pridané.");
     }
 
+    public function deleteImage(Request $request){
+        // todo: authorize deleting image
+        $imageid = $request->json()->get("id");
+
+        $model = ImageModel::findOrFail($imageid);
+        $imgname = $model->filename;
+
+        $model->delete();
+        File::delete(['images/image_thumb/'.$imgname, 'images/image/'.$imgname]);
+
+        return "1";
+    }
+
 }

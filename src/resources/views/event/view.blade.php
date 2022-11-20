@@ -205,7 +205,21 @@
 
             <div class="my-4 grid grid-cols-4 sm:grid-cols-6 lg:grid-cols-8 gap-4">
                 @foreach($images as $image)
-                    <img src="{{url('/images/image_thumb/', $image->filename)}}" class="cursor-pointer transition-transform hover:scale-125 w-full h-24 md:h-24 object-cover rounded-lg overflow-hidden shadow-lg" onclick="window.open( '{{url('/images/image/', $image->filename)}}' )">
+                    <div class="cursor-pointer transition-transform hover:scale-125 w-full h-24 md:h-24 rounded-lg overflow-hidden shadow-lg">
+                        <img
+                            class="object-cover w-full h-full"
+                            src="{{url('/images/image_thumb/', $image->filename)}}"
+                            onclick="window.open( '{{url('/images/image/', $image->filename)}}' )"
+                        >
+
+                        <!-- delete button -->
+                        @if($event->user()->is(auth()->user()))
+                        <div class="absolute bottom-1 right-1 h-6 w-6">
+                            <img onclick="deleteImage(this.parentNode.parentNode, {{$image->id}})" src="{{asset('/icons/delete.svg/')}}" class="outline-red-700 outline-1 outline hover:bg-red-500 bg-gray-100 p-1 shadow-sm rounded-md">
+                        </div>
+                        @endif
+
+                    </div>
                 @endforeach
             </div>
 
@@ -224,6 +238,7 @@
                 </form>
             @endif
         </div>
-
     </div>
+
+    <script src="{{asset("/js/eventview.js")}}"></script>
 </x-barebones>

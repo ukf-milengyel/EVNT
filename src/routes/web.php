@@ -77,4 +77,7 @@ Route::resource('/user', UserController::class)
 Route::post('/event/image/store', [EventController::class, 'storeImage'])
     ->name('event.image.store')->middleware(['auth', 'verified']);
 
+Route::post('/event/image/delete', [EventController::class, 'deleteImage'])
+    ->name('event.image.delete')->middleware(['auth', 'verified']);
+
 require __DIR__.'/auth.php';
