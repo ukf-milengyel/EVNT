@@ -13,7 +13,7 @@ class TagController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request, $message = null)
+    public function index($message = null)
     {
         // create query
 
@@ -98,8 +98,6 @@ class TagController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
         ]);
-
-        $permissions = $this->translatePerms($request);
 
         $tag->name = $validated['name'];
 

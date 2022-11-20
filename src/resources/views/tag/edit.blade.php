@@ -5,17 +5,36 @@
         </h2>
     </x-slot>
 
+
+    @if($errors->any())
+        <x-std-error>
+            <x-slot:title>
+                Chyba
+            </x-slot:title>
+            <ul>
+                @foreach($errors->all() as $error)
+                    <li>{{$error}}</li>
+                @endforeach
+            </ul>
+        </x-std-error>
+    @endif
+
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 bg-white border-b border-gray-200">
+            <x-std-form>
+                <form method="POST" action="{{ route('tag.update', $tag) }}" enctype="multipart/form-data">
+                    @csrf
+                    @method('PUT')
+                    <div>
+                        <x-input-label for="name" value="Názov tagu" />
+                        <x-std-text-input name="name" type="text" value="{{ old('name') }}"/>
+                    </div>
 
-                    <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                        Formulár na úpravu tagu
-                    </h2>
-
-                </div>
-            </div>
+                    <div class="flex justify-end mt-8">
+                        <x-primary-button>{{ __('Upraviť') }}</x-primary-button>
+                    </div>
+                </form>
+            </x-std-form>
         </div>
     </div>
 </x-app-layout>

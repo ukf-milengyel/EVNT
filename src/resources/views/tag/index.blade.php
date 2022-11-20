@@ -31,8 +31,15 @@
                             <div class="flex-auto">
                             </div>
                             <div class="flex-none">
+                                <a href="{{route('tag.edit', $tag)}}">
                                 <img src="{{asset('/icons/edit.svg')}}" class="inline w-4 my-auto cursor-pointer">
+                                </a>
+
+                                <form class="inline" method="POST" action="{{ route('tag.destroy', $tag) }}">
+                                    @csrf
+                                    @method('delete')
                                 <img src="{{asset('/icons/delete.svg')}}" class="inline underline w-4 my-auto cursor-pointer" :href="route('tag.destroy', $tag)" onclick="event.preventDefault(); if(confirm('Chcete odstrániť tento tag?')){this.closest('form').submit();}">
+                                </form>
                             </div>
                         </div>
                     @endforeach
