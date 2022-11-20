@@ -43,6 +43,7 @@
                     {{$event->description}}
                 </p>
 
+                <h2 class="font-bold mt-4 text-2xl text-gray-800">Oznámenia</h2>
                 <!-- todo: nahradiť checkom, či používateľ je autor príspevku -->
                 @if(true)
                 <form method="POST" action="{{ route('announcement.store') }}" class="py-4 px-6 border-2 border-dashed rounded-xl border-gray-300" enctype="multipart/form-data">
@@ -62,7 +63,6 @@
                 @endif
                 <!-- todo: nahradiť checkom, či existujú oznámenia -->
                 @if(true)
-                    <h2 class="font-bold mt-4 text-2xl text-gray-800">Oznámenia</h2>
                     <x-announcement-component>
                         <x-slot:date>12.5.2023, 20:48</x-slot:date>
                         <x-slot:image>{{asset('images/event/0.jpg')}}</x-slot:image>
@@ -189,7 +189,7 @@
         <div class="mt-4">
             <h2 class="font-bold text-2xl text-gray-800">Fotografie</h2>
             @if($event->user()->is(auth()->user()))
-                <form method="POST" action="{{ route('event.image.store', $event) }}" class="my-1 py-4 px-6 border-2 border-dashed rounded-xl border-gray-300" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('event.image.store') }}" class="my-1 py-4 px-6 border-2 border-dashed rounded-xl border-gray-300" enctype="multipart/form-data">
                     @csrf
                     <input type="hidden" name="event_id" value="{{$event->id}}">
                     <div>
@@ -225,11 +225,12 @@
 
             <h2 class="font-bold text-2xl text-gray-800">Prílohy</h2>
             @if($event->user()->is(auth()->user()))
-                <form method="POST" action="/" class="my-1 py-4 px-6 border-2 border-dashed rounded-xl border-gray-300" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('event.file.store') }}" class="my-1 py-4 px-6 border-2 border-dashed rounded-xl border-gray-300" enctype="multipart/form-data">
                     @csrf
+                    <input type="hidden" name="event_id" value="{{$event->id}}">
                     <div>
-                        <x-input-label for="attachments" value="Pridať prílohy" />
-                        <input id="picker" name="attachments" type="file" multiple/>
+                        <x-input-label for="files[]" value="Pridať prílohy" />
+                        <input id="picker" name="files[]" type="file" multiple/>
                     </div>
 
                     <div class="flex justify-end">
@@ -237,6 +238,25 @@
                     </div>
                 </form>
             @endif
+            <div class="my-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                @foreach($files as $file)
+                    <a href="{{url('files/', $file->filename)}}">
+                        <div class="relative border-2 border-gray-300 cursor-pointer w-full rounded-lg overflow-hidden shadow-lg">
+                            <img src="{{asset('/icons/file.svg/')}}" class="inline h-10 p-1">
+                            {{substr($file->filename, 14)}}
+
+                            <!-- delete button -->
+                            @if(false)
+                                <div class="absolute bottom-2 right-2 h-6 w-6">
+                                    <img onclick="deleteImage(this.parentNode.parentNode, {{$image->id}})" src="{{asset('/icons/delete.svg/')}}" class="outline-red-700 outline-1 outline hover:bg-red-500 bg-gray-100 p-0.5 shadow-sm rounded-md">
+                                </div>
+                            @endif
+                        </div>
+                    </a>
+
+
+                @endforeach
+            </div>
         </div>
     </div>
 
