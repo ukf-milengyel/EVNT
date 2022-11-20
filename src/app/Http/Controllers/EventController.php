@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Event;
 use App\Models\User;
 use App\Models\Image as ImageModel;
+use App\Models\Attachment as FileModel;
 use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
 use Intervention\Image\ImageManagerStatic as Image;
@@ -126,6 +127,7 @@ class EventController extends Controller
             'attend_count' => $event->user_a->count(),
             'message' => $message,
             'images' => ImageModel::where('event_id', $event->id)->get(),
+            'files' => FileModel::where('event_id', $event->id)->get(),
             'share_message' => $share_message,
         ]);
     }
@@ -255,13 +257,49 @@ class EventController extends Controller
 
     public function deleteImage(Request $request){
         // todo: authorize deleting image
-        $imageid = $request->json()->get("id");
 
-        $model = ImageModel::findOrFail($imageid);
+        $model = ImageModel::findOrFail( $request->json()->get("id") );
         $imgname = $model->filename;
 
         $model->delete();
         File::delete(['images/image_thumb/'.$imgname, 'images/image/'.$imgname]);
+
+        return "1";
+    }
+
+    public function storeFile(Request $request){
+        // todo: authorize adding file
+
+        $eid = $request["event_id"];
+
+        $this->validate($request, [
+            'files' => 'required',
+            'files.*' => 'file|max:2048',
+        ]);
+
+        foreach ($request->file("files") as $file){
+            // store in public folder
+            $name = uniqid() ."_". $file->getClientOriginalName();
+            $file->move(public_path('files'), $name);
+
+            // add db entry
+            FileModel::create([
+                'event_id' => $eid,
+                'filename' => $name,
+            ]);
+        }
+
+        return $this->show($request, $eid, "Súbory boli pridané.");
+    }
+
+    public function deleteFile(Request $request){
+        // todo: authorize deleting file
+
+        $model = FileModel::findOrFail( $request->json()->get("id") );
+        $filename = $model->filename;
+
+        $model->delete();
+        File::delete(['files/'.$filename, 'images/image/'.$filename]);
 
         return "1";
     }

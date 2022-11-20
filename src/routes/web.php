@@ -80,4 +80,11 @@ Route::post('/event/image/store', [EventController::class, 'storeImage'])
 Route::post('/event/image/delete', [EventController::class, 'deleteImage'])
     ->name('event.image.delete')->middleware(['auth', 'verified']);
 
+Route::post('/event/file/store', [EventController::class, 'storeFile'])
+    ->name('event.file.store')->middleware(['auth', 'verified']);
+
+Route::post('/event/file/delete', [EventController::class, 'deleteFile'])
+    ->name('event.file.delete')->middleware(['auth', 'verified']);
+
+
 require __DIR__.'/auth.php';
