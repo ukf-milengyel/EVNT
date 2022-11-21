@@ -45,6 +45,7 @@ class ImagePolicy
     {
         if ($user->group == NULL) return false;
         return $user->group->permissions & 0b1000;
+        return true;
     }
 
     /**
@@ -56,9 +57,8 @@ class ImagePolicy
      */
     public function update(User $user, Image $image)
     {
-        return
-            $image->user()->is($user)
-            && $this->create($user);
+        // stub!
+        return false;
     }
 
     /**
@@ -70,7 +70,7 @@ class ImagePolicy
      */
     public function delete(User $user, Image $image)
     {
-        return $this->update($user, $image);
+        return $image->event->user()->is($user);
     }
 
     /**

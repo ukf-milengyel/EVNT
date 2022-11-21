@@ -35,4 +35,16 @@ class Event extends Model
         return $this->belongsToMany(User::class, 'user_attends_event');
     }
 
+    public function image() {
+        return $this->hasMany(Image::class);
+    }
+
+    public function attachment() {
+        return $this->hasMany(Attachment::class);
+    }
+
+    public function announcement() {
+        return $this->hasMany(Announcement::class);
+    }
+
 }

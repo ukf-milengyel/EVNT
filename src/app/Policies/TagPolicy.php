@@ -70,7 +70,7 @@ class TagPolicy
      */
     public function delete(User $user, Tag $tag)
     {
-        return $this->update($user, $tag);
+        return $tag->user()->is($user);
     }
 
     /**

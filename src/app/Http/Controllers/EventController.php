@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Attachment;
 use App\Models\Event;
 use App\Models\User;
 use App\Models\Image as ImageModel;
@@ -230,7 +231,7 @@ class EventController extends Controller
     }
 
     public function storeImage(Request $request){
-        // todo: authorize adding images
+        $this->authorize('create', ImageModel::class);
 
         $eid = $request["event_id"];
         //$this->authorize('create', Image::class);
@@ -256,9 +257,11 @@ class EventController extends Controller
     }
 
     public function deleteImage(Request $request){
-        // todo: authorize deleting image
-
         $model = ImageModel::findOrFail( $request->json()->get("id") );
+
+        //return "uid" . $model->event->user->id;
+        $this->authorize('delete', $model);
+
         $imgname = $model->filename;
 
         $model->delete();
@@ -268,7 +271,7 @@ class EventController extends Controller
     }
 
     public function storeFile(Request $request){
-        // todo: authorize adding file
+        $this->authorize('create', Attachment::class);
 
         $eid = $request["event_id"];
 
@@ -293,9 +296,10 @@ class EventController extends Controller
     }
 
     public function deleteFile(Request $request){
-        // todo: authorize deleting file
-
         $model = FileModel::findOrFail( $request->json()->get("id") );
+
+        $this->authorize('delete', $model);
+
         $filename = $model->filename;
 
         $model->delete();

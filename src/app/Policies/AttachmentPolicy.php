@@ -57,7 +57,7 @@ class AttachmentPolicy
     public function update(User $user, Attachment $attachment)
     {
         return
-            $attachment->user()->is($user)
+            $attachment->event->user()->is($user)
             && $this->create($user);
     }
 
@@ -70,7 +70,7 @@ class AttachmentPolicy
      */
     public function delete(User $user, Attachment $attachment)
     {
-        return $this->update($user, $attachment);
+        return $attachment->event->user()->is($user);
     }
 
     /**

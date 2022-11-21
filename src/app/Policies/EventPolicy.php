@@ -68,7 +68,7 @@ class EventPolicy
      */
     public function delete(User $user, Event $event)
     {
-        return $this->update($user, $event);
+        return $event->user()->is($user);
     }
 
     /**

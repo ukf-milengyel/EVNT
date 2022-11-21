@@ -188,7 +188,7 @@
 
         <div class="mt-4">
             <h2 class="font-bold text-2xl text-gray-800">Fotografie</h2>
-            @if($event->user()->is(auth()->user()))
+            @can('create', App\Models\Image::class)
                 <form method="POST" action="{{ route('event.image.store') }}" class="my-1 py-4 px-6 border-2 border-dashed rounded-xl border-gray-300" enctype="multipart/form-data">
                     @csrf
                     <input type="hidden" name="event_id" value="{{$event->id}}">
@@ -213,7 +213,7 @@
                         >
 
                         <!-- delete button -->
-                        @if($event->user()->is(auth()->user()))
+                        @can('delete', $image)
                         <div class="absolute bottom-2 right-2 h-5 w-5">
                             <img onclick="deleteImage(this.parentNode.parentNode, {{$image->id}})" src="{{asset('/icons/delete.svg/')}}" class="outline-red-700 outline-1 outline hover:bg-red-500 bg-gray-100 p-0.5 shadow-sm rounded-md">
                         </div>
@@ -224,7 +224,7 @@
             </div>
 
             <h2 class="font-bold text-2xl text-gray-800">Prílohy</h2>
-            @if($event->user()->is(auth()->user()))
+            @can('create', App\Models\Attachment::class)
                 <form method="POST" action="{{ route('event.file.store') }}" class="my-1 py-4 px-6 border-2 border-dashed rounded-xl border-gray-300" enctype="multipart/form-data">
                     @csrf
                     <input type="hidden" name="event_id" value="{{$event->id}}">
@@ -237,7 +237,7 @@
                         <x-primary-button>{{ __('Pridať') }}</x-primary-button>
                     </div>
                 </form>
-            @endif
+            @endcan
             <div class="my-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
                 @foreach($files as $file)
                     <div class="relative border-2 border-gray-300 cursor-pointer w-full rounded-lg overflow-hidden shadow-lg underline">
@@ -248,7 +248,7 @@
                             </div>
                         </a>
                         <!-- delete button -->
-                        @if($event->user()->is(auth()->user()))
+                        @can('delete', $file)
                             <div class="absolute bottom-2 right-2 h-6 w-6">
                                 <img onclick="deleteFile(this.parentNode.parentNode, {{$file->id}})" src="{{asset('/icons/delete.svg/')}}" class="outline-red-700 outline-1 outline hover:bg-red-500 bg-gray-100 p-0.5 shadow-sm rounded-md">
                             </div>

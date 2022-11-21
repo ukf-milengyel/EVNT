@@ -57,7 +57,7 @@ class AnnouncementPolicy
     public function update(User $user, Announcement $announcement)
     {
         return
-            $announcement->user()->is($user)
+            $announcement->event->user()->is($user)
             && $this->create($user);
     }
 
