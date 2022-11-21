@@ -18,9 +18,11 @@
                     <x-nav-link :href="route('announcement.index')" :active="request()->routeIs('announcement.index')">
                         {{ __('Oznámenia') }}
                     </x-nav-link>
+                    @can('create', App\Models\Tag::class)
                     <x-nav-link :href="route('tag.index')" :active="request()->routeIs('tag.index')">
                         {{ __('Tagy') }}
                     </x-nav-link>
+                    @endcan
                     <x-nav-link :href="route('statistics')" :active="request()->routeIs('statistics')">
                         {{ __('Štatistika') }}
                     </x-nav-link>
@@ -94,9 +96,11 @@
             <x-responsive-nav-link :href="route('announcement.index')" :active="request()->routeIs('announcement.index')">
                 {{ __('Oznámenia') }}
             </x-responsive-nav-link>
+            @can('create', App\Models\Tag::class)
             <x-responsive-nav-link :href="route('tag.index')" :active="request()->routeIs('tag.index')">
                 {{ __('Tagy') }}
             </x-responsive-nav-link>
+            @endcan
             <x-responsive-nav-link :href="route('statistics')" :active="request()->routeIs('statistics')">
                 {{ __('Štatistika') }}
             </x-responsive-nav-link>

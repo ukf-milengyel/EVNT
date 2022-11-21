@@ -19,4 +19,8 @@ class Tag extends Model
     public function event() {
         return $this->belongsToMany(Event::class, 'event_has_tag');
     }
+
+    public function user() {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

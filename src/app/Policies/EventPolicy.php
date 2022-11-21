@@ -42,7 +42,7 @@ class EventPolicy
     public function create(User $user)
     {
         if ($user->group == NULL) return false;
-        return $user->group->permissions & 0b10;
+        return $user->group->permissions & 0b10 || AdminPolicy::isAdmin($user);
     }
 
     /**
@@ -55,6 +55,7 @@ class EventPolicy
     public function update(User $user, Event $event)
     {
         return
+            AdminPolicy::isAdmin($user) ||
             $event->user()->is($user)
             && $this->create($user);
     }
@@ -68,7 +69,9 @@ class EventPolicy
      */
     public function delete(User $user, Event $event)
     {
-        return $event->user()->is($user);
+        return
+            AdminPolicy::isAdmin($user) ||
+            $event->user()->is($user);
     }
 
     /**

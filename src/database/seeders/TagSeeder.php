@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use Faker\Factory;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -17,9 +18,10 @@ class TagSeeder extends Seeder
     {
         $faker = Factory::create();
 
-        for ($i = 1; $i <= 20; $i++) {
+        for ($i = 1; $i <= 200; $i++) {
             DB::table('tag')->insert([
                 'name' => $faker->word,
+                'user_id' => User::all()->random(1)->first()->id,
             ]);
         }
     }

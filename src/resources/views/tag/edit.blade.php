@@ -5,7 +5,6 @@
         </h2>
     </x-slot>
 
-
     @if($errors->any())
         <x-std-error>
             <x-slot:title>
@@ -27,7 +26,7 @@
                     @method('PUT')
                     <div>
                         <x-input-label for="name" value="Názov tagu" />
-                        <x-std-text-input name="name" type="text" value="{{ old('name') }}"/>
+                        <x-std-text-input name="name" type="text" value="{{ $tag->name }}"/>
                     </div>
 
                     <div class="flex justify-end mt-8">

@@ -43,8 +43,7 @@ class AnnouncementPolicy
      */
     public function create(User $user)
     {
-        if ($user->group == NULL) return false;
-        return $user->group->permissions & 0b10;
+        return AdminPolicy::isAdmin($user);
     }
 
     /**
@@ -57,6 +56,7 @@ class AnnouncementPolicy
     public function update(User $user, Announcement $announcement)
     {
         return
+            AdminPolicy::isAdmin($user) ||
             $announcement->event->user()->is($user)
             && $this->create($user);
     }

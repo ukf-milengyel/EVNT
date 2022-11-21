@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Event;
 use App\Models\Tag;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class TagController extends Controller
@@ -13,13 +14,20 @@ class TagController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($message = null)
+    public function index(Request $request, String $message = null)
     {
         // create query
         // todo: only show tags created by the current user
+        $this->authorize('create', Tag::class);
+
+        $tags =
+            auth()->user()->can('viewAny', User::class)
+            ? Tag::all()
+            : Tag::where('user_id', $request->user()->id)->get();
 
         return view('tag.index', [
-            'tags' => Tag::all(),
+            'tags' => $tags,
+            'message' => $message,
         ]);
     }
 
@@ -52,9 +60,9 @@ class TagController extends Controller
 
         $tag = new Tag();
         $tag->name = $validated['name'];
+        $tag->user_id = $request->user()->id;
         $tag->save();
 
-        // todo: redirect to event page
         return $this->index($request, 'Vytvorili ste tag '.$validated['name']);
     }
 
@@ -104,7 +112,7 @@ class TagController extends Controller
 
         $tag->save();
 
-        return $this->index('Tag '.$validated['name'].' bol upravený.');
+        return $this->index($request, 'Tag '.$validated['name'].' bol upravený.');
     }
 
     /**
@@ -113,7 +121,7 @@ class TagController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Tag $tag)
+    public function destroy(Request $request, Tag $tag)
     {
         // odstránime tag
         $this->authorize('delete', $tag);
@@ -121,7 +129,6 @@ class TagController extends Controller
         $name = $tag->name;
         $tag->delete();
 
-        return $this->index('Tag '.$name.' bol odstránený.');
-        return redirect(route('tag.index'));
+        return $this->index($request, 'Tag '.$name.' bol odstránený.');
     }
 }

@@ -44,7 +44,7 @@ class TagPolicy
     public function create(User $user)
     {
         if ($user->group == NULL) return false;
-        return $user->group->permissions & 0b100;
+        return $user->group->permissions & 0b100 || AdminPolicy::isAdmin($user);
     }
 
     /**
@@ -57,6 +57,7 @@ class TagPolicy
     public function update(User $user, Tag $tag)
     {
         return
+            AdminPolicy::isAdmin($user) ||
             $tag->user()->is($user)
             && $this->create($user);
     }
@@ -70,7 +71,9 @@ class TagPolicy
      */
     public function delete(User $user, Tag $tag)
     {
-        return $tag->user()->is($user);
+        return
+            AdminPolicy::isAdmin($user) ||
+            $tag->user()->is($user);
     }
 
     /**

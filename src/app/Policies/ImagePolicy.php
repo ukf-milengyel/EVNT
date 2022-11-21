@@ -44,8 +44,7 @@ class ImagePolicy
     public function create(User $user)
     {
         if ($user->group == NULL) return false;
-        return $user->group->permissions & 0b1000;
-        return true;
+        return $user->group->permissions & 0b1000 || AdminPolicy::isAdmin($user);
     }
 
     /**
@@ -70,7 +69,9 @@ class ImagePolicy
      */
     public function delete(User $user, Image $image)
     {
-        return $image->event->user()->is($user);
+        return
+            AdminPolicy::isAdmin($user) ||
+            $image->event->user()->is($user);
     }
 
     /**

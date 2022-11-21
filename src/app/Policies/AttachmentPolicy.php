@@ -44,7 +44,7 @@ class AttachmentPolicy
     public function create(User $user)
     {
         if ($user->group == NULL) return false;
-        return $user->group->permissions & 0b10000;
+        return $user->group->permissions & 0b10000 || AdminPolicy::isAdmin($user);
     }
 
     /**
@@ -57,6 +57,7 @@ class AttachmentPolicy
     public function update(User $user, Attachment $attachment)
     {
         return
+            AdminPolicy::isAdmin($user) ||
             $attachment->event->user()->is($user)
             && $this->create($user);
     }
@@ -70,7 +71,9 @@ class AttachmentPolicy
      */
     public function delete(User $user, Attachment $attachment)
     {
-        return $attachment->event->user()->is($user);
+        return
+            AdminPolicy::isAdmin($user) ||
+            $attachment->event->user()->is($user);
     }
 
     /**
