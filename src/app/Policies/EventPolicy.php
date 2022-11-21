@@ -42,7 +42,7 @@ class EventPolicy
     public function create(User $user)
     {
         if ($user->group == NULL) return false;
-        return $user->group->permissions & 2;
+        return $user->group->permissions & 0b10;
     }
 
     /**

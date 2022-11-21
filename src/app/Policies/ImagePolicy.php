@@ -18,7 +18,8 @@ class ImagePolicy
      */
     public function viewAny(User $user)
     {
-        //
+        // stub!
+        return true;
     }
 
     /**
@@ -30,7 +31,8 @@ class ImagePolicy
      */
     public function view(User $user, Image $image)
     {
-        //
+        // stub!
+        return true;
     }
 
     /**
@@ -41,7 +43,8 @@ class ImagePolicy
      */
     public function create(User $user)
     {
-        //
+        if ($user->group == NULL) return false;
+        return $user->group->permissions & 0b1000;
     }
 
     /**
@@ -53,7 +56,9 @@ class ImagePolicy
      */
     public function update(User $user, Image $image)
     {
-        //
+        return
+            $image->user()->is($user)
+            && $this->create($user);
     }
 
     /**
@@ -65,7 +70,7 @@ class ImagePolicy
      */
     public function delete(User $user, Image $image)
     {
-        //
+        return $this->update($user, $image);
     }
 
     /**
@@ -77,7 +82,8 @@ class ImagePolicy
      */
     public function restore(User $user, Image $image)
     {
-        //
+        // stub!
+        return false;
     }
 
     /**
@@ -89,6 +95,7 @@ class ImagePolicy
      */
     public function forceDelete(User $user, Image $image)
     {
-        //
+        // stub!
+        return false;
     }
 }

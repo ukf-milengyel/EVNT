@@ -43,8 +43,8 @@ class AnnouncementPolicy
      */
     public function create(User $user)
     {
-        // stub!
-        return true;
+        if ($user->group == NULL) return false;
+        return $user->group->permissions & 0b10;
     }
 
     /**
@@ -56,8 +56,9 @@ class AnnouncementPolicy
      */
     public function update(User $user, Announcement $announcement)
     {
-        // stub!
-        return true;
+        return
+            $announcement->user()->is($user)
+            && $this->create($user);
     }
 
     /**
@@ -69,8 +70,7 @@ class AnnouncementPolicy
      */
     public function delete(User $user, Announcement $announcement)
     {
-        // stub!
-        return true;
+        return $this->update($user, $announcement);
     }
 
     /**
@@ -83,7 +83,7 @@ class AnnouncementPolicy
     public function restore(User $user, Announcement $announcement)
     {
         // stub!
-        return true;
+        return false;
     }
 
     /**
@@ -96,6 +96,6 @@ class AnnouncementPolicy
     public function forceDelete(User $user, Announcement $announcement)
     {
         // stub!
-        return true;
+        return false;
     }
 }

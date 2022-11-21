@@ -99,7 +99,7 @@ function restart(){
             yaccel: rng(-maxSpeed, maxSpeed),
             xaccelTarget: rng(-maxSpeed, maxSpeed),
             yaccelTarget: rng(-maxSpeed, maxSpeed),
-            size: maxSize,
+            size: rng(minSize, maxSize),
             sizeTarget: rng(minSize, maxSize)
         });
     }

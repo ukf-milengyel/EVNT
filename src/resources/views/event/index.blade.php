@@ -17,13 +17,13 @@
             </div>
             @can('create', App\Models\Event::class)
                 <div class="justify-end flex-none">
-                    <x-primary-button-sm class="inline" id="dropdownRadioButton" data-dropdown-toggle="dropdownDefaultRadio" type="button">Filter<svg class="ml-2 w-4 h-4" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></x-primary-button-sm>
+                    <x-primary-button-sm class="inline mr-2" id="dropdownRadioButton" data-dropdown-toggle="dropdownDefaultRadio" type="button">Filter<svg class="ml-2 w-4 h-4" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></x-primary-button-sm>
                     <a href="{{ route('event.add') }}">
                         <x-primary-button-sm>Vytvoriť podujatie</x-primary-button-sm>
                     </a>
 
                     <form method="get" action="{{route('event.index')}}">
-                        <div id="dropdownDefaultRadio" class="hidden px-2 z-10 w-full sm:w-48 bg-white rounded-xl divide-y divide-gray-100 border-0 border-b-2 sm:border-2 border-gray-300 shadow-md">
+                        <div id="dropdownDefaultRadio" class="hidden px-2 z-10 w-full sm:w-56 bg-white rounded-xl divide-y divide-gray-100 border-0 border-b sm:border border-gray-300 shadow-md">
 
                             <ul class="p-2 space-y-3 text-sm text-gray-700 dark:text-gray-900" aria-labelledby="dropdownRadioButton">
                                 <span class="text-gray-800 text-lg font-semibold">Zobraziť</span>
@@ -110,11 +110,6 @@
     <div class="py-12">
 
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-
-
-
-            <hr class="my-2">
-
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
 
                 @foreach($events as $event)

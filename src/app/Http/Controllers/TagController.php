@@ -16,6 +16,7 @@ class TagController extends Controller
     public function index($message = null)
     {
         // create query
+        // todo: only show tags created by the current user
 
         return view('tag.index', [
             'tags' => Tag::all(),

@@ -18,7 +18,8 @@ class AttachmentPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        // stub!
+        return true;
     }
 
     /**
@@ -30,7 +31,8 @@ class AttachmentPolicy
      */
     public function view(User $user, Attachment $attachment)
     {
-        //
+        // stub!
+        return true;
     }
 
     /**
@@ -41,7 +43,8 @@ class AttachmentPolicy
      */
     public function create(User $user)
     {
-        //
+        if ($user->group == NULL) return false;
+        return $user->group->permissions & 0b10000;
     }
 
     /**
@@ -53,7 +56,9 @@ class AttachmentPolicy
      */
     public function update(User $user, Attachment $attachment)
     {
-        //
+        return
+            $attachment->user()->is($user)
+            && $this->create($user);
     }
 
     /**
@@ -65,7 +70,7 @@ class AttachmentPolicy
      */
     public function delete(User $user, Attachment $attachment)
     {
-        //
+        return $this->update($user, $attachment);
     }
 
     /**
@@ -77,7 +82,8 @@ class AttachmentPolicy
      */
     public function restore(User $user, Attachment $attachment)
     {
-        //
+        // stub!
+        return false;
     }
 
     /**
@@ -89,6 +95,7 @@ class AttachmentPolicy
      */
     public function forceDelete(User $user, Attachment $attachment)
     {
-        //
+        // stub!
+        return false;
     }
 }
