@@ -21,7 +21,7 @@
 
 <x-barebones>
 
-<div class="flex min-h-screen bg-gradient-to-tl from-blue-400 to-blue-200">
+<div class="flex min-h-screen bg-gradient-to-tl from-purple-400 to-blue-200">
 
     <canvas id="canvas" class="pointer-events-none md:pointer-events-none"></canvas>
 
@@ -31,7 +31,7 @@
 
             <div class="w-full sm:w-auto">
                 <h1 class="text-gray-900 text-6xl font-extrabold">
-                    {{ config('app.name', 'UKF Events') }}
+                    Správca podujatí EVNT
                 </h1>
 
                 <div class="mt-3">
