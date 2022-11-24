@@ -178,7 +178,7 @@
 
                     <div>
                         <p class="pt-2 text-xs text-gray-800">Prílohy</p>
-                        1234
+                        {{$files->count()}}
                     </div>
                 </div>
             </div>
