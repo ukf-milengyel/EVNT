@@ -32,7 +32,7 @@
                 <div class="p-5 w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6 gap-4">
 
                     @foreach($tags as $tag)
-                        <div class="flex w-full px-1 rounded-xl border-2 flex items-center space-x-1">
+                        <div class="flex w-full h-12 md:h-7 px-3 md:px-1 rounded-3xl md:rounded-xl border-2 flex items-center space-x-1">
                             <div class="flex-initial">
                                 <x-tag-view class="md:max-w-[10em]">
                                     <x-slot:tag>{{$tag->name}}</x-slot:tag>
@@ -42,13 +42,13 @@
                             </div>
                             <div class="flex-none">
                                 <a href="{{route('tag.edit', $tag)}}">
-                                <img src="{{asset('/icons/edit.svg')}}" class="inline w-4 my-auto cursor-pointer">
+                                <img src="{{asset('/icons/edit.svg')}}" class="inline w-8 md:w-4 my-auto cursor-pointer">
                                 </a>
 
                                 <form class="inline" method="POST" action="{{ route('tag.destroy', $tag) }}">
                                     @csrf
                                     @method('delete')
-                                <img src="{{asset('/icons/delete.svg')}}" class="inline underline w-4 my-auto cursor-pointer" :href="route('tag.destroy', $tag)" onclick="event.preventDefault(); if(confirm('Chcete odstrániť tento tag?')){this.closest('form').submit();}">
+                                <img src="{{asset('/icons/delete.svg')}}" class="inline w-8 md:w-4 my-auto cursor-pointer" :href="route('tag.destroy', $tag)" onclick="event.preventDefault(); if(confirm('Chcete odstrániť tento tag?')){this.closest('form').submit();}">
                                 </form>
                             </div>
                         </div>

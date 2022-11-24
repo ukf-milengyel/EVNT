@@ -5,17 +5,17 @@
             <div class="truncate w-full flex">
                 {{$organizer}}
             </div>
-            <div class="flex-1 pl-2 w-auto text-xl font-bold text-white text-shadow">
+            <div class="flex-1 pl-2 w-auto text-2xl md:text-xl font-bold text-white text-shadow">
                 {{$participants}}
             </div>
 
         </div>
     </div>
     <div class="px-4 py-2">
-        <div class="text-xl font-bold text-black">
+        <div class="text-2xl md:text-xl font-bold text-black">
             {{$name}}
         </div>
-        <div class="text-sm font-medium text-black">
+        <div class="text-md md:text-sm font-medium text-black">
             {{$date}}
         </div>
 

@@ -7,7 +7,7 @@
             style="background: linear-gradient(90deg, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.5)), #333"
         @endif
     >
-        <p class="inline-flex font-bold text-white text-shadow">
+        <p class="inline-flex text-lg md:text-sm font-bold text-white text-shadow">
             @if(isset($name))
                 {{$name}}
             @else
@@ -16,7 +16,7 @@
         </p>
 
         @if(isset($group))
-            <p class="inline text-xs text-white text-shadow">
+            <p class="inline text-md md:text-xs text-white text-shadow">
                 {{$group}}
             </p>
         @endif

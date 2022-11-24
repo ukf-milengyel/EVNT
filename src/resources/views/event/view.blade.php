@@ -203,9 +203,9 @@
                 </form>
             @endif
 
-            <div class="my-4 grid grid-cols-4 sm:grid-cols-6 lg:grid-cols-8 gap-4">
+            <div class="my-4 grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-4">
                 @foreach($images as $image)
-                    <div class="relative cursor-pointer transition-transform hover:scale-125 w-full h-16 md:h-24 rounded-lg overflow-hidden shadow-lg">
+                    <div class="relative cursor-pointer transition-transform hover:scale-105 md:hover:scale-110 w-full h-32 sm:h-28 md:h-24 rounded-lg overflow-hidden shadow-lg">
                         <img
                             class="absolute top-0 left-0 object-cover w-full h-full"
                             src="{{url('/images/image_thumb/', $image->filename)}}"
@@ -214,7 +214,7 @@
 
                         <!-- delete button -->
                         @can('delete', $image)
-                        <div class="absolute bottom-2 right-2 h-5 w-5">
+                        <div class="absolute bottom-2 right-2 h-8 w-8 md:h-5 md:w-5">
                             <img onclick="deleteImage(this.parentNode.parentNode, {{$image->id}})" src="{{asset('/icons/delete.svg/')}}" class="outline-red-700 outline-1 outline hover:bg-red-500 bg-gray-100 p-0.5 shadow-sm rounded-md">
                         </div>
                         @endif
