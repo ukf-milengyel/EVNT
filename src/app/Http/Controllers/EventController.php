@@ -109,7 +109,13 @@ class EventController extends Controller
         $event->image = $imgname;
         $event->save();
 
-        // todo: redirect to event page
+        // save tags
+        $limit = 10;
+        foreach ($request->tags as $tag){
+            if ($limit-- == 0) break;
+            $event->tag()->attach($tag);
+        }
+
         return $this->index($request, 'Vytvorili ste podujatie '.$validated['name'].', naplánované na '.$validated['date']);
     }
 
@@ -156,9 +162,14 @@ class EventController extends Controller
             Tag::where('user_id', '!=', auth()->user()->id)->orderBy('name')->get()
         );
 
+        $selected = collect($event->tag()->get())->map( function ($tag, $key){
+            return $tag->id;
+        })->toArray();
+
         return view('event.edit', [
             'event' => $event,
             'tags' => $tags,
+            'selectedTags' => $selected,
         ]);
     }
 
@@ -180,15 +191,21 @@ class EventController extends Controller
             'organizer' => 'string|max:255|nullable',
             'location_name' => 'string|max:255',
             'location_address' => 'string|max:255|nullable',
-            'image' => 'required|image|mimes:jpg,jpeg,png|max:8192'
+            'image' => 'image|mimes:jpg,jpeg,png|max:8192'
         ]);
 
-        $imgname = uniqid('', true) . ".jpg";
+        if (isset($request->image)){
+            $imgname = uniqid('', true) . ".jpg";
 
-        Image::make($request->image)->fit(400,300)->save(public_path('images/event_thumb/'.$imgname), 75, 'jpg');
-        Image::make($request->image)->save(public_path('images/event/'.$imgname), 90, 'jpg');
+            Image::make($request->image)->fit(400,300)->save(public_path('images/event_thumb/'.$imgname), 75, 'jpg');
+            Image::make($request->image)->save(public_path('images/event/'.$imgname), 90, 'jpg');
 
-        $oldname = $event->image;
+            // delete old image
+            if ($event->image != "0.jpg")
+                File::delete(['images/event_thumb/'.$event->image, 'images/event/'.$event->image]);
+
+            $event->image = $imgname;
+        }
 
         $event->name = $validated['name'];
         $event->description = $validated['description'];
@@ -197,12 +214,15 @@ class EventController extends Controller
         $event->organizer = $validated['organizer'];
         $event->location_name = $validated['location_name'];
         $event->location_address = $validated['location_address'];
-        $event->image = $imgname;
         $event->save();
 
-        // delete old image
-        if ($oldname != "0.jpg")
-            File::delete(['images/event_thumb/'.$oldname, 'images/event/'.$oldname]);
+        // save tags
+        $event->tag()->detach();
+        $limit = 10;
+        foreach ($request->tags as $tag){
+            if ($limit-- == 0) break;
+            $event->tag()->attach($tag);
+        }
 
         return $this->show($request, $event->id);
     }

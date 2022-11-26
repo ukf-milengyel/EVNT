@@ -17,7 +17,7 @@ return new class extends Migration
     {
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->unique();
             $table->string('description', 2000);
             $table->unsignedBigInteger('user_id');
             $table->dateTime('date');

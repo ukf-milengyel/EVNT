@@ -168,7 +168,13 @@
 
                     <div>
                         <p class="pt-2 text-xs text-gray-800">Tagy</p>
-                        -
+                        <div class="flex flex-wrap w-full gap-1">
+                        @foreach($event->tag as $tag)
+                            <x-tag-view>
+                                {{$tag->name}}
+                            </x-tag-view>
+                        @endforeach
+                        </div>
                     </div>
 
                     <div>

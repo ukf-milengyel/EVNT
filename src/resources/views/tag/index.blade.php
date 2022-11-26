@@ -34,8 +34,8 @@
                     @foreach($tags as $tag)
                         <div class="flex w-full h-12 md:h-7 px-3 md:px-1 rounded-3xl md:rounded-xl border-2 flex items-center space-x-1">
                             <div class="flex-initial">
-                                <x-tag-view class="md:max-w-[10em]">
-                                    <x-slot:tag>{{$tag->name}}</x-slot:tag>
+                                <x-tag-view>
+                                    {{$tag->name}}
                                 </x-tag-view>
                             </div>
                             <div class="flex-auto">

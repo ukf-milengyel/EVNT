@@ -141,7 +141,7 @@
         </div>
     </div>
 
-    <div id='detail-background' class="fixed top-0 left-0 detail-background w-full h-full"></div>
+    <div id='detail-background' class="fixed hidden top-0 left-0 z-10 w-full h-full"></div>
     <div id='detail-frame' class="overflow-hidden hidden fixed top-0 left-0 w-full h-full md:top-3 md:left-3 md:w-[calc(100%-1.5rem)] md:h-[calc(100%-1.5rem)] z-10 bg-white rounded-none md:rounded-lg shadow-2xl">
         <div id="detail-spinner">
             <div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
