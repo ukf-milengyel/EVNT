@@ -19,7 +19,7 @@ class GroupSeeder extends Seeder
 
         for ($i = 1; $i <= 20; $i++) {
             DB::table('group')->insert([
-                'name' => $faker->word,
+                'name' => $faker->unique()->word,
                 'permissions' => rand(0, 15) * 2,
                 'color' => $faker->hexColor,
             ]);

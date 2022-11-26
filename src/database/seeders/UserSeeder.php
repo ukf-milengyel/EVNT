@@ -20,7 +20,7 @@ class UserSeeder extends Seeder
         $faker = Factory::create();
         for ($i = 0; $i < $count; $i++) {
             DB::table('users')->insert([
-                'name' => $faker->firstName,
+                'name' => $faker->unique()->firstName,
                 'email' => $faker->email,
                 'password' => password_hash('testtesttesttesttesttesttesttesttest', null),
                 'group_id' => Group::all()->random(1)->first()->id,

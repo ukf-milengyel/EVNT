@@ -18,9 +18,9 @@ class TagSeeder extends Seeder
     {
         $faker = Factory::create();
 
-        for ($i = 1; $i <= 200; $i++) {
+        for ($i = 1; $i <= 50; $i++) {
             DB::table('tag')->insert([
-                'name' => $faker->word,
+                'name' => $faker->unique()->word,
                 'user_id' => User::all()->random(1)->first()->id,
             ]);
         }
