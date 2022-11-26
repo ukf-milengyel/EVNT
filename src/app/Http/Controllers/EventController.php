@@ -7,6 +7,7 @@ use App\Models\Event;
 use App\Models\User;
 use App\Models\Image as ImageModel;
 use App\Models\Attachment as FileModel;
+use App\Models\Tag;
 use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
 use Intervention\Image\ImageManagerStatic as Image;
@@ -63,7 +64,14 @@ class EventController extends Controller
     public function create()
     {
         $this->authorize('create', Event::class);
-        return view('event.add');
+
+        $tags = Tag::where('user_id', auth()->user()->id)->orderBy('name')->get()->merge(
+            Tag::where('user_id', '!=', auth()->user()->id)->orderBy('name')->get()
+        );
+
+        return view('event.add', [
+            'tags' => $tags,
+        ]);
     }
 
     /**
@@ -144,8 +152,13 @@ class EventController extends Controller
     {
         $this->authorize('create', Event::class);
 
+        $tags = Tag::where('user_id', auth()->user()->id)->orderBy('name')->get()->merge(
+            Tag::where('user_id', '!=', auth()->user()->id)->orderBy('name')->get()
+        );
+
         return view('event.edit', [
             'event' => $event,
+            'tags' => $tags,
         ]);
     }
 

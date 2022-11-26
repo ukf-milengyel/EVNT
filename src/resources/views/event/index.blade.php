@@ -141,8 +141,8 @@
         </div>
     </div>
 
-    <div id='detail-background'></div>
-    <div id='detail-frame' class="overflow-hidden z-10 bg-white rounded-none md:rounded-lg shadow-2xl">
+    <div id='detail-background' class="fixed top-0 left-0 detail-background w-full h-full"></div>
+    <div id='detail-frame' class="overflow-hidden hidden fixed top-0 left-0 w-full h-full md:top-3 md:left-3 md:w-[calc(100%-1.5rem)] md:h-[calc(100%-1.5rem)] z-10 bg-white rounded-none md:rounded-lg shadow-2xl">
         <div id="detail-spinner">
             <div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
         </div>
@@ -150,7 +150,7 @@
 
         </iframe>
         <div id='detail-spinner'></div>
-        <div id='close-button' class="bg-white rounded-full shadow-lg w-10 h-10 fixed top-4 right-4 md:top-6 md:right-8 cursor-pointer z-10" onclick='hideDetails()'>
+        <div id='close-button' class="bg-white absolute rounded-full shadow-lg w-10 h-10 fixed top-4 right-4 md:top-6 md:right-8 cursor-pointer z-10" onclick='hideDetails()'>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
             </svg>

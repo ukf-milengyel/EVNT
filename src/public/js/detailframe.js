@@ -4,8 +4,8 @@ const detailIframe = document.getElementById('detail-iframe');
 const detailSpinner = document.getElementById('detail-spinner');
 const closeButton = document.getElementById('close-button');
 
-const animOpen = [{opacity: 0, transform: 'translate(-50%, -50%) scale(0.7, 0.7) perspective(400px) rotateX(-5deg)'}, {opacity: 1, transform: 'translate(-50%, -50%) scale(1, 1) perspective(400px) rotateX(0deg)'}];
-const animClose = [{opacity: 1, transform: 'translate(-50%, -50%) scale(1, 1) perspective(400px) rotateX(0deg)'}, {opacity: 0, transform: 'translate(-50%, -50%) scale(0.7, 0.7) perspective(400px) rotateX(5deg)'}];
+const animOpen = [{opacity: 0, transform: 'scale(0.7, 0.7) perspective(400px) rotateX(-5deg)'}, {opacity: 1, transform: 'scale(1, 1) perspective(400px) rotateX(0deg)'}];
+const animClose = [{opacity: 1, transform: 'scale(1, 1) perspective(400px) rotateX(0deg)'}, {opacity: 0, transform: 'scale(0.7, 0.7) perspective(400px) rotateX(5deg)'}];
 
 const animFadeOpen = [{opacity: 0}, {opacity: 1}];
 const animFadeClose = animFadeOpen.slice().reverse();

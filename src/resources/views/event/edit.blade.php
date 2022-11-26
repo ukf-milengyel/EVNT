@@ -63,9 +63,18 @@
                                     </div>
 
                                     <div class="mt-4">
+                                        <x-input-label for="tags" value="Tagy (Max 10, držte CTRL pre výber viacerých)" />
+                                        <select name="tags[]" class="rounded-md w-full h-72 shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" multiple>
+                                            @foreach($tags as $tag)
+                                                <option value="{{$tag->id}}">{{$tag->name}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+
+                                    <div class="mt-4">
                                         <x-input-label for="image" value="Fotografia" />
                                         <input id="picker" name="image" type="file" accept="image/png, image/jpeg"/>
-                                        <img id="preview" class="my-2 object-cover relative mx-auto rounded-lg overflow-hidden shadow-lg">
+                                        <img id="preview" href="{{url('/images/event_thumb/', $event->image)}}" class="my-2 object-cover relative mx-auto rounded-lg overflow-hidden shadow-lg">
                                     </div>
 
                                     <div class="flex justify-end mt-8">

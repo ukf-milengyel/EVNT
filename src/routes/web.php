@@ -25,9 +25,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [StatisticsController::class, 'index']);
 
 // EVENTS -------------------------------------------------------------------
-Route::get('/event/add', function (){
-    return view('event.add');
-})->name('event.add')->middleware(['auth', 'verified']);
+Route::get('/event/add', [EventController::class, 'create'])
+    ->name('event.add')->middleware(['auth', 'verified']);
 
 Route::post('/event/attend', [EventController::class, 'attendEvent'])
     ->name('event.attend')->middleware(['auth', 'verified']);
