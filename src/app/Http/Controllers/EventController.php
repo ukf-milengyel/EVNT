@@ -36,10 +36,17 @@ class EventController extends Controller
         // only show attended events?
         $uid = $request->user()->id;
         $my = $request->get('my') ?? 0;
-        if ($my)
-            $events->whereHas('user_a', function($query) use($uid){
-                $query->where('user_id', $uid);
-            });
+        switch ($my){
+            case 1:
+                $events->whereHas('user_a', function($query) use($uid){
+                    $query->where('user_id', $uid);
+                });
+                break;
+            case 2:
+                $events->where('user_id', $request->user()->id);
+                break;
+        }
+
 
         $events->orderBy($orders[$order] ,$sorts[$sort]);
 
@@ -61,12 +68,12 @@ class EventController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         $this->authorize('create', Event::class);
 
-        $tags = Tag::where('user_id', auth()->user()->id)->orderBy('name')->get()->merge(
-            Tag::where('user_id', '!=', auth()->user()->id)->orderBy('name')->get()
+        $tags = Tag::where('user_id', $request->user()->id)->orderBy('name')->get()->merge(
+            Tag::where('user_id', '!=', $request->user()->id)->orderBy('name')->get()
         );
 
         return view('event.add', [
@@ -154,12 +161,12 @@ class EventController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function edit(Event $event)
+    public function edit(Request $request, Event $event)
     {
         $this->authorize('create', Event::class);
 
-        $tags = Tag::where('user_id', auth()->user()->id)->orderBy('name')->get()->merge(
-            Tag::where('user_id', '!=', auth()->user()->id)->orderBy('name')->get()
+        $tags = Tag::where('user_id', $request->user()->id)->orderBy('name')->get()->merge(
+            Tag::where('user_id', '!=', $request->user()->id)->orderBy('name')->get()
         );
 
         $selected = collect($event->tag()->get())->map( function ($tag, $key){
