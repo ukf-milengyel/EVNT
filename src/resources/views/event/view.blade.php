@@ -74,7 +74,7 @@
 
             <div class="break-words w-full lg:w-56 pt-4 shrink-0">
 
-                @if($event->user()->is(auth()->user()))
+                @can('update', $event)
                     <div class="flex pb-4 items-end gap-x-4 items-stretch lg:items-baseline lg:justify-end">
                         <a href="{{route('event.edit', $event)}}" class="w-full">
                             <x-primary-button-sm class="p-4 h-16 w-full overflow-hidden rounded-full">
@@ -89,7 +89,7 @@
                             </x-primary-button-sm>
                         </form>
                     </div>
-                @endif
+                @endcan
 
                 <div class="flex items-end gap-x-4 items-stretch lg:items-baseline lg:justify-end">
                     <div class="w-full lg:w-auto">
@@ -174,6 +174,7 @@
                                 {{$tag->name}}
                             </x-tag-view>
                         @endforeach
+                        @if(sizeof($event->tag) == 0)-@endif
                         </div>
                     </div>
 

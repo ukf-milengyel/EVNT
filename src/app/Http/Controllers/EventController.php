@@ -118,7 +118,7 @@ class EventController extends Controller
 
         // save tags
         $limit = 10;
-        foreach ($request->tags as $tag){
+        foreach ($request->tags ?? [] as $tag){
             if ($limit-- == 0) break;
             $event->tag()->attach($tag);
         }
@@ -226,7 +226,7 @@ class EventController extends Controller
         // save tags
         $event->tag()->detach();
         $limit = 10;
-        foreach ($request->tags as $tag){
+        foreach ($request->tags ?? [] as $tag){
             if ($limit-- == 0) break;
             $event->tag()->attach($tag);
         }
