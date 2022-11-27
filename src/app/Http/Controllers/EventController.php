@@ -33,28 +33,29 @@ class EventController extends Controller
         // create query
         $events = Event::whereDate('date', $archiveds[$archived], now());
 
-        // only show attended events?
+        // only show my events?
         $uid = $request->user()->id;
         $my = $request->get('my') ?? 0;
         switch ($my){
             case 1:
+                // attended
                 $events->whereHas('user_a', function($query) use($uid){
                     $query->where('user_id', $uid);
                 });
                 break;
             case 2:
+                // created
                 $events->where('user_id', $uid);
                 break;
         }
 
         // filter out tags?
-        /*
-        foreach ($request->tags ?? [] as $tag){
-            if ($limit-- == 0) break;
-            $event->tag()->attach($tag);
+        $tags = $request->tags ?? [];
+        if ($tags){
+            $events->whereHas('tag', function($query) use($tags){
+                $query->whereIn('event_has_tag.tag_id', $tags);
+            });
         }
-        */
-
 
         $events->orderBy($orders[$order] ,$sorts[$sort]);
 
@@ -63,12 +64,13 @@ class EventController extends Controller
 
         return view('event.index', [
             'events' => $events->get(),
-            'tags' => Tag::all(),
+            'tags' => Tag::all()->sortBy('name'),
             'message' => $message,
             'order' => $order,
             'sort' => $sort,
             'archived' => $archived,
             'my' => $my,
+            'selectedTags' => $tags,
         ]);
     }
 
@@ -225,7 +227,6 @@ class EventController extends Controller
 
         $event->name = $validated['name'];
         $event->description = $validated['description'];
-        $event->user_id = $request->user()->id;
         $event->date = $validated['date'];
         $event->organizer = $validated['organizer'];
         $event->location_name = $validated['location_name'];

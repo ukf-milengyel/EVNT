@@ -35,7 +35,11 @@
                                     <span class="text-gray-800 pl-1 text-lg font-semibold">Tagy</span>
                                     <select name="tags[]" class="rounded-md mt-2 w-full h-[19rem] shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" multiple>
                                         @foreach($tags as $tag)
-                                            <option value="{{$tag->id}}">{{$tag->name}}</option>
+                                            <option value="{{$tag->id}}"
+                                                    @if( in_array($tag->id, $selectedTags) ) selected @endif
+                                            >
+                                                {{$tag->name}}
+                                            </option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -141,6 +145,13 @@
                         <x-slot:participants>{{$event->user_a->count()}}</x-slot:participants>
                         <x-slot:name>{{$event->name}}</x-slot:name>
                         <x-slot:date>{{ \Carbon\Carbon::parse($event->date)->format('d.m.Y, h:i') }}</x-slot:date>
+                        <x-slot:tags>
+                            @foreach($event->tag as $tag)
+                                <x-tag-view>
+                                    {{$tag->name}}
+                                </x-tag-view>
+                            @endforeach
+                        </x-slot:tags>
                         <x-slot:organizer>
                             <x-user-badge>
                                 @if($event->organizer)
