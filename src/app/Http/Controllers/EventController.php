@@ -43,9 +43,17 @@ class EventController extends Controller
                 });
                 break;
             case 2:
-                $events->where('user_id', $request->user()->id);
+                $events->where('user_id', $uid);
                 break;
         }
+
+        // filter out tags?
+        /*
+        foreach ($request->tags ?? [] as $tag){
+            if ($limit-- == 0) break;
+            $event->tag()->attach($tag);
+        }
+        */
 
 
         $events->orderBy($orders[$order] ,$sorts[$sort]);
@@ -55,6 +63,7 @@ class EventController extends Controller
 
         return view('event.index', [
             'events' => $events->get(),
+            'tags' => Tag::all(),
             'message' => $message,
             'order' => $order,
             'sort' => $sort,
