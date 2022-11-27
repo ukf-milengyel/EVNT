@@ -18,7 +18,7 @@ return new class extends Migration
     {
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique();
+            $table->string('name', 50)->unique();
             $table->unsignedBigInteger('user_id')->nullable();
 
             $table->foreign('user_id')

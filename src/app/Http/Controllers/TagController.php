@@ -55,7 +55,7 @@ class TagController extends Controller
         $this->authorize('create', Tag::class);
 
         $validated = $request->validate([
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|max:50',
         ]);
 
         $tag = new Tag();
