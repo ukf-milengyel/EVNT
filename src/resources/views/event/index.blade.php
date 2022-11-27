@@ -27,7 +27,7 @@
 
                             <div class="pt-1 pb-3 px-3">
                                 <span class="text-gray-800 text-lg font-semibold">Textové vyhľadávanie</span>
-                                <x-std-text-input name="textsearch" type="text" value=""/>
+                                <x-std-text-input name="textsearch" type="text" value="{{$textsearch}}"/>
                             </div>
 
                             <div class="flex flex-wrap py-2">

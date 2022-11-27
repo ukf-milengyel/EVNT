@@ -33,7 +33,7 @@ class EventController extends Controller
         // create query
         $events = Event::whereDate('date', $archiveds[$archived], now());
 
-        // only show my events?
+        // filter only my events?
         $uid = $request->user()->id;
         $my = $request->get('my') ?? 0;
         switch ($my){
@@ -57,6 +57,11 @@ class EventController extends Controller
             });
         }
 
+        // filter by name?
+        $textsearch = $request->textsearch ?? "";
+        if (isset($textsearch))
+            $events->where('name', 'like', '%'.$textsearch.'%');
+
         $events->orderBy($orders[$order] ,$sorts[$sort]);
 
         if ($events->count() == 0)
@@ -71,6 +76,7 @@ class EventController extends Controller
             'archived' => $archived,
             'my' => $my,
             'selectedTags' => $tags,
+            'textsearch' => $textsearch,
         ]);
     }
 
