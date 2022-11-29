@@ -36,7 +36,7 @@
 
                 <div class="mt-3">
                     <div class="text-gray-800 text-md">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                        Vitajte v EVNT ! EVNT je aplikácia vytvorená tímom študentov študujúcich na Univerzite Konštantína Filozofa v Nitre za účelom evidencie udalostí na univerzite. EVNT umožňuje vytvárať záznamy o udalostiach, ktoré umožňujú zapisovanie všetkých potrebných detailov o daných udalostiach, ako napríklad dátum a miesto konania udalosti a tým umožňuje jednoduchý prístup k týmto údajom. Organizátorom udalostí umožňuje zaujať používateľov fotografiami alebo inými prílohami. Používateľom umožňuje prihlásenie na udalosť ako spätnú väzbu pre organizátorov vďaka zobrazeniu množstva prihlásených používateľov. Aplikácia umožňuje filtrovanie záznamov podľa rôznych kritérií pre jednoduchú orientáciu.
                     </div>
                 <br>
                     @if (Route::has('login'))
@@ -51,7 +51,7 @@
 
                             @if (Route::has('register'))
                                 <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 dark:text-gray-500 ">
-                                    <button type="button" class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-600 dark:focus:ring-blue-800">Registrovať sa</button>
+                                    <button type="button" class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-600 dark:focus:ring-blue-800">Vytvoriť nový účet</button>
                                 </a>
                             @endif
                         @endauth
