@@ -25,8 +25,8 @@
                     <form method="get" action="{{route('event.index')}}">
                         <div id="dropdownDefaultRadio" class="hidden p-2 z-10 w-full sm:w-auto bg-white rounded-xl divide-y divide-gray-100 border-0 border-b sm:border border-gray-300 shadow-md">
 
-                            <div class="pt-1 pb-3 px-3">
-                                <span class="text-gray-800 text-lg font-semibold">Textové vyhľadávanie</span>
+                            <div class="pt-1 pb-3 px-2">
+                                <span class="text-gray-800 pl-1 text-lg font-semibold">Textové vyhľadávanie</span>
                                 <x-std-text-input name="textsearch" type="text" value="{{$textsearch}}"/>
                             </div>
 
