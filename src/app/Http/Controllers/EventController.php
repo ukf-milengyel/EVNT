@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Attachment;
 use App\Models\Event;
 use App\Models\User;
+use App\Models\Group;
 use App\Models\Image as ImageModel;
 use App\Models\Attachment as FileModel;
 use App\Models\Tag;
@@ -57,6 +58,14 @@ class EventController extends Controller
             });
         }
 
+        // filter out groups?
+        $groups = $request->groups ?? [];
+        if ($groups){
+            $events->whereHas('user', function($query) use($groups){
+                $query->whereIn('group_id', $groups);
+            });
+        }
+
         // filter by name?
         $textsearch = $request->textsearch ?? "";
         if (isset($textsearch))
@@ -70,12 +79,14 @@ class EventController extends Controller
         return view('event.index', [
             'events' => $events->get(),
             'tags' => Tag::all()->sortBy('name'),
+            'groups' => Group::all()->sortBy('name'),
             'message' => $message,
             'order' => $order,
             'sort' => $sort,
             'archived' => $archived,
             'my' => $my,
             'selectedTags' => $tags,
+            'selectedGroups' => $groups,
             'textsearch' => $textsearch,
         ]);
     }

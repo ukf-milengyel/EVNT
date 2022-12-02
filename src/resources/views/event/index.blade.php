@@ -44,6 +44,19 @@
                                     </select>
                                 </div>
 
+                                <div class="flex-auto pt-1 px-2">
+                                    <span class="text-gray-800 pl-1 text-lg font-semibold">Skupiny</span>
+                                    <select name="groups[]" class="rounded-md mt-2 w-full h-[19rem] shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" multiple>
+                                        @foreach($groups as $group)
+                                            <option value="{{$group->id}}"
+                                                    @if( in_array($group->id, $selectedGroups) ) selected @endif
+                                            >
+                                                {{$group->name}}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
                                 <div class="flex-auto">
                                     <ul class="px-2 py-1 space-y-1 text-sm text-gray-700 dark:text-gray-900" aria-labelledby="dropdownRadioButton">
                                         <span class="text-gray-800 text-lg font-semibold">Zobraziť</span>
@@ -104,8 +117,8 @@
                                 </div>
                             </div>
 
-                            <div class="text-center pt-2">
-                                <x-primary-button-sm type="submit">Filtrovať</x-primary-button-sm>
+                            <div class="text-right pt-2 pb-1 pr-2">
+                                <x-primary-button type="submit">Filtrovať</x-primary-button>
                             </div>
 
                         </div>
