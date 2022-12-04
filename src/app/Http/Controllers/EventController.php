@@ -6,6 +6,7 @@ use App\Models\Attachment;
 use App\Models\Event;
 use App\Models\User;
 use App\Models\Group;
+use App\Models\Announcement;
 use App\Models\Image as ImageModel;
 use App\Models\Attachment as FileModel;
 use App\Models\Tag;
@@ -176,6 +177,7 @@ class EventController extends Controller
             'attends' => User::find($request->user()->id)->event_a->where('id', $id)->count(),
             'attend_count' => $event->user_a->count(),
             'message' => $message,
+            'announcements' => Announcement::where('event_id', $event->id)->get(),
             'images' => ImageModel::where('event_id', $event->id)->get(),
             'files' => FileModel::where('event_id', $event->id)->get(),
             'share_message' => $share_message,

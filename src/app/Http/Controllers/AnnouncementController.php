@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Announcement;
 use Illuminate\Http\Request;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class AnnouncementController extends Controller
 {
@@ -36,7 +38,30 @@ class AnnouncementController extends Controller
     public function store(Request $request)
     {
         // uložíme nové oznámenia na základe dát z requestu
-        return "Funguje to!";
+        $this->authorize('create', Announcement::class);
+
+        $validated = $request->validate([
+            'body' => 'required|string|max:1000',
+            'image' => 'image|mimes:jpg,jpeg,png|max:8192'
+        ]);
+
+        $announcement = new Announcement();
+        $announcement->body = $validated['body'];
+        $announcement->event_id = $request["event_id"];
+
+        if ($image = $request->image){
+            // store in public folder
+            $imgname = uniqid('', true) . '.jpg';
+            Image::make($image)->fit(200,150)->save(public_path('images/announcement_thumb/'.$imgname), 75, 'jpg');
+            Image::make($image)->save(public_path('images/announcement/'.$imgname), 90, 'jpg');
+
+            $announcement->image = $imgname;
+        }
+
+        $announcement->save();
+
+        $controller = new EventController();
+        return $controller->show($request, $request["event_id"], "Oznámenie bolo vytvorené.");
     }
 
     /**

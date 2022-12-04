@@ -10,10 +10,12 @@
     </div>
     <hr>
     <div class="flex pt-2">
-        <img
-            class="cursor-pointer transition-transform hover:scale-105 w-full h-20 sm:h-32 md:h-44 xl:h-52 object-cover rounded-lg overflow-hidden shadow-lg"
-            src="{{$image}}" onclick="window.open(this.src)">
-        <p class="text-left pl-4">
+        @if( isset($image) )
+            <img
+                class="cursor-pointer transition-transform hover:scale-105 w-full h-20 pr-4 sm:h-32 md:h-44 xl:h-52 object-cover rounded-lg overflow-hidden shadow-lg"
+                src="{{asset('images/announcement_thumb/'. $image)}}" onclick="window.open({{asset('images/announcement/'. $image)}})">
+        @endif
+        <p class="text-left">
             {{$slot}}
         </p>
     </div>

@@ -45,12 +45,13 @@
 
                 <h2 class="font-bold mt-4 text-2xl text-gray-800">Oznámenia</h2>
                 <!-- todo: nahradiť checkom, či používateľ je autor príspevku -->
-                @if(true)
+                @can('create', App\Models\Announcement::class)
                 <form method="POST" action="{{ route('announcement.store') }}" class="py-4 px-6 border-2 border-dashed rounded-xl border-gray-300" enctype="multipart/form-data">
                     @csrf
+                    <input type="hidden" name="event_id" value="{{$event->id}}">
                     <div>
                         <x-input-label for="body" value="Nové oznámenie" />
-                        <x-std-textarea name="description">{{ old('description') }}</x-std-textarea>
+                        <x-std-textarea name="body">{{ old('body') }}</x-std-textarea>
                     </div>
                     <div class="mt-4">
                         <x-input-label for="image" value="Fotografia" />
@@ -62,13 +63,15 @@
                 </form>
                 @endif
                 <!-- todo: nahradiť checkom, či existujú oznámenia -->
-                @if(true)
+                @foreach($announcements as $announcement)
                     <x-announcement-component>
-                        <x-slot:date>12.5.2023, 20:48</x-slot:date>
-                        <x-slot:image>{{asset('images/event/0.jpg')}}</x-slot:image>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                        <x-slot:date>{{ $announcement->created_at }}</x-slot:date>
+                        @if($announcement->image)
+                            <x-slot:image>{{$announcement->image}}</x-slot:image>
+                        @endif
+                        {{ $announcement->body }}
                     </x-announcement-component>
-                @endif
+                @endforeach
 
             </div>
 
