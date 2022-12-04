@@ -1,4 +1,4 @@
-<div class="overflow-hidden bg-white w-full border-2 rounded-xl shadow-lg transition-transform items-center px-4 py-4 mt-2">
+<div class="overflow-hidden bg-white w-full border-b border-gray-200 shadow-sm rounded-xl transition-transform items-center px-4 py-4 mt-2">
     <div class="flex border-b-1">
         <div class="flex-auto font-semibold w-24 text-lg items-center">
             @if(isset($onclick))<p onclick="{{$onclick}}" class="text-4xl cursor-pointer">{{$name}}</p>@endif

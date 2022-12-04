@@ -18,7 +18,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="font-sans antialiased">
-<div class="min-h-screen bg-white">
+<div {{$attributes->merge(['class' => 'min-h-screen bg-white'])}}>
     <!-- Page Content -->
     <main>
         {{ $slot }}

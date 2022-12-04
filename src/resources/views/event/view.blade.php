@@ -1,7 +1,7 @@
 @push('css')
     <link href="{{ asset('css/style.css') }}" rel="stylesheet" type="text/css">
 @endpush
-<x-barebones>
+<x-barebones class="bg-gray-100">
     @if($errors->any())
         <x-std-error>
             <x-slot:title>
