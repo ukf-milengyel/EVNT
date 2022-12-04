@@ -19,10 +19,10 @@ class AnnouncementSeeder extends Seeder
     {
         $faker = Factory::create();
 
-        for ($i = 1; $i <= 10; $i++) {
+        for ($i = 1; $i <= 100; $i++) {
             DB::table('announcement')->insert([
                 'body' => $faker->text(255),
-                'image' => "0.jpg",
+                'image' => rand(0,1) == 0 ? "0.jpg" : null,
                 'event_id' => Event::all()->random(1)->first()->id,
                 'created_at' => now(),
                 'updated_at' => now(),
