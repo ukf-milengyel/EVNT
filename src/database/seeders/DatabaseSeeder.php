@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             TagSeeder::class,
             EventSeeder::class,
+            AnnouncementSeeder::class,
         ]);
     }
 }
