@@ -44,7 +44,7 @@
                 </p>
 
                 <h2 class="font-bold mt-4 text-2xl text-gray-800">Oznámenia</h2>
-                <!-- todo: nahradiť checkom, či používateľ je autor príspevku -->
+
                 @can('create', App\Models\Announcement::class)
                 <form method="POST" action="{{ route('announcement.store') }}" class="py-4 px-6 border-2 border-dashed rounded-xl border-gray-300" enctype="multipart/form-data">
                     @csrf
@@ -62,17 +62,18 @@
                     </div>
                 </form>
                 @endif
-                <!-- todo: nahradiť checkom, či existujú oznámenia -->
+
                 @foreach($announcements as $announcement)
                     <x-announcement-component>
                         @can('update', $announcement)
                             <x-slot:owns></x-slot:owns>
                         @endcan
+                        <x-slot:id>{{$announcement->id}}</x-slot:id>
+                        <x-slot:date>{{ $announcement->created_at }}</x-slot:date>
+                        {{ $announcement->body }}
                         @if($announcement->image)
                             <x-slot:image>{{$announcement->image}}</x-slot:image>
                         @endif
-                        <x-slot:date>{{ $announcement->created_at }}</x-slot:date>
-                        {{ $announcement->body }}
                     </x-announcement-component>
                 @endforeach
 

@@ -1,9 +1,4 @@
 <x-barebones>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Upraviť podujatie
-        </h2>
-    </x-slot>
     @if($errors->any())
         <x-std-error>
             <x-slot:title>

@@ -273,7 +273,6 @@ class EventController extends Controller
     {
         $this->authorize('delete', $event);
 
-        // todo: delete all associated images and files
         $imgname = $event->image;
 
         $event->delete();

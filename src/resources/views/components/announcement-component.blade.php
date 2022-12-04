@@ -6,8 +6,12 @@
         </div>
         @if($owns ?? false)
             <div class="flex-none">
-                <img src="{{asset('/icons/edit.svg/')}}" class="inline cursor-pointer mx-auto h-6">
-                <img src="{{asset('/icons/delete.svg/')}}" class="inline cursor-pointer mx-auto h-6">
+                <a href="{{route('announcement.edit', $id)}}"><img src="{{asset('/icons/edit.svg/')}}" class="inline cursor-pointer mx-auto h-6"></a>
+                <form class="inline" method="POST" action="{{ route('announcement.destroy', $id) }}">
+                    @csrf
+                    @method('delete')
+                    <img src="{{asset('/icons/delete.svg')}}" class="inline cursor-pointer mx-auto h-6" :href="{{route('announcement.destroy', $id)}}" onclick="event.preventDefault(); if(confirm('Chcete odstrániť toto oznámenie?')){this.closest('form').submit();}">
+                </form>
             </div>
         @endif
     </div>

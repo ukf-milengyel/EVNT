@@ -17,6 +17,7 @@
                     @can('update', $announcement)
                         <x-slot:owns></x-slot:owns>
                     @endcan
+                    <x-slot:id>{{$announcement->id}}</x-slot:id>
                     <x-slot:onclick>showDetails('{{route('event.show', $announcement->event->id)}}')</x-slot:onclick>
                     <x-slot:name>{{ $announcement->event->name }}</x-slot:name>
                     <x-slot:date>{{ $announcement->created_at }}</x-slot:date>

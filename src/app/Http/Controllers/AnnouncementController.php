@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Announcement;
 use App\Models\Event;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Redirect;
 use Intervention\Image\ImageManagerStatic as Image;
 
 class AnnouncementController extends Controller
@@ -89,10 +91,14 @@ class AnnouncementController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(int $id)
     {
+        $announcement = Announcement::findOrFail($id);
+
         // zobrazíme formulár na úpravu oznámenia
-        return view("announcement.edit");
+        return view("announcement.edit", [
+            'announcement' => $announcement,
+        ]);
     }
 
     /**
@@ -102,9 +108,36 @@ class AnnouncementController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, int $id)
     {
+        $announcement = Announcement::findOrFail($id);
+
         // upravíme dané oznámenie na základe dát z requestu
+        $this->authorize('delete', $announcement);
+
+        $validated = $request->validate([
+            'body' => 'required|string|max:1000',
+            'image' => 'image|mimes:jpg,jpeg,png|max:8192'
+        ]);
+
+        $announcement->body = $validated['body'];
+
+        if ($image = $request->image){
+            // delete old image
+            if ($imgname = $announcement->image != "0.jpg")
+                File::delete(['images/announcement_thumb/'.$imgname, 'images/announcement/'.$imgname]);
+
+            // store in public folder
+            $imgname = uniqid('', true) . '.jpg';
+            Image::make($image)->fit(200,150)->save(public_path('images/announcement_thumb/'.$imgname), 75, 'jpg');
+            Image::make($image)->save(public_path('images/announcement/'.$imgname), 90, 'jpg');
+
+            $announcement->image = $imgname;
+        }
+
+        $announcement->save();
+
+        return Redirect::to(route('event.show', $announcement->event->id));
     }
 
     /**
@@ -113,8 +146,20 @@ class AnnouncementController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, int $id)
     {
+        $announcement = Announcement::findOrFail($id);
+
         // odstránenie daného oznámenia
+        $this->authorize('delete', $announcement);
+
+        $imgname = $announcement->image;
+        $eid = $announcement->event->id;
+
+        $announcement->delete();
+        if ($imgname != "0.jpg")
+            File::delete(['images/announcement_thumb/'.$imgname, 'images/announcement/'.$imgname]);
+
+        return back();
     }
 }
