@@ -177,7 +177,7 @@ class EventController extends Controller
             'attends' => User::find($request->user()->id)->event_a->where('id', $id)->count(),
             'attend_count' => $event->user_a->count(),
             'message' => $message,
-            'announcements' => Announcement::where('event_id', $event->id)->get(),
+            'announcements' => Announcement::where('event_id', $event->id)->orderBy('created_at', 'desc')->get(),
             'images' => ImageModel::where('event_id', $event->id)->get(),
             'files' => FileModel::where('event_id', $event->id)->get(),
             'share_message' => $share_message,

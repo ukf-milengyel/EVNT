@@ -65,10 +65,13 @@
                 <!-- todo: nahradiť checkom, či existujú oznámenia -->
                 @foreach($announcements as $announcement)
                     <x-announcement-component>
-                        <x-slot:date>{{ $announcement->created_at }}</x-slot:date>
+                        @can('update', $announcement)
+                            <x-slot:owns></x-slot:owns>
+                        @endcan
                         @if($announcement->image)
                             <x-slot:image>{{$announcement->image}}</x-slot:image>
                         @endif
+                        <x-slot:date>{{ $announcement->created_at }}</x-slot:date>
                         {{ $announcement->body }}
                     </x-announcement-component>
                 @endforeach

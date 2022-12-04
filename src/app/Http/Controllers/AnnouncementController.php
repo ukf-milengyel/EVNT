@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Announcement;
+use App\Models\Event;
 use Illuminate\Http\Request;
 use Intervention\Image\ImageManagerStatic as Image;
 
@@ -13,10 +14,17 @@ class AnnouncementController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         // vrátime zoznam všetkých oznámení, alternatívne len oznámenia ktoré sa vzťahujú na používateľa
-        return view("announcement.index");
+        $uid = $request->user()->id;
+        $ids = Event::select('id')->whereHas('user_a', function($query) use($uid){
+            $query->where('user_id', $uid);
+        })->get();
+
+        return view("announcement.index", [
+            'announcements' => Announcement::whereIn('event_id', $ids)->orderBy('created_at', 'desc')->get(),
+        ]);
     }
 
     /**
