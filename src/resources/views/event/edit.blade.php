@@ -1,4 +1,4 @@
-<x-barebones>
+<x-barebones class="bg-gray-100">
     @if($errors->any())
         <x-std-error>
             <x-slot:title>

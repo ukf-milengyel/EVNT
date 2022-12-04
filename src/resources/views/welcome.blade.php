@@ -16,16 +16,14 @@
     }
 </style>
 
-
-
-
 <x-barebones>
 
 <div class="flex min-h-screen bg-gradient-to-tl from-purple-400 to-blue-200">
 
+    <x-application-logo-transparent class="absolute h-[calc(100%-3rem)] top-6 right-12 fill-[#FFFFFF55]"></x-application-logo-transparent>
     <canvas id="canvas" class="pointer-events-none md:pointer-events-none"></canvas>
 
-    <div class="bg-white/50 p-8 mx-2 rounded-none lg:rounded-2xl shadow-xl max-w-6xl my-0 md:my-auto mx-0 sm:mx-auto">
+    <div class="bg-white/50 p-8 mx-2 rounded-none z-10 lg:rounded-2xl shadow-xl max-w-6xl my-0 md:my-auto mx-0 sm:mx-auto">
         <div class="flex flex-wrap md:flex-nowrap gap-8">
             <x-application-logo class="flex-none h-48 w-48 md:w-72 md:h-72 fill-red-700" />
 
@@ -36,7 +34,7 @@
 
                 <div class="mt-3">
                     <div class="text-gray-800 text-md">
-                        Vitajte v EVNT ! EVNT je aplikácia vytvorená tímom študentov študujúcich na Univerzite Konštantína Filozofa v Nitre za účelom evidencie udalostí na univerzite. EVNT umožňuje vytvárať záznamy o udalostiach, ktoré umožňujú zapisovanie všetkých potrebných detailov o daných udalostiach, ako napríklad dátum a miesto konania udalosti a tým umožňuje jednoduchý prístup k týmto údajom. Organizátorom udalostí umožňuje zaujať používateľov fotografiami alebo inými prílohami. Používateľom umožňuje prihlásenie na udalosť ako spätnú väzbu pre organizátorov vďaka zobrazeniu množstva prihlásených používateľov. Aplikácia umožňuje filtrovanie záznamov podľa rôznych kritérií pre jednoduchú orientáciu.
+                        EVNT je aplikácia vytvorená tímom študentov študujúcich na Univerzite Konštantína Filozofa v Nitre za účelom evidencie univerzitných udalostí. Aplikácia zhromážďuje záznamy o udalostiach vrátane názvu, dátumu a mieste konania. Organizátorom umožňuje zaujať používateľov fotografiami alebo prílohami. Prihlásením na podujatie bude používateľ dostávať relevantné oznámenia od autora podujatia. Aplikácia umožňuje filtrovanie záznamov na základe rôznych kritérií pre jednoduchú orientáciu.
                     </div>
                 <br>
                     @if (Route::has('login'))
