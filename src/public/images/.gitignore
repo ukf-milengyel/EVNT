@@ -12,7 +12,8 @@ image_thumb/*
 
 announcement/*
 !announcement/.gitkeep
+!announcement/0.jpg
 announcement_thumb/*
 !announcement_thumb/.gitkeep
-
+!announcement_thumb/0.jpg
 
