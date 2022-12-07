@@ -45,7 +45,6 @@ class AnnouncementPolicy
      */
     public function create(User $user, Event $event)
     {
-        // stub!
         return (new EventPolicy())->createAnnouncement($user, $event);
     }
 
@@ -72,7 +71,9 @@ class AnnouncementPolicy
      */
     public function delete(User $user, Announcement $announcement)
     {
-        return $this->update($user, $announcement);
+        return
+            AdminPolicy::isAdmin($user) ||
+            $announcement->event->user()->is($user);
     }
 
     /**

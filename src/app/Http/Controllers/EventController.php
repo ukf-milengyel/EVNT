@@ -299,7 +299,7 @@ class EventController extends Controller
     }
 
     public function storeImage(Request $request){
-        $this->authorize('create', ImageModel::class);
+        $this->authorize('createImage', Event::findOrFail($request["event_id"]));
 
         $eid = $request["event_id"];
         //$this->authorize('create', Image::class);
@@ -339,7 +339,7 @@ class EventController extends Controller
     }
 
     public function storeFile(Request $request){
-        $this->authorize('create', Attachment::class);
+        $this->authorize('createAttachment', Event::findOrFail($request["event_id"]));
 
         $eid = $request["event_id"];
 

@@ -47,6 +47,22 @@ class EventPolicy
 
     public function createAnnouncement (User $user, Event $event){
         return AdminPolicy::isAdmin($user) ||
+            $user->group != NULL &&
+            $user->group->permissions & 0b10000 &&
+            $event->user()->is($user);
+    }
+
+    public function createImage(User $user, Event $event){
+        return AdminPolicy::isAdmin($user) ||
+            $user->group != NULL &&
+            $user->group->permissions & 0b100 &&
+            $event->user()->is($user);
+    }
+
+    public function createAttachment(User $user, Event $event){
+        return AdminPolicy::isAdmin($user) ||
+            $user->group != NULL &&
+            $user->group->permissions & 0b1000 &&
             $event->user()->is($user);
     }
 

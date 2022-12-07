@@ -202,7 +202,7 @@
 
         <div class="mt-4">
             <h2 class="font-bold text-2xl text-gray-800">Fotografie</h2>
-            @can('create', App\Models\Image::class)
+            @can('createImage', $event)
                 <form method="POST" action="{{ route('event.image.store') }}" class="my-1 py-4 px-6 border-2 border-dashed rounded-xl border-gray-300" enctype="multipart/form-data">
                     @csrf
                     <input type="hidden" name="event_id" value="{{$event->id}}">
@@ -238,7 +238,7 @@
             </div>
 
             <h2 class="font-bold text-2xl text-gray-800">Prílohy</h2>
-            @can('create', App\Models\Attachment::class)
+            @can('createAttachment', $event)
                 <form method="POST" action="{{ route('event.file.store') }}" class="my-1 py-4 px-6 border-2 border-dashed rounded-xl border-gray-300" enctype="multipart/form-data">
                     @csrf
                     <input type="hidden" name="event_id" value="{{$event->id}}">

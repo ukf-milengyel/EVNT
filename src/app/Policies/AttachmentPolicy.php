@@ -3,6 +3,7 @@
 namespace App\Policies;
 
 use App\Models\Attachment;
+use App\Models\Event;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
@@ -41,10 +42,9 @@ class AttachmentPolicy
      * @param  \App\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function create(User $user)
+    public function create(User $user, Event $event)
     {
-        if ($user->group == NULL) return false;
-        return $user->group->permissions & 0b10000 || AdminPolicy::isAdmin($user);
+        return (new EventPolicy())->createAttachment($user, $event);
     }
 
     /**
