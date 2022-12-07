@@ -45,6 +45,11 @@ class EventPolicy
         return $user->group->permissions & 0b10 || AdminPolicy::isAdmin($user);
     }
 
+    public function createAnnouncement (User $user, Event $event){
+        return AdminPolicy::isAdmin($user) ||
+            $event->user()->is($user);
+    }
+
     /**
      * Determine whether the user can update the model.
      *

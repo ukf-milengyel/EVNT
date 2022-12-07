@@ -3,7 +3,9 @@
 namespace App\Policies;
 
 use App\Models\Announcement;
+use App\Models\Event;
 use App\Models\User;
+use App\Policies\EventPolicy;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class AnnouncementPolicy
@@ -41,9 +43,10 @@ class AnnouncementPolicy
      * @param  \App\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function create(User $user)
+    public function create(User $user, Event $event)
     {
-        return AdminPolicy::isAdmin($user);
+        // stub!
+        return (new EventPolicy())->createAnnouncement($user, $event);
     }
 
     /**
@@ -57,8 +60,7 @@ class AnnouncementPolicy
     {
         return
             AdminPolicy::isAdmin($user) ||
-            $announcement->event->user()->is($user)
-            && $this->create($user);
+            $this->create($user, $announcement->event);
     }
 
     /**

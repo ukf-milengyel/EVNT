@@ -45,7 +45,7 @@
 
                 <h2 class="font-bold mt-4 text-2xl text-gray-800">Oznámenia</h2>
 
-                @can('create', App\Models\Announcement::class)
+                @can('createAnnouncement', $event)
                 <form method="POST" action="{{ route('announcement.store') }}" class="py-4 px-6 border-2 border-dashed rounded-xl border-gray-300" enctype="multipart/form-data">
                     @csrf
                     <input type="hidden" name="event_id" value="{{$event->id}}">

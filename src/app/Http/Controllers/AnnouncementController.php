@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Announcement;
 use App\Models\Event;
+use App\Http\Controllers\EventController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Redirect;
@@ -48,7 +49,7 @@ class AnnouncementController extends Controller
     public function store(Request $request)
     {
         // uložíme nové oznámenia na základe dát z requestu
-        $this->authorize('create', Announcement::class);
+        (new EventController)->authorize('createAnnouncement', Event::findOrFail($request["event_id"]));
 
         $validated = $request->validate([
             'body' => 'required|string|max:1000',
