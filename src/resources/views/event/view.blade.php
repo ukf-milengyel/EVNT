@@ -32,7 +32,7 @@
 
         <div class="flex flex-wrap lg:flex-nowrap gap-4 justify-between">
 
-            <div class="break-words lg:w-auto">
+            <div class="break-words w-full">
                 <h2 class="font-bold text-6xl text-gray-800">
                     {{$event->name}}
                 </h2>

@@ -25,6 +25,8 @@ class TagController extends Controller
             ? Tag::all()
             : Tag::where('user_id', $request->user()->id)->get();
 
+        $message = $tags->count() == 0 ? "Nemáte žiadne vytvorené tagy." : $message;
+
         return view('tag.index', [
             'tags' => $tags,
             'message' => $message,

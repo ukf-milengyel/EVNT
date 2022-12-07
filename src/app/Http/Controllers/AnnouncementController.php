@@ -17,7 +17,7 @@ class AnnouncementController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(Request $request, $message = null)
     {
         // vrátime zoznam všetkých oznámení, alternatívne len oznámenia ktoré sa vzťahujú na používateľa
         $uid = $request->user()->id;
@@ -25,8 +25,13 @@ class AnnouncementController extends Controller
             $query->where('user_id', $uid);
         })->get();
 
+        $announcements = Announcement::whereIn('event_id', $ids)->orderBy('created_at', 'desc')->get();
+
+        $message = $announcements->count() == 0 ? "Žiadne oznámenia." : $message;
+
         return view("announcement.index", [
-            'announcements' => Announcement::whereIn('event_id', $ids)->orderBy('created_at', 'desc')->get(),
+            'announcements' => $announcements,
+            'message' => $message,
         ]);
     }
 
